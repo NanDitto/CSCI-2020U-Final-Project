@@ -54,13 +54,13 @@ import javafx.util.Duration;
 import java.util.Iterator.*;
 import java.util.ArrayList;
 import java.util.Collections;
-
+import javax.swing.JOptionPane;
 
 public class Jeopardy extends Application {
 	Stage Window;
 	GridPane numbers = new GridPane();
 	int one=4, two=4,three=4,four=4,five=4;
-	int score;
+	int score,mainCounter=0;
 	VBox pane = new VBox();
 	HBox catego = new HBox();
 	HBox scoring = new HBox();
@@ -82,7 +82,6 @@ public class Jeopardy extends Application {
 				numButtons[i][j].setOnAction(this::handleButtonAction);
 			}
 		}
-
 		numbers.setHgap(5); //horizontal gap in pixels => that's what you are asking for
 		numbers.setVgap(5); //vertical gap in pixels
 		numbers.setPadding(new Insets(10, 5, 10, 5)); //margins around the whole grid (top/right/bottom/left)
@@ -94,13 +93,13 @@ public class Jeopardy extends Application {
 		pane.getChildren().add(scoring);
 		Label player = new Label("Points: ");
 		scoring.getChildren().addAll(player,scoreboard);
+		scoreboard.setText("0");
 		scoreboard.setId("scoreboard");
 		player.setId("scoreboard");
 		pane.setSpacing(10);
 		scoring.setSpacing(5);
 		scoring.setPadding(new Insets(10, 5, 10, 5));
 		scoring.setAlignment(Pos.CENTER);
-
 
 		Scene scene = new Scene(pane,950,500);
 		scene.getStylesheets().add("file:/home/hanan/Desktop/Jeopardy/style.css");  
@@ -213,6 +212,7 @@ public class Jeopardy extends Application {
 		}
  	}
  	private void handleButtonAction(ActionEvent event){
+ 		mainCounter = mainCounter + 1;
  		for(int i = 1; i<= 5; i++){
           for( int p=1; p<= 5; p++){
           	if(i==1 && p>=1){
@@ -332,13 +332,21 @@ public class Jeopardy extends Application {
 		 			if(p==5){
 		 				action(numButtons[i][p], fifthCat,five,500);
 		 				five = five -1;
-		 			}
-		 		}	
-			}
-
+		 				}
+		 			}	
+				}
 			}
 
 		}
+		if(mainCounter == 25){
+				JOptionPane.showMessageDialog(null, "You won! You money will be tranfered to you in 1 decade.", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
+				try{
+					Thread.sleep(2000);
+				}catch(Exception e){}
+				System.exit(0);
+		}
+
+
  	}
  	private void action(Button x, int number, int rando,int points){
  		Random rand = new Random();
@@ -360,8 +368,6 @@ public class Jeopardy extends Application {
 		}
 		if (entered.toUpperCase().contains(answers[number].get(temp).toUpperCase())){ // checking userinput and answer
 			score = score + points;
-		}else{
-			score = score - points;
 		}
 		update(score); // updating score 
 
