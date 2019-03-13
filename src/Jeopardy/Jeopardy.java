@@ -83,9 +83,6 @@ public class Jeopardy extends Application {
 			}
 		}
 
-		if(one==0){
-			System.out.print("ASdasd");
-		}
 		numbers.setHgap(5); //horizontal gap in pixels => that's what you are asking for
 		numbers.setVgap(5); //vertical gap in pixels
 		numbers.setPadding(new Insets(10, 5, 10, 5)); //margins around the whole grid (top/right/bottom/left)
