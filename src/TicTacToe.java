@@ -4,24 +4,33 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Cell;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
+import java.util.Random;
+
 public class TicTacToe extends Application {
 
     private char currentPlayer = 'X';
+
     private Cell[][] cell = new Cell[3][3];
-    private Label status = new Label("X must play");
+    private Label status = new Label("X must play\t");
+    int wins = 0;
+    int losses = 0;
+    private Label score = new Label("Wins: " + wins + "\tLosses: " + losses+ "\t");
+
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
         GridPane pane = new GridPane();
 
         for(int i = 0;i < 3;i++){
@@ -32,9 +41,24 @@ public class TicTacToe extends Application {
             }
         }
 
+        Button reset = new Button("Reset");
+        reset.setOnAction(e -> {
+            pane.getChildren().clear();
+            for(int i = 0;i < 3;i++){
+                for(int j = 0; j<3; j++){
+                    cell[i][j] = new Cell();
+                    pane.add(cell[i][j], j, i);
+
+                }
+            }
+        });
+
+        HBox statusBar = new HBox();
+        statusBar.getChildren().addAll(status, score, reset);
+
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(pane);
-        borderPane.setBottom(status);
+        borderPane.setBottom(statusBar);
 
         Scene scene = new Scene(borderPane, 450,300);
         primaryStage.setTitle("Tic Tac Toe");
@@ -76,6 +100,8 @@ public class TicTacToe extends Application {
 
     }
 
+
+
     public class Cell extends Pane {
         private char player = ' ';
 
@@ -91,21 +117,57 @@ public class TicTacToe extends Application {
 
                 if(hasWon(currentPlayer)){
                     status.setText(currentPlayer + " won!");
+                    updateScore(currentPlayer);
 
                 } else if(isBoardFull()){
                     status.setText("Draw!");
                     currentPlayer = ' ';
 
                 } else{
-                    currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+                    if(currentPlayer == 'X'){
+                        currentPlayer = 'O';
+                        computerMove();
+                        if(hasWon(currentPlayer)){ updateScore(currentPlayer); }
+                        currentPlayer = 'X';
+
+                    } else if(currentPlayer == 'O') {
+                        currentPlayer = 'X';
+                    }
                     status.setText(currentPlayer + " must play");
 
 
                 }
             }
         }
+
         public char getPlayer(){
             return player;
+        }
+
+        public void updateScore(char c){
+            if(c == 'X'){
+                wins += 1;
+                score.setText("Wins: " + wins + "\tLosses: " + losses+ "\t");
+            }
+            else if(c == 'O'){
+                losses += 1;
+                score.setText("Wins: " + wins + "\tLosses: " + losses+ "\t");
+            }
+        }
+
+        public void computerMove() {
+
+            Random rand = new Random();
+
+            int i = rand.nextInt(3);
+            int j = rand.nextInt(3);
+
+            if (cell[i][j].getPlayer() == ' ') {
+                cell[i][j].setPlayer(currentPlayer);
+            }
+            else{
+                computerMove();
+                }
         }
 
         public void setPlayer(char c){
@@ -137,6 +199,7 @@ public class TicTacToe extends Application {
             }
         }
     }
+
     public static void main(String[] args) {
         launch(args);
     }
