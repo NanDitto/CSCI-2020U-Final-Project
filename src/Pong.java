@@ -152,6 +152,9 @@ public class Pong extends Application{
 		        	}else{
 		        		Paddle1.setY(Paddle1.getY() - DELTA_Y);
 		        	}break;
+		        case R:
+		        	reset(ball);
+		        	break;
 		        case SPACE:
 		        	//When Space key is pressed Start The movement and Timer
 		        	Board.getChildren().remove(prompt);
@@ -170,6 +173,7 @@ public class Pong extends Application{
 		        	break;
 		      }
 		    });
+		
 	}
 	public void reset(Circle c){
 		Random rand = new Random();

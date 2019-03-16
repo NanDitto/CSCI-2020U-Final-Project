@@ -62,7 +62,7 @@ public class Blackjack extends Application {
 	Stage Window;
 	Scene newScene;
 
-	String source = "file:/home/hanan/Desktop/Cards/"; 
+	String source = "file:/home/hanan/Desktop/BlackJack/Cards/"; 
   	public void start(Stage primaryStage) {
   		Window = primaryStage;
 
