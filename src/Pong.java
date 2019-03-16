@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.util.Random;
 public class Pong extends Application{
+	//IF PLAYER BEATS COMPUTER PASS LEVEL
+	public boolean pass = false;
 	// Board Layout
 	public final static int TIME = 60;
 	public static int time = TIME;
@@ -57,7 +59,7 @@ public class Pong extends Application{
 		//Timer Text
 		timer.setFill(Color.WHITE);
 		timer.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
-		
+
 		//Prompt Text
 		prompt.setFont(Font.font("Times New Roman",FontWeight.BOLD, 80));
 		prompt.setFill(Color.WHITE);
@@ -69,10 +71,10 @@ public class Pong extends Application{
 		Paddle1.setFill(Color.WHITE);
 		Rectangle Paddle2 = new Rectangle(WIDTH - 30, HEIGHT/2, W, LENGTH);
 		Paddle2.setFill(Color.WHITE);
-		
+
 		Board.getChildren().addAll(Paddle1,Paddle2,timer,prompt);
 		//Ball movement and paddle interactions
-		Timeline Movement = new Timeline(new KeyFrame(Duration.millis(20), 
+		Timeline Movement = new Timeline(new KeyFrame(Duration.millis(20),
 				new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent t) {
@@ -90,17 +92,17 @@ public class Pong extends Application{
 					if(Paddle1.getY() - DELTA_Y <= 0){
 						Paddle2.setY(0);
 		        	}else{
-		        		Paddle2.setY(Paddle2.getY() - Bot_Y); 
+		        		Paddle2.setY(Paddle2.getY() - Bot_Y);
 		        	}
 				}
 				//If the ball touches left paddle
-				if(ball.getLayoutX() <= Paddle1.getX() + W && ((ball.getLayoutY() >= Paddle1.getY()) 
+				if(ball.getLayoutX() <= Paddle1.getX() + W && ((ball.getLayoutY() >= Paddle1.getY())
 						&& (ball.getLayoutY() <= Paddle1.getY() + LENGTH))){
 					xspeed -= 3;
 					xspeed = -xspeed;
 				}
 				//If the ball touches right paddle
-				if(ball.getLayoutX() >= Paddle2.getX() - W && ((ball.getLayoutY() >= Paddle2.getY()) 
+				if(ball.getLayoutX() >= Paddle2.getX() - W && ((ball.getLayoutY() >= Paddle2.getY())
 						&& (ball.getLayoutY() <= Paddle2.getY() + LENGTH)  )){
 					xspeed += 3;
 					xspeed *= -1;
@@ -121,13 +123,13 @@ public class Pong extends Application{
 				}
 			}
 		}));
-		Timeline Tick = new Timeline(new KeyFrame(Duration.seconds(1), 
+		Timeline Tick = new Timeline(new KeyFrame(Duration.seconds(1),
 				new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent h) {
 				time -=1;
 				timer.setText(Integer.toString(time));
-				
+
 				if(time == 0){
 					Board.getChildren().remove(ball);
 					Movement.stop();
@@ -135,20 +137,20 @@ public class Pong extends Application{
 				}
 			}
 		}));
-		
-		scene.setOnKeyPressed(e -> {    
+
+		scene.setOnKeyPressed(e -> {
 		      switch (e.getCode()) {
-		        case DOWN: 
+		        case DOWN:
 		        	if(Paddle1.getY() + LENGTH + DELTA_Y >= HEIGHT){
 		        		Paddle1.setY(HEIGHT - LENGTH);
 		        	}else{
 		        		Paddle1.setY(Paddle1.getY() + DELTA_Y);
-		        	}break;	        
+		        	}break;
 		        case UP:
 		        	if(Paddle1.getY() - DELTA_Y <= 0){
 		        		Paddle1.setY(0);
 		        	}else{
-		        		Paddle1.setY(Paddle1.getY() - DELTA_Y); 
+		        		Paddle1.setY(Paddle1.getY() - DELTA_Y);
 		        	}break;
 		        case SPACE:
 		        	//When Space key is pressed Start The movement and Timer
@@ -164,14 +166,14 @@ public class Pong extends Application{
 			      	Tick.setCycleCount(TIME);
 		        	Tick.play();
 	        	break;
-		        default: 
+		        default:
 		        	break;
 		      }
 		    });
 	}
 	public void reset(Circle c){
 		Random rand = new Random();
-    	float n = rand.nextInt(9);
+    	float n = rand.nextInt(9) + 1;
     	xspeed = n;
     	if(n > 5)
     	xspeed -= 10;
@@ -182,8 +184,9 @@ public class Pong extends Application{
 	public void DetermineWinner(){
 		prompt.setX(250);
 		if(PlayerScore>ComputerScore){
-			prompt.setText("Player Wins!");
+			prompt.setText("You Win!");
 			Board.getChildren().add(prompt);
+			pass = true;
 		}else if(ComputerScore > PlayerScore){
 			prompt.setText("Computer Wins!");
 			Board.getChildren().add(prompt);
@@ -191,7 +194,7 @@ public class Pong extends Application{
 			prompt.setText("TIE");
 			prompt.setX(450);
 			Board.getChildren().add(prompt);
-		}	
+		}
 	}
 	public static void main(String[] args) {
 		launch();
