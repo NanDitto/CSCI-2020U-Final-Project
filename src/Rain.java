@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import java.util.Random;
+
 public class Rain extends Application{
 
 	private final int WIDTH = 700;
@@ -48,7 +49,10 @@ public class Rain extends Application{
 		Score1.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
 		prompt.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
 		prompt.setFill(Color.BLACK);
-
+		
+		for(int i = 0; i < MAX; i++){
+			letters[i].setFont(Font.font("Times New Roman", 25));
+		}
     	spawnLetters();
     	
     	pane.getChildren().addAll(Score1);
@@ -81,13 +85,14 @@ public class Rain extends Application{
 				
 			}
 		}));
+    	
     	Timeline Tok = new Timeline(new KeyFrame(Duration.millis(1), 
 				new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent h) {
 				for(int y = 0; y<20; y++){
 					if(letters[y].getY() > HEIGHT){
-					pane.getChildren().remove(letters);
+					pane.getChildren().removeAll(letters);
 					Tick.stop();
 				}
 				}
