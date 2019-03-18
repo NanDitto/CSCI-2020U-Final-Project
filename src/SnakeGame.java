@@ -70,8 +70,23 @@ private final int SPEED = 20;
 						prompts.setX((WIDTH/2)-200);
 						prompts.setY(HEIGHT/2);
 						pane.getChildren().add(prompts);
-						pane.getChildren().remove(tails);
-						pane.getChildren().remove(head);
+
+					}
+
+				}
+
+			}
+		}));
+	   
+
+	   Timeline Downdate = new Timeline(new KeyFrame(Duration.millis(80), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent t) {
+				if(checkDead()){
+					if(dead){
+						pane.getChildren().removeAll(tails);
+						pane.getChildren().removeAll(head);
+						pane.getChildren().removeAll(food);
 						dead = false;
 					}
 
@@ -123,6 +138,8 @@ private final int SPEED = 20;
 			        	pane.getChildren().remove(prompts);
 			        	Update.setCycleCount(Timeline.INDEFINITE);
 			        	Update.play();
+			        	Downdate.setCycleCount(Timeline.INDEFINITE);
+			        	Downdate.play();
 			        	start = false;
 		        	}
 		        	break;
