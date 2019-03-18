@@ -24,7 +24,7 @@ public class Pong extends Application{
 	public final static int WIDTH = 1000;
 	public final Pane Board = new Pane();
 	public final Scene scene = new Scene(Board, WIDTH, HEIGHT, Color.BLACK);
-	Text prompt = new Text(175, HEIGHT/2, "Press Space to Start!");
+	Text prompt = new Text(30, 100, "Press Space to Start!");
 	Text timer = new Text(WIDTH/2 , 30,Integer.toString(TIME));
 	//Determine Winner
 	Text Score1 = new Text(40, 30,"0");

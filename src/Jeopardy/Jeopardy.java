@@ -57,17 +57,18 @@ import java.util.Collections;
 import javax.swing.JOptionPane;
 
 public class Jeopardy extends Application {
-	Stage Window;
+	Stage Window; // stages
 	GridPane numbers = new GridPane();
-	int one=4, two=4,three=4,four=4,five=4;
-	int score,mainCounter=0;
-	VBox pane = new VBox();
-	HBox catego = new HBox();
-	HBox scoring = new HBox();
+	int one=4, two=4,three=4,four=4,five=4; // counter for each row and column 
+	int score,mainCounter=0; // counters for score
+	VBox pane = new VBox(); // main pane 
+	HBox catego = new HBox(); // button pane
+	HBox scoring = new HBox(); // box for score
+	StackPane connect = new StackPane();
 	private Button[][] numButtons = new Button[6][6];
-	ArrayList<String> tokens = new ArrayList<String>(); 
-	ArrayList<String> questions[] = new ArrayList[21];
-	ArrayList<String> answers[] = new ArrayList[21];
+	ArrayList<String> tokens = new ArrayList<String>(); // used to store cateogory from arraylist
+	ArrayList<String> questions[] = new ArrayList[21]; // used to store question from arraylist
+	ArrayList<String> answers[] = new ArrayList[21]; // used to store answers from arraylist
 	Label scoreboard = new Label();
 	private int firstCat,secondCat,temp,thirdCat,fourthCat,fifthCat;
 	Random rand = new Random();
@@ -75,14 +76,21 @@ public class Jeopardy extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Window = primaryStage;
 		layout();
-		showLines("/home/hanan/Desktop/Jeopardy/questionAnswers.txt");
+		ImageView title = new ImageView("file:/home/hanan/Desktop/Jeopardy/title.gif"); // title on top 
+		title.setFitHeight(150);
+		title.setFitWidth(960);
+		ImageView main = new ImageView("file:/home/hanan/Desktop/Jeopardy/back.gif"); // background image
+		main.setFitHeight(600);
+		main.setFitWidth(960);
+		showLines("/home/hanan/Desktop/Jeopardy/questionAnswers.txt"); // for getting random category with random question in that category
 		categoryAcclines();
 		for(int i=1;i<numButtons.length;i++){
 			for(int j=1;j<numButtons.length;j++){
-				numButtons[i][j].setOnAction(this::handleButtonAction);
+				numButtons[i][j].setOnAction(this::handleButtonAction); // handling for all buttons 
 			}
 		}
-		numbers.setHgap(5); //horizontal gap in pixels => that's what you are asking for
+		pane.getChildren().add(title);
+		numbers.setHgap(5); //horizontal gap in pixels 
 		numbers.setVgap(5); //vertical gap in pixels
 		numbers.setPadding(new Insets(10, 5, 10, 5)); //margins around the whole grid (top/right/bottom/left)
 	    
@@ -96,13 +104,12 @@ public class Jeopardy extends Application {
 		scoreboard.setText("0");
 		scoreboard.setId("scoreboard");
 		player.setId("scoreboard");
-		pane.setSpacing(10);
 		scoring.setSpacing(5);
 		scoring.setPadding(new Insets(10, 5, 10, 5));
 		scoring.setAlignment(Pos.CENTER);
-
-		Scene scene = new Scene(pane,950,500);
-		scene.getStylesheets().add("file:/home/hanan/Desktop/Jeopardy/style.css");  
+		connect.getChildren().addAll(main,pane);
+		Scene scene = new Scene(connect,950,570);
+		scene.getStylesheets().add("file:/home/hanan/Desktop/Jeopardy/style.css");  // used to design the buttons 
 	 	Window.setTitle("Jeopardy!"); // Set the stage title
 	  	Window.setScene(scene); // Place the scene in the stage
 	  	Window.show(); // Display the stage
@@ -112,7 +119,7 @@ public class Jeopardy extends Application {
    public static void main(String[] args) {
     	launch(args);
   }
-  public void layout(){
+  public void layout(){ // to make a 5 by 5 with name acccording to the row and column
   	for(int i = 1; i<= 5; i++){
           for( int p=1; p<= 5; p++){
             if(i == 1){
@@ -141,7 +148,7 @@ public class Jeopardy extends Application {
          }
 
  	 }
-	  public  void showLines(String fileName) {
+	  public  void showLines(String fileName) { // read the category, quesitions and answers from the file and store it into the list
 		 try {
             File f = new File(fileName);
             Scanner sc = new Scanner(f);
@@ -175,7 +182,7 @@ public class Jeopardy extends Application {
        }
 
 
-	public void categoryAcclines(){
+	public void categoryAcclines(){ // randomly generating the categories 
 		Button[] catButton = new Button[5];
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
@@ -211,7 +218,7 @@ public class Jeopardy extends Application {
 			catButton[i].setId("categories");
 		}
  	}
- 	private void handleButtonAction(ActionEvent event){
+ 	private void handleButtonAction(ActionEvent event){ // used 
  		mainCounter = mainCounter + 1;
  		for(int i = 1; i<= 5; i++){
           for( int p=1; p<= 5; p++){
@@ -338,7 +345,7 @@ public class Jeopardy extends Application {
 			}
 
 		}
-		if(mainCounter == 25){
+		if(mainCounter == 25){ // if all the boxes are pressed on, then output the dialog
 				JOptionPane.showMessageDialog(null, "You won! You money will be tranfered to you in 1 decade.", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
 				try{
 					Thread.sleep(2000);
@@ -348,7 +355,7 @@ public class Jeopardy extends Application {
 
 
  	}
- 	private void action(Button x, int number, int rando,int points){
+ 	private void action(Button x, int number, int rando,int points){ // do various things
  		Random rand = new Random();
 
  		if(rando == 0){
@@ -376,7 +383,7 @@ public class Jeopardy extends Application {
 		fadeAndDisable(x); // fading the button and disabling it
 		
  	}
- 	private void fadeAndDisable(Button x){
+ 	private void fadeAndDisable(Button x){ // fade buttons when they are pressed
  		FadeTransition trans = new FadeTransition(Duration.seconds(1), x);
         trans.setFromValue(1.0);
         trans.setToValue(.20);
@@ -385,7 +392,7 @@ public class Jeopardy extends Application {
         x.setDisable(true);		
         
  	}
- 	private void update(int score){
+ 	private void update(int score){ // update score
  		String conv = Integer.toString(score);
  		scoreboard.setText(conv);
  	}

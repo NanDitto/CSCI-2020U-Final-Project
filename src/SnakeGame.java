@@ -28,7 +28,7 @@ private final int LENGTH = 20;
 Rectangle food = new Rectangle(LENGTH,LENGTH);
 //Messages
 Text scoreTxt = new Text("0"); // SHOW SCORE WHEN GAME IS OVER
-Text prompts = new Text(150,HEIGHT/2,"PRESS SPACE TO START!");
+Text prompts = new Text(50,390,"PRESS SPACE TO START!");
 //head Properties
 boolean RIGHT = true;
 boolean LEFT = false;
@@ -49,7 +49,7 @@ private final int SPEED = 20;
     // Create a scene and place it in the stage
     Scene scene = new Scene(pane, WIDTH, HEIGHT,Color.BLACK);
 
-    primaryStage.setTitle("head Game"); // Set the stage title
+    primaryStage.setTitle("Snake Game"); // Set the stage title
     primaryStage.setScene(scene); // Place the scene in the stage
     primaryStage.show(); // Display the stage
     prompts.setFill(Color.WHITE);

@@ -45,33 +45,32 @@ import javafx.scene.layout.BackgroundSize;
 
 
 public class Blackjack extends Application {
-	private VBox pane = new VBox();
-	private HBox cardi = new HBox();
-	private HBox computer = new HBox();
-	private ArrayList<ImageView> cards  = new ArrayList<ImageView>();
-	private ArrayList<String> nameOfcard  = new ArrayList<String>();
+	private VBox pane = new VBox(); // main pane
+	private HBox cardi = new HBox(); // used to store cards
+	private HBox computer = new HBox(); // used to store computer cards
+	private ArrayList<ImageView> cards  = new ArrayList<ImageView>(); // storing cards in an arraylist
+	private ArrayList<String> nameOfcard  = new ArrayList<String>(); // stroing the card name  in arraylist
 	public int firstRan;
 	public int ButtonRan;
 	public int points =0;
 	public int computerpoints =0;
-	 
+	// textfield for score
 	private TextField userPoints = new TextField();
 	private TextField computerpoint = new TextField();
 
-
-	Stage Window;
-	Scene newScene;
+	Stage Window; // main window 
+	Scene newScene; // window with won or loss
 
 	String source = "file:/home/hanan/Desktop/BlackJack/Cards/"; 
   	public void start(Stage primaryStage) {
   		Window = primaryStage;
-
-  		userPoints.setPrefSize(100,40);
+  		// pre fix sizes for nodes
+  		userPoints.setPrefSize(100,40); 
   		computerpoint.setPrefSize(100,40);
 		userPoints.setMaxWidth(70);
 		computerpoint.setMaxWidth(70);
-
-  		userPoints.setStyle("-fx-font-weight: bold");
+		//design changes 
+  		userPoints.setStyle("-fx-font-weight: bold"); 
   		computerpoint.setStyle("-fx-font-weight: bold");
 
   		userPoints.setFont(Font.font ("Verdana", 22));
@@ -80,10 +79,10 @@ public class Blackjack extends Application {
   		HBox player = new HBox();
   		HBox computerboard = new HBox();
 
-  		Label pla = new Label("Player Score: ");
+  		Label pla = new Label("Player Score: "); // label for player 1
   		pla.setFont(Font.font ("Verdana", 22));
 
-  		Label com = new Label("Computer Score: ");
+  		Label com = new Label("Computer Score: "); // label for computer
   		com.setFont(Font.font ("Verdana", 22));
 
   		player.getChildren().addAll(pla, userPoints);
@@ -117,7 +116,7 @@ public class Blackjack extends Application {
       	pane.getChildren().add(button);
       	pane.setSpacing(30);
       	cardi.setSpacing(-20);
-
+      	// more design ^ 
     	userPoints.setEditable(false);
 		userPoints.setMouseTransparent(true);
 		userPoints.setFocusTraversable(false);
@@ -129,9 +128,9 @@ public class Blackjack extends Application {
       	hit.setOnAction(new EventHandler<ActionEvent>() {
       		@Override // Override the handle method
       		public void handle(ActionEvent e) {
-      			if (points > 21){
+      			if (points > 21){ // if the points are greater than 21 on computer side, switch to computer won
       				StackPane layout1 = new StackPane();
-      				Label newSenelabe = new Label("Computer Won!");
+      				Label newSenelabe = new Label("Computer Won!"); 
 					newSenelabe.setStyle("-fx-font-weight: bold");
       				layout1.getChildren().add(newSenelabe);
       				newSenelabe.setFont(Font.font ("Verdana", 22));
@@ -139,7 +138,7 @@ public class Blackjack extends Application {
       				Window.setScene(newScene);
       			}
       			if(points == 21){
-      				StackPane layout1 = new StackPane();
+      				StackPane layout1 = new StackPane(); // if the points are greater than 21 on computer side,user won
       				Label newSenelabe = new Label("YOU WON!");
 					newSenelabe.setStyle("-fx-font-weight: bold");
       				layout1.getChildren().add(newSenelabe);
@@ -221,8 +220,7 @@ public class Blackjack extends Application {
     	launch(args);
   }
 
-    public void score(int number){
-    	//System.out.print("Adsad");
+    public void score(int number){ // scoring for each picture according to their names for the user
     	if(nameOfcard.get(number).equals("3a") || nameOfcard.get(number).equals("3b")||nameOfcard.get(number).equals("3c")||nameOfcard.get(number).equals("3d")){
     		points = points +3;
     		String value = Integer.toString(points);
@@ -297,7 +295,7 @@ public class Blackjack extends Application {
 
     }
 
-	public void generateCards(){
+	public void generateCards(){ // randomly generating cards for computer and user
 		for(int j=3;j<=15;j++){
 			for(int i=1;i<=4;i++){
 				if(i ==1){
@@ -334,8 +332,7 @@ public class Blackjack extends Application {
 		}
 	}
 
- public void computerscore(int number){
-    	//System.out.print("Adsad");
+ public void computerscore(int number){  // scoring for each picture according to their names for the computer
     	if(nameOfcard.get(number).equals("3a") || nameOfcard.get(number).equals("3b")||nameOfcard.get(number).equals("3c")||nameOfcard.get(number).equals("3d")){
     		computerpoints = computerpoints +3;
     		String value = Integer.toString(computerpoints);
