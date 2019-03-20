@@ -40,7 +40,7 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.List;
 import java.lang.Object.*;
-import java.util.*; 
+import java.util.*;
 import javafx.scene.control.TextInputDialog;
 import java.awt.Dialog;
 import javafx.scene.text.Text;
@@ -83,7 +83,7 @@ public class Scene1 extends Application {
 		pane.getChildren().addAll(buttons);
 		buttons.setAlignment(Pos.CENTER);
 
-		fadeTran(1,0.8,home,2); // fade transiton of picture 
+		fadeTran(1,0.8,home,2); // fade transiton of picture
         pathTran(100,20,950,600,login); // path transition of the buttons
         pathTran(100,20,-950,600,register);
         pathTran(100,20,-450,600,imports);
@@ -103,26 +103,26 @@ public class Scene1 extends Application {
     	launch(args);
   	}
   	public void pathTran(int x, int y,int moveX, int moveY,Button butto){
-  		Path path = new Path(); 
-	    //Moving to the starting point 
-	    MoveTo moveTo = new MoveTo(moveX, moveY);               
-      	//Creating 1st line 
-      	LineTo line1 = new LineTo(x, y);        
-      	//Adding all the elements to the path  
-      	path.getElements().addAll(moveTo, line1); 
-      	//Creating the path transition 
+  		Path path = new Path();
+	    //Moving to the starting point
+	    MoveTo moveTo = new MoveTo(moveX, moveY);
+      	//Creating 1st line
+      	LineTo line1 = new LineTo(x, y);
+      	//Adding all the elements to the path
+      	path.getElements().addAll(moveTo, line1);
+      	//Creating the path transition
      	PathTransition pathTransition = new PathTransition();
-      	//Setting the duration of the transition 
-      	pathTransition.setDuration(Duration.seconds(2));       
-      	//Setting the node for the transition 
-      	pathTransition.setNode(butto); 
-      	//Setting the path for the transition 
-      	pathTransition.setPath(path);       
-      	//Setting the cycle count for the transition 
-      	pathTransition.setCycleCount(1); 
-      	//Setting auto reverse value to true 
-      	pathTransition.setAutoReverse(false); 
-      	//Playing the animation 
+      	//Setting the duration of the transition
+      	pathTransition.setDuration(Duration.seconds(2));
+      	//Setting the node for the transition
+      	pathTransition.setNode(butto);
+      	//Setting the path for the transition
+      	pathTransition.setPath(path);
+      	//Setting the cycle count for the transition
+      	pathTransition.setCycleCount(1);
+      	//Setting auto reverse value to true
+      	pathTransition.setAutoReverse(false);
+      	//Playing the animation
       	pathTransition.play();
   	}
   	public void fadeTran(double from, double to, ImageView objs, int time){
@@ -140,12 +140,12 @@ public class Scene1 extends Application {
 	            Scanner sc = new Scanner(f);
 	            JLabel label_login = new JLabel("Username:"); // username textfield
 				JTextField login = new JTextField();
-				 
+
 				JLabel label_password = new JLabel("Password:"); // password textfield
 				JPasswordField password = new JPasswordField();
 				Object[] array = { label_login,  login, label_password, password };
-				int res = JOptionPane.showConfirmDialog(null, array, "Login",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE); // Dialog with all the information 
-				 
+				int res = JOptionPane.showConfirmDialog(null, array, "Login",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE); // Dialog with all the information
+
 				if (res == JOptionPane.OK_OPTION) { // do the following when ok is pressed
 					boolean opt = false;
 		            while(sc.hasNextLine()){ // read the file until its not the end
@@ -168,17 +168,17 @@ public class Scene1 extends Application {
 					   	image.setDisable(true);
 					}
 				}
-			} catch (FileNotFoundException e) {         
+			} catch (FileNotFoundException e) {
 	            e.printStackTrace();
 	        }
        }
         if(event.getSource() == register){
         	try{
-        		BufferedWriter out = new BufferedWriter(new FileWriter(currentFilename,true)); // reading the file 
+        		BufferedWriter out = new BufferedWriter(new FileWriter(currentFilename,true)); // reading the file
 
 	        	JLabel label_login = new JLabel("Username:");
 				JTextField login = new JTextField();
-				 
+
 				JLabel label_password = new JLabel("Password:");
 				JPasswordField password = new JPasswordField();
 
@@ -203,11 +203,11 @@ public class Scene1 extends Application {
         	}catch (IOException e){
         		e.printStackTrace();
         	}
-        	
+
         }
         if(event.getSource() == imports){
         	FileChooser fileChooser = new FileChooser(); // new filechoser
-	        fileChooser.setInitialDirectory(new File(".")); 
+	        fileChooser.setInitialDirectory(new File("."));
 	        currentFilename = fileChooser.showOpenDialog(primaryStage).getAbsolutePath(); // overwriting filename to the user designated file destination
         }
 	}
