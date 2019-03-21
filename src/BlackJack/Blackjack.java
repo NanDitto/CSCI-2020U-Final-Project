@@ -57,7 +57,7 @@ public class Blackjack extends Application {
 	// textfield for score
 	private TextField userPoints = new TextField();
 	private TextField computerpoint = new TextField();
-
+	boolean check = true;
 	Stage Window; // main window 
 	Scene newScene; // window with won or loss
 
@@ -124,10 +124,22 @@ public class Blackjack extends Application {
     	pane.getChildren().add(computer);
     	pane.getChildren().add(computerboard);
     	computer.setSpacing(-20);
-
+    	
+    	if(points > 21){
+    		check = false;
+    	}
       	hit.setOnAction(new EventHandler<ActionEvent>() {
       		@Override // Override the handle method
       		public void handle(ActionEvent e) {
+      			if (check == true){
+	      			if(points < 21){
+	      				ButtonRan = rand.nextInt(cards.size());
+		      			cardi.getChildren().add(cards.get(ButtonRan));
+		      			score(ButtonRan);
+		      			cards.remove(ButtonRan);
+		      			nameOfcard.remove(ButtonRan);
+	      			}
+      			}
       			if (points > 21){ // if the points are greater than 21 on computer side, switch to computer won
       				StackPane layout1 = new StackPane();
       				Label newSenelabe = new Label("Computer Won!"); 
@@ -136,7 +148,7 @@ public class Blackjack extends Application {
       				newSenelabe.setFont(Font.font ("Verdana", 22));
       				newScene = new Scene(layout1,200,200);
       				Window.setScene(newScene);
-      			}
+	      		}
       			if(points == 21){
       				StackPane layout1 = new StackPane(); // if the points are greater than 21 on computer side,user won
       				Label newSenelabe = new Label("YOU WON!");
@@ -144,14 +156,7 @@ public class Blackjack extends Application {
       				layout1.getChildren().add(newSenelabe);
       				newSenelabe.setFont(Font.font ("Verdana", 22));
       				newScene = new Scene(layout1,200,200);
-      				Window.setScene(newScene);      			}
-      			if(points < 21){
-      				ButtonRan = rand.nextInt(cards.size());
-	      			cardi.getChildren().add(cards.get(ButtonRan));
-	      			score(ButtonRan);
-	    
-	      			cards.remove(ButtonRan);
-	      			nameOfcard.remove(ButtonRan);
+      				Window.setScene(newScene);
       			}
 
       		}
@@ -221,6 +226,7 @@ public class Blackjack extends Application {
   }
 
     public void score(int number){ // scoring for each picture according to their names for the user
+
     	if(nameOfcard.get(number).equals("3a") || nameOfcard.get(number).equals("3b")||nameOfcard.get(number).equals("3c")||nameOfcard.get(number).equals("3d")){
     		points = points +3;
     		String value = Integer.toString(points);
