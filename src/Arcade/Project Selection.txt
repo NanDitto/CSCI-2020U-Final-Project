@@ -1,0 +1,16 @@
+Final Project Choice: MINI ARCADE
+
+File I/O: Transfer High Scores Over From another Device
+Mini Arcade:
+		ALL GAMES DUE(MARCH 14)
+		Games:
+			Nandor: HARDEST Checkers
+			JOSEPH: EASY-MIDDLE Connect 4
+			GARY: 	EASY Tic-Tac-Toe
+			HANAN: 	EASY Black Jack
+			HANAN: 	EASY President
+			JOSEPH: EASY WAR
+			HANAN: 	MEDIUM Jepordy
+			GARY:	MEDIUM Wheel Of Fortune
+			JOSEPH: MEDIUM Are you smarter than a 5th Grader
+			

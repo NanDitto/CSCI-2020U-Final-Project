@@ -61,7 +61,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class Scene1 extends Application {
-	public Stage window;
+	public Stage CurrentWindow;
 	VBox buttons = new VBox(10);
 	StackPane pane = new StackPane(); // main pane
 	Button login = new Button("Login"); // buttons for functionaliy
@@ -70,8 +70,8 @@ public class Scene1 extends Application {
 	public String currentFilename = "C:/Users/Nandor Gallo/workspace/Arcade/bin/res/progress.csv"; // intial file name
 
 	public void start(Stage primaryStage) {
-		window = primaryStage;
-		//Media media = new Media("file:/home/hanan/Desktop/Sc1/music.mp3");
+		CurrentWindow = primaryStage;
+		//Media media = new Media("C:/Users/Nandor Gallo/workspace/Arcade/bin/res/music.mp3");
        	//MediaPlayer player = new MediaPlayer(media); // used for playig music at the background
        	//player.play();
 		ImageView home = new ImageView("/res/q.gif"); // main background image
@@ -95,9 +95,9 @@ public class Scene1 extends Application {
 
 		Scene scene = new Scene(pane,900,540);
 		scene.getStylesheets().add("res/main.css");  // adding styles using css
-		window.setTitle("Welcome!"); // Set the stage title
-		window.setScene(scene); // Place the scene in the stage
-		window.show(); // Display the stage
+		CurrentWindow.setTitle("Welcome!"); // Set the stage title
+		CurrentWindow.setScene(scene); // Place the scene in the stage
+		CurrentWindow.show(); // Display the stage
 	}
 	public static void main(String[] args) {
 
@@ -160,11 +160,7 @@ public class Scene1 extends Application {
 						    fadeTran(1,0,image,5);
 						    opt = true;
 						    MainMenu hi = new MainMenu();
-						    Stage s = new Stage();
-						    hi.start(s);
-						    stop();
-						    //hi.start(primaryStage);
-						   // Stage hi = (Stage)((Node) event.getSource()).get
+						    hi.start(CurrentWindow);
 						}
 					}
 					if(opt == false){
@@ -217,7 +213,7 @@ public class Scene1 extends Application {
         if(event.getSource() == imports){
         	FileChooser fileChooser = new FileChooser(); // new filechoser
 	        fileChooser.setInitialDirectory(new File("."));
-	        currentFilename = fileChooser.showOpenDialog(window).getAbsolutePath(); // overwriting filename to the user designated file destination
+	        currentFilename = fileChooser.showOpenDialog(CurrentWindow).getAbsolutePath(); // overwriting filename to the user designated file destination
         }
 	}
 }

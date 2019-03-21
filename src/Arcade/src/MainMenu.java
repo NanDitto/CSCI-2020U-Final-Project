@@ -30,12 +30,9 @@ public class MainMenu extends Application {
     public Stage windowtwo;
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("Play", () -> {
-            	SnakeGame s = new SnakeGame();
-            	Stage stage = new Stage();
+            	Scence3 s = new Scence3();
             	try{
-            		s.start(stage);
-            		windowtwo.close();
-            		
+            		s.start(windowtwo);		
             	} catch(Exception e){
             		e.printStackTrace();
             	}
@@ -143,11 +140,6 @@ public class MainMenu extends Application {
     	windowtwo.setTitle("Arcade Menu");
     	windowtwo.setScene(scene);
     	windowtwo.show();
-    	
-    	//Scene1 hi = new Scene1();
-	    //hi.start(window);
-	   // Stage hi = (Stage)((Node) event.getSource()).get
-	     // primaryStage.close();
     }
     public static void main(String[] args) {
         launch(args);
