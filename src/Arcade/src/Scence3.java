@@ -2,20 +2,26 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class Scence3 extends Application {
-	private final int WIDTH = 590;
+	private final int WIDTH = 900;
 	private final int HEIGHT = 900;
+	private final int STARTX = 125;
+	private final int GAP = 250;
+	private final int windowWIDTH = 160;
+	private final int windowHEIGHT = 160;
 	//A USER_NAME thats passed between FILES
-	public String USER_NAME = "Nandor";
+	public String USER_NAME = "INSERT USERS NAME HERE";
 	public Text user = new Text(20,40,USER_NAME);
   @Override 
   public void start(Stage stage) {
@@ -25,20 +31,25 @@ public class Scence3 extends Application {
     //TicTacToe, Rain, Jeopardy, BlackJack
     //President, Pong, SnakeGame
     user.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
-    Image image = new Image("res/Background3.png");
+    user.setFill(Color.WHITE);
+    user.setX(150);
+    user.setY(80);
+    Image image = new Image("res/background.gif");
     ImageView background = new ImageView(image);
     background.setFitWidth(WIDTH+10);
     background.setFitHeight(HEIGHT+20);
     Image light = new Image("res/lights.gif");
     ImageView lights = new ImageView(light);
-    lights.setFitWidth(720);
+    lights.setFitWidth(WIDTH + 100);
     lights.setFitHeight(1160);
-    lights.setX(-60);
+    lights.setX(-50);
     lights.setY(-130);
     pane.getChildren().addAll(background,lights);
     
     
     
+    Image Lock = new Image("res/lock.gif");
+    Image back = new Image("res/left_arrow.gif");
     
     
     Image game1 = new Image("res/TicTacToe.png");
@@ -50,6 +61,12 @@ public class Scence3 extends Application {
     Image game7 = new Image("res/Jeopardy.png");
     Image game8 = new Image("res/LetterFall.png");
     
+  
+    
+    ImageView Back_Arrow = new ImageView(back);
+    Back_Arrow.setX(30);
+    Back_Arrow.setY(30);
+    
     ImageView Level1 = new ImageView(game1);
     ImageView Level2 = new ImageView(game2);
     ImageView Level3 = new ImageView(game3);
@@ -60,71 +77,107 @@ public class Scence3 extends Application {
     ImageView Level8 = new ImageView(game8);
     
     
-   //Added Text Under each window
-    Text l1 = new Text(35,340,"TicTacToe");
+  
+    Text l1 = new Text(STARTX,340,"TicTacToe");
     l1.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
     
-    Text l2 = new Text(260,340,"BLACK \n JACK");
+    
+    Text l2 = new Text(STARTX + GAP + 25,340,"BLACK \n JACK");
     l2.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
     
-    Text l3 = new Text(470,340,"PONG");
+    Text l3 = new Text(STARTX + GAP*2 + 33,340,"PONG");
     l3.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
     
-    Text l4 = new Text(40,595,"President");
+    Text l4 = new Text(STARTX+10,595,"President");
     l4.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
     
-    Text l5 = new Text(230,595,"Snake Game");
+    Text l5 = new Text(STARTX + GAP,595,"Snake Game");
     l5.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
     
-    Text l6 = new Text(440,598,"Hang Man");
+    Text l6 = new Text(STARTX + GAP*2+10,598,"Hang Man");
     l6.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
     
-    Text l7 = new Text(35,865,"Jeopardy");
+    Text l7 = new Text(STARTX+15,865,"Jeopardy");
     l7.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
     
-    Text l8 = new Text(250,865,"LetterFall");
+    Text l8 = new Text(STARTX + GAP+10,865,"LetterFall");
     l8.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
+    
+    l1.setFill(Color.WHITE);
+    l2.setFill(Color.WHITE);
+    l3.setFill(Color.WHITE);
+    l4.setFill(Color.WHITE);
+    l5.setFill(Color.WHITE);
+    l6.setFill(Color.WHITE);
+    l7.setFill(Color.WHITE);
+    l8.setFill(Color.WHITE);
+    
     
     Level1.setFitWidth(152);
     Level1.setFitHeight(167);
-    Level1.setX(25);
+    Level1.setX(STARTX);
     Level1.setY(136);
     
     Level2.setFitWidth(152);
     Level2.setFitHeight(166);
-    Level2.setX(234);
+    Level2.setX(STARTX + GAP);
     Level2.setY(136);
     
     Level3.setFitWidth(152);
     Level3.setFitHeight(167);
-    Level3.setX(437);
+    Level3.setX(STARTX + GAP*2);
     Level3.setY(136);
     
     Level4.setFitWidth(152);
     Level4.setFitHeight(166);
-    Level4.setX(29);
+    Level4.setX(STARTX);
     Level4.setY(396);
     
     Level5.setFitWidth(152);
     Level5.setFitHeight(167);
-    Level5.setX(234);
+    Level5.setX(STARTX + GAP);
     Level5.setY(397);
     
     Level6.setFitWidth(152);
     Level6.setFitHeight(166);
-    Level6.setX(434);
+    Level6.setX(STARTX + GAP*2);
     Level6.setY(400);
     
     Level7.setFitWidth(152);
     Level7.setFitHeight(167);
-    Level7.setX(27);
+    Level7.setX(STARTX);
     Level7.setY(663);
     
     Level8.setFitWidth(152);
     Level8.setFitHeight(166);
-    Level8.setX(234);
+    Level8.setX(STARTX + GAP);
     Level8.setY(663);
-
+    //Event for each level being clicked
+    	Back_Arrow.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+            	MainMenu TTT = new MainMenu();
+                try {
+    				TTT.start(stage);
+    			} catch (Exception e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+            }
+       });
+    Back_Arrow.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+        	MainMenu TTT = new MainMenu();
+            try {
+				TTT.start(stage);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+   });
+    
     Level1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -181,7 +234,7 @@ public class Scence3 extends Application {
     Level6.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-        	TicTacToe hi = new TicTacToe();
+        	Hang hi = new Hang();
             hi.start(stage);
             
         }
@@ -210,8 +263,21 @@ public class Scence3 extends Application {
         }
    });
     
-    
-    pane.getChildren().addAll(user,Level1,l1,Level2,l2,Level3,l3,Level4,l4,Level5,l5,Level6,l6,Level7,l7,Level8,l8);
+    //Add everything to the pane
+    pane.getChildren().addAll(Back_Arrow,user,Level1,l1,Level2,l2,Level3,l3,Level4,l4,Level5,l5,Level6,l6,Level7,l7,Level8,l8);
+  //Create a for loop to place locks on levels and after completion of levels unlock another level
+    int currentX= 130;
+    int currentY = 140;
+    for(int i = 0; i < 8;i++)
+    {
+    	
+    	ImageView lockedlevels = new ImageView(Lock);
+    	lockedlevels.setX(currentX+=GAP);
+    	lockedlevels.setY(currentY);
+    	lockedlevels.setFitWidth(windowWIDTH);
+    	lockedlevels.setFitHeight(windowHEIGHT);
+    	pane.getChildren().add(lockedlevels);
+    }
     
     Scene scene = new Scene(pane,WIDTH,HEIGHT);
     stage.setResizable(false);
