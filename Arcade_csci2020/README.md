@@ -4,7 +4,7 @@ About the arcade **to be done
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What things you need to install
 
 ```
 No Prerequisites required other than gradle
