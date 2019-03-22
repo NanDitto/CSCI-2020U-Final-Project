@@ -67,7 +67,7 @@ public class Scene1 extends Application {
 	Button login = new Button("Login"); // buttons for functionaliy
 	Button register = new Button("Register");
 	Button imports = new Button("Import File");
-	public String currentFilename = "C:/Users/Nandor Gallo/workspace/Arcade/bin/res/progress.csv"; // intial file name
+	public String currentFilename = "res/progress.csv"; // intial file name
 
 	public void start(Stage primaryStage) {
 		CurrentWindow = primaryStage;
