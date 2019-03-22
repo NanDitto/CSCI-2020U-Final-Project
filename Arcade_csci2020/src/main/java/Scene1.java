@@ -69,18 +69,25 @@ public class Scene1 extends Application {
 	Button login = new Button("Login"); // buttons for functionaliy
 	Button register = new Button("Register");
 	Button imports = new Button("Import File");
-	String cwd = System.getProperty("user.dir"); // used to read the user current directory
+
+	static String cwd = System.getProperty("user.dir"); // used to read the user current directory
 	static String ret = "";
+	static String chck ="";
+	String finalsDes = "";
 
 	public String currentFilename = (cwd + ret + "src" + ret + "main" + ret + "resources" + ret + "progress.csv"); // intial file name
 
 	public void start(Stage primaryStage) {
-
+		if(chck == "Windows"){
+			finalsDes = cwd + ret + "src" + ret + "main" + ret + "resources" + ret;
+		}else{
+			finalsDes = "file:" + cwd + ret + "src" + ret + "main" + ret + "resources" + ret;
+		}
 		CurrentWindow = primaryStage;
-		Media media = new Media("file:"+ cwd + ret + "src" + ret + "main" + ret + "resources" + ret + "music.mp3");
+		Media media = new Media(finalsDes + "music.mp3");
        	MediaPlayer player = new MediaPlayer(media); // used for playig music at the background
        	player.play();
-		ImageView home = new ImageView("file:"+ cwd + ret + "src" + ret + "main" + ret + "resources" + ret +  "q.gif"); // main background image
+       	ImageView home = new ImageView(finalsDes + "q.gif"); // main background image
 		pane.getChildren().add(home);
 		login.setId("button");
 		register.setId("button");
@@ -99,13 +106,14 @@ public class Scene1 extends Application {
         register.setOnAction(this::handleButtonAction);
         imports.setOnAction(this::handleButtonAction);
 
-		Scene scene = new Scene(pane,900,540);
-		scene.getStylesheets().add("file:"+ cwd + ret + "src" + ret + "main" + ret + "resources" + ret + "main.css");  // adding styles using css
+        Scene scene = new Scene(pane,900,540);
+        scene.getStylesheets().add(finalsDes + "main.css");  // adding styles using css
 		CurrentWindow.setTitle("Welcome!"); // Set the stage title
 		CurrentWindow.setScene(scene); // Place the scene in the stage
 		CurrentWindow.show(); // Display the stage
 	}
 	public static void main(String[] args) {
+		chck = System.getProperty("os.name");
 		ret = File.separator; // to get file seperator according to the os
     	launch(args);
   	}
@@ -161,7 +169,7 @@ public class Scene1 extends Application {
 		                String temp1 = login.getText().trim();
 		                String temp2 = new String(password.getPassword());
 						if(details[0].equals(temp1) && details[1].equals(temp2)){ // if the username and password are same, then continue
-						    ImageView image = new ImageView("file:"+ cwd + ret + "src" + ret + "main" + ret + "resources" + ret +  "cm.gif");
+							ImageView image = new ImageView(finalsDes + "cm.gif");
 						    pane.getChildren().add(image);
 						    fadeTran(1,0,image,5);
 						    opt = true;
@@ -172,7 +180,7 @@ public class Scene1 extends Application {
 						}
 					}
 					if(opt == false){
-					    ImageView image = new ImageView("file:"+ cwd + ret + "src" + ret + "main" + ret + "resources" + ret +  "x.gif"); // if information is incorrect, then try again
+						ImageView image = new ImageView(finalsDes +  "x.gif"); // if information is incorrect, then try again
 					    pane.getChildren().add(image);
 					    fadeTran(1,0,image,2);
 					   	image.setDisable(true);
