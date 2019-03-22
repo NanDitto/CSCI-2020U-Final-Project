@@ -73,21 +73,18 @@ public class Scene1 extends Application {
 	static String cwd = System.getProperty("user.dir"); // used to read the user current directory
 	static String ret = "";
 	static String chck ="";
-	String finalsDes = "";
 
-	public String currentFilename = (cwd + ret + "src" + ret + "main" + ret + "resources" + ret + "progress.csv"); // intial file name
+	public String currentFilename = (cwd + ret + "src" + ret + "main" + ret + "java" + ret +  "progress.csv"); // intial file name
 
 	public void start(Stage primaryStage) {
-		if(chck == "Windows"){
-			finalsDes = cwd + ret + "src" + ret + "main" + ret + "resources" + ret;
-		}else{
-			finalsDes = "file:" + cwd + ret + "src" + ret + "main" + ret + "resources" + ret;
-		}
+		System.out.print(currentFilename);
 		CurrentWindow = primaryStage;
+		/*
 		Media media = new Media(finalsDes + "music.mp3");
        	MediaPlayer player = new MediaPlayer(media); // used for playig music at the background
        	player.play();
-       	ImageView home = new ImageView(finalsDes + "q.gif"); // main background image
+       	*/
+       	ImageView home = new ImageView("q.gif"); // main background image
 		pane.getChildren().add(home);
 		login.setId("button");
 		register.setId("button");
@@ -107,13 +104,12 @@ public class Scene1 extends Application {
         imports.setOnAction(this::handleButtonAction);
 
         Scene scene = new Scene(pane,900,540);
-        scene.getStylesheets().add(finalsDes + "main.css");  // adding styles using css
+        scene.getStylesheets().add("main.css");  // adding styles using css
 		CurrentWindow.setTitle("Welcome!"); // Set the stage title
 		CurrentWindow.setScene(scene); // Place the scene in the stage
 		CurrentWindow.show(); // Display the stage
 	}
 	public static void main(String[] args) {
-		chck = System.getProperty("os.name");
 		ret = File.separator; // to get file seperator according to the os
     	launch(args);
   	}
@@ -169,7 +165,7 @@ public class Scene1 extends Application {
 		                String temp1 = login.getText().trim();
 		                String temp2 = new String(password.getPassword());
 						if(details[0].equals(temp1) && details[1].equals(temp2)){ // if the username and password are same, then continue
-							ImageView image = new ImageView(finalsDes + "cm.gif");
+							ImageView image = new ImageView("cm.gif");
 						    pane.getChildren().add(image);
 						    fadeTran(1,0,image,5);
 						    opt = true;
@@ -180,7 +176,7 @@ public class Scene1 extends Application {
 						}
 					}
 					if(opt == false){
-						ImageView image = new ImageView(finalsDes +  "x.gif"); // if information is incorrect, then try again
+						ImageView image = new ImageView("x.gif"); // if information is incorrect, then try again
 					    pane.getChildren().add(image);
 					    fadeTran(1,0,image,2);
 					   	image.setDisable(true);
