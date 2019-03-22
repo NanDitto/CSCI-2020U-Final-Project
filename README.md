@@ -14,7 +14,7 @@ No Prerequisites required other than gradle
 
 Download/Clone the file. Open the Arcade_csci2020 folder and run the following commands from terminal 
 ```
-gradlew build
+./gradlew build
 ```
 
 And then
