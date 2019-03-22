@@ -30,7 +30,7 @@ public class Hang extends Application {
 	private TextField Guess = new TextField();
 	private TextField LettersGuessed = new TextField();
 	private PauseTransition delay = new PauseTransition(Duration.seconds(1));
-	private Text prompt1 = new Text(300,175, "");
+	private Text prompt1 = new Text(235,175, "");
 	private Text prompt2 = new Text(100,175, "");
 	private Text prompt3 = new Text(300,175, "");
 	private Text prompt4 = new Text(140,175, "");
@@ -42,7 +42,7 @@ public class Hang extends Application {
 	private String guessedLetters = "";
 	private Scanner input;
 	private Text[] text;
-	private File file = new File("d:/Users/Joseph/Desktop/translate.txt");
+
 
 
 	
@@ -72,7 +72,7 @@ public class Hang extends Application {
 		BorderPane bPane = new BorderPane();
 		bPane.setRight(gridPane);
 		bPane.setCenter(pane);
-		prompt1.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
+		prompt1.setFont(Font.font("Times New Roman",FontWeight.BOLD, 20));
 		prompt1.setFill(Color.RED);
 		prompt2.setFont(Font.font("Times New Roman",FontWeight.BOLD, 20));
 		prompt2.setFill(Color.RED);
@@ -161,7 +161,7 @@ public class Hang extends Application {
 	
 	private void getWord() {
 
-        
+        File file = new File("d:/Users/Joseph/Desktop/translate.txt");
 		try {
 			input = new Scanner(file);
 		} catch (FileNotFoundException e) {
@@ -177,7 +177,6 @@ public class Hang extends Application {
         
         int index = rand.nextInt(storeWordList.size());
         currentWord = storeWordList.get(index);
-    	System.out.println(currentWord);
     	underlines();
 
     }
@@ -247,7 +246,6 @@ public class Hang extends Application {
 			guessedLetters+=guess;
 		}
 		LettersGuessed.setText(guessedLetters);
-		System.out.println(guessedLetters);		
 		// Check if the letter is in the word
 		boolean good = false;
 		for (int i = 0; i < currentWord.length(); i++) {
@@ -263,9 +261,9 @@ public class Hang extends Application {
 			guessesRemaining.setText(String.valueOf(left));
 		}
 		if (left == 0) {
-			prompt1.setText("You have 0 tries left, you lose.");
+			prompt1.setText("You have 0 tries left, you lose. The word was: " + currentWord);
 			Guess.setEditable(false);
-
+			
 		}
 		// Check if word is solved
 		boolean solved = true;
