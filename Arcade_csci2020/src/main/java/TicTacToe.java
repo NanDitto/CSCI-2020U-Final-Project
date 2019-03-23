@@ -1,11 +1,8 @@
 package mainApp;
-
+import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Cell;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -27,6 +24,7 @@ public class TicTacToe extends Application {
     int wins = 0;
     int losses = 0;
     private Label score = new Label("Wins: " + wins + "\tLosses: " + losses+ "\t");
+
 
 
     @Override
@@ -53,6 +51,7 @@ public class TicTacToe extends Application {
             }
         });
 
+
         HBox statusBar = new HBox();
         statusBar.getChildren().addAll(status, score, reset);
 
@@ -64,6 +63,22 @@ public class TicTacToe extends Application {
         primaryStage.setTitle("Tic Tac Toe");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        scene.setOnKeyPressed(e -> {
+		      switch (e.getCode()) {
+		        case ESCAPE:
+		        	Scence3 hi = new Scence3();
+				try {
+					hi.start(primaryStage);
+					primaryStage.setWidth(900);
+                  primaryStage.setHeight(900);
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+		        default:
+		        	break;
+		      }
+		    });
     }
 
     public boolean isBoardFull(){

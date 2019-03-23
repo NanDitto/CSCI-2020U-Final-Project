@@ -46,6 +46,7 @@ import javafx.scene.layout.BackgroundSize;
 
 
 public class Blackjack extends Application {
+	public boolean WIN = false;
 	private VBox pane = new VBox(); // main pane
 	private HBox cardi = new HBox(); // used to store cards
 	private HBox computer = new HBox(); // used to store computer cards
@@ -55,24 +56,24 @@ public class Blackjack extends Application {
 	public int ButtonRan;
 	public int points =0;
 	public int computerpoints =0;
-  String cwd = System.getProperty("user.dir"); 
+  String cwd = System.getProperty("user.dir");
 	// textfield for score
 	private TextField userPoints = new TextField();
 	private TextField computerpoint = new TextField();
 	boolean check = true;
-	Stage Window; // main window 
+	Stage Window; // main window
 	Scene newScene; // window with won or loss
 
-	String source = "file:" + cwd + "/src/main/resources/Cards/"; 
+	String source = "file:" + cwd + "/src/main/resources/Cards/";
   	public void start(Stage primaryStage) {
   		Window = primaryStage;
   		// pre fix sizes for nodes
-  		userPoints.setPrefSize(100,40); 
+  		userPoints.setPrefSize(100,40);
   		computerpoint.setPrefSize(100,40);
 		userPoints.setMaxWidth(70);
 		computerpoint.setMaxWidth(70);
-		//design changes 
-  		userPoints.setStyle("-fx-font-weight: bold"); 
+		//design changes
+  		userPoints.setStyle("-fx-font-weight: bold");
   		computerpoint.setStyle("-fx-font-weight: bold");
 
   		userPoints.setFont(Font.font ("Verdana", 22));
@@ -118,7 +119,7 @@ public class Blackjack extends Application {
       	pane.getChildren().add(button);
       	pane.setSpacing(30);
       	cardi.setSpacing(-20);
-      	// more design ^ 
+      	// more design ^
     	userPoints.setEditable(false);
 		userPoints.setMouseTransparent(true);
 		userPoints.setFocusTraversable(false);
@@ -126,7 +127,7 @@ public class Blackjack extends Application {
     	pane.getChildren().add(computer);
     	pane.getChildren().add(computerboard);
     	computer.setSpacing(-20);
-    	
+
     	if(points > 21){
     		check = false;
     	}
@@ -144,7 +145,7 @@ public class Blackjack extends Application {
       			}
       			if (points > 21){ // if the points are greater than 21 on computer side, switch to computer won
       				StackPane layout1 = new StackPane();
-      				Label newSenelabe = new Label("Computer Won!"); 
+      				Label newSenelabe = new Label("Computer Won!");
 					newSenelabe.setStyle("-fx-font-weight: bold");
       				layout1.getChildren().add(newSenelabe);
       				newSenelabe.setFont(Font.font ("Verdana", 22));
@@ -159,11 +160,12 @@ public class Blackjack extends Application {
       				newSenelabe.setFont(Font.font ("Verdana", 22));
       				newScene = new Scene(layout1,200,200);
       				Window.setScene(newScene);
+							WIN = true;
       			}
 
       		}
     	});
-	  
+
       	stand.setOnAction(new EventHandler<ActionEvent>() {
       		@Override // Override the handle method
       		public void handle(ActionEvent e) {
@@ -190,6 +192,7 @@ public class Blackjack extends Application {
       				newSenelabe.setFont(Font.font ("Verdana", 22));
       				newScene = new Scene(layout1,200,200);
       				Window.setScene(newScene);
+							WIN = true;
       			}
       			if(computerpoints == 21){
       				StackPane layout1 = new StackPane();
@@ -204,15 +207,15 @@ public class Blackjack extends Application {
 
       		}
     	});
-    	  // create a background fill 
-            BackgroundFill background_fill = new BackgroundFill(Color.PINK,  
-                                          CornerRadii.EMPTY, Insets.EMPTY); 
-  
-            // create Background 
-            Background background = new Background(background_fill); 
-  
-            // set background 
-            pane.setBackground(background); 
+    	  // create a background fill
+            BackgroundFill background_fill = new BackgroundFill(Color.PINK,
+                                          CornerRadii.EMPTY, Insets.EMPTY);
+
+            // create Background
+            Background background = new Background(background_fill);
+
+            // set background
+            pane.setBackground(background);
 
 
 
@@ -222,6 +225,21 @@ public class Blackjack extends Application {
      	Window.setTitle("President"); // Set the stage title
       	Window.setScene(scene); // Place the scene in the stage
       	Window.show(); // Display the stage
+				scene.setOnKeyPressed(e -> {
+		      switch (e.getCode()) {
+		        case ESCAPE:
+		        	Scence3 hi = new Scence3();
+				try {
+					hi.start(primaryStage);
+					primaryStage.setWidth(900);
+					primaryStage.setHeight(900);
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+		        default:
+		        	break;
+		      }
+		    });
    }
    public static void main(String[] args) {
     	launch(args);

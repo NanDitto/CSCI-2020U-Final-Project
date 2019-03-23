@@ -1,6 +1,8 @@
 package mainApp;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -16,6 +18,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 public class SnakeGame extends Application {
+//Images
+	private final String background_Image = "res/GrassBackGround.png";
 //Board Size
 private final int HEIGHT = 800;
 private final int WIDTH = 1200;
@@ -29,7 +33,7 @@ private final int LENGTH = 20;
 Rectangle food = new Rectangle(LENGTH,LENGTH);
 //Messages
 Text scoreTxt = new Text("0"); // SHOW SCORE WHEN GAME IS OVER
-Text prompts = new Text(50,390,"PRESS SPACE TO START!");
+Text prompts = new Text(150,390,"PRESS SPACE TO START!");
 //head Properties
 boolean RIGHT = true;
 boolean LEFT = false;
@@ -49,15 +53,19 @@ private final int SPEED = 20;
 	primaryStage.setResizable(false);
     // Create a scene and place it in the stage
     Scene scene = new Scene(pane, WIDTH, HEIGHT,Color.BLACK);
+    ImageView background = new ImageView(new Image(background_Image));
+    background.setFitHeight(HEIGHT+10);
+    background.setFitWidth(WIDTH + 10);
 
     primaryStage.setTitle("Snake Game"); // Set the stage title
     primaryStage.setScene(scene); // Place the scene in the stage
     primaryStage.show(); // Display the stage
     prompts.setFill(Color.WHITE);
     prompts.setFont(Font.font("Times New Roman",FontWeight.BOLD, 80));
-    pane.getChildren().add(prompts);
+    pane.getChildren().addAll(background,prompts);
     head.setFill(Color.CADETBLUE);
     tails.add(head);
+
 
 	   Timeline Update = new Timeline(new KeyFrame(Duration.millis(80), new EventHandler<ActionEvent>() {
 			@Override
@@ -67,18 +75,17 @@ private final int SPEED = 20;
 				checkCollect();
 				if(checkDead()){
 					if(dead){
-						prompts.setText("Game Over\nScore: " + SCORE);
+						prompts.setText("Game Over\nScore: " + SCORE + "\nPress Esc To Return");
 						prompts.setX((WIDTH/2)-200);
 						prompts.setY(HEIGHT/2);
 						pane.getChildren().add(prompts);
-
 					}
 
 				}
 
 			}
 		}));
-	   
+
 
 	   Timeline Downdate = new Timeline(new KeyFrame(Duration.millis(80), new EventHandler<ActionEvent>() {
 			@Override
@@ -90,7 +97,6 @@ private final int SPEED = 20;
 						pane.getChildren().removeAll(food);
 						dead = false;
 					}
-
 				}
 
 			}
@@ -131,6 +137,15 @@ private final int SPEED = 20;
 			        	UP = false;
 			        	LEFT = false;
 			        	break;
+		        case ESCAPE:
+		        	Scence3 hi = new Scence3();
+				try {
+					hi.start(primaryStage);
+					primaryStage.setWidth(900);
+					primaryStage.setHeight(900);
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
 		        case SPACE:
 		        	if(start){
 		        		GenerateFruit();
@@ -148,7 +163,6 @@ private final int SPEED = 20;
 		        	break;
 		      }
 		    });
-
 }
   private boolean checkDead() {
 	  	//Dies if touches tail or wall

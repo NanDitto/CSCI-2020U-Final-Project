@@ -160,11 +160,26 @@ public class Pres extends Application {
 
         Scene scene = new Scene(pane,650,800);
         pane.setId("scene");
-        scene.getStylesheets().add("file:" + cwd + "/src/main/resources/PresStyle.css");  // used for desiging the layout
+        scene.getStylesheets().add("PresStyle.css");  // used for desiging the layout
         primaryStage.setTitle("President"); // Set the stage title
         primaryStage.setScene(scene); // Place the scene in the stage
         primaryStage.show(); // Display the stage
-    }
+        scene.setOnKeyPressed(e -> {
+		      switch (e.getCode()) {
+		        case ESCAPE:
+		        	Scence3 hi = new Scence3();
+				try {
+				hi.start(primaryStage);
+				primaryStage.setWidth(900);
+                primaryStage.setHeight(900);
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+		        default:
+		        	break;
+		      }
+		    });
+  }
 
     public static void main(String[] args) {
         launch(args);

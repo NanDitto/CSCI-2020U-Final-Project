@@ -4,9 +4,13 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -19,13 +23,17 @@ public class Pong extends Application{
 	//IF PLAYER BEATS COMPUTER PASS LEVEL
 	public boolean pass = false;
 	// Board Layout
+	private final String background_Image = "res/GrassBackGround.png";
+	private final String log_image = "res/Log.png";
+	private final String ball_image = "res/ball1.png";
+
 	public final static int TIME = 60;
 	public static int time = TIME;
 	public final static int HEIGHT = 600;
 	public final static int WIDTH = 1000;
 	public final Pane Board = new Pane();
 	public final Scene scene = new Scene(Board, WIDTH, HEIGHT, Color.BLACK);
-	Text prompt = new Text(30, 100, "Press Space to Start!");
+	Text prompt = new Text(150, 300, "Press Space to Start!");
 	Text timer = new Text(WIDTH/2 , 30,Integer.toString(TIME));
 	//Determine Winner
 	Text Score1 = new Text(40, 30,"0");
@@ -53,6 +61,7 @@ public class Pong extends Application{
 	public final float LENGTH = 100;
 	public final float W = 20;
 	@Override
+	@FXML
 	public void start(Stage stage) {
 		stage.setScene(scene);
 		stage.show();
@@ -72,8 +81,17 @@ public class Pong extends Application{
 		Paddle1.setFill(Color.WHITE);
 		Rectangle Paddle2 = new Rectangle(WIDTH - 30, HEIGHT/2, W, LENGTH);
 		Paddle2.setFill(Color.WHITE);
+		Image img = new Image(log_image);
+		Image ballimg = new Image(ball_image);
+		ImageView background = new ImageView(background_Image);
 
-		Board.getChildren().addAll(Paddle1,Paddle2,timer,prompt);
+		ball.setFill(new ImagePattern(ballimg));
+		Paddle1.setFill(new ImagePattern(img));
+		Paddle2.setFill(new ImagePattern(img));
+		background.setFitHeight(HEIGHT + 10);
+		background.setFitWidth(WIDTH + 10);
+
+		Board.getChildren().addAll(background,Paddle1,Paddle2,timer,prompt);
 		//Ball movement and paddle interactions
 		Timeline Movement = new Timeline(new KeyFrame(Duration.millis(20),
 				new EventHandler<ActionEvent>() {
@@ -167,6 +185,15 @@ public class Pong extends Application{
 			      	Tick.setCycleCount(TIME);
 		        	Tick.play();
 	        	break;
+		        case ESCAPE:
+		        	Scence3 hi = new Scence3();
+				try {
+					hi.start(stage);
+					stage.setHeight(910);
+		        	stage.setWidth(900);
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
 		        default:
 		        	break;
 		      }
