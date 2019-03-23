@@ -28,9 +28,15 @@ public class MainMenu extends Application {
 
     private static final int WIDTH = 900;
     private static final int HEIGHT = 590;
-
+    public Stage window2;
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
-            new Pair<String, Runnable>("Play", () -> {}),
+            new Pair<String, Runnable>("Play", () -> {
+                window2.setResizable(false);
+                Scene3 hi = new Scene3();
+                hi.start(window2);
+                window2.setWidth(900);
+                window2.setWidth(900);
+            }),
             new Pair<String, Runnable>("Instructions", () -> {
             }),
             new Pair<String, Runnable>("Scores", () -> {}),
@@ -66,7 +72,7 @@ public class MainMenu extends Application {
     }
 
     private void addBackground() {
-        ImageView imageView = new ImageView(new Image(getClass().getResource("res/temp.jpg").toExternalForm()));
+        ImageView imageView = new ImageView(new Image("temp.jpg"));
 
         imageView.setFitWidth(WIDTH);
         imageView.setFitHeight(HEIGHT);
@@ -130,10 +136,11 @@ public class MainMenu extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        window2 = primaryStage;
         Scene scene = new Scene(createContent());
-        primaryStage.setTitle("Arcade Menu");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        window2.setTitle("Arcade Menu");
+        window2.setScene(scene);
+        window2.show();
     }
 
     public static void main(String[] args) {

@@ -84,10 +84,11 @@ public class Rain extends Application{
 		            	}
 		            }
 		        });
+		        /*
 		        scene.setOnKeyPressed(e -> {
 				      switch (e.getCode()) {
 				        case ESCAPE:
-				        	Scence3 hi = new Scence3();
+				        	Scene3 hi = new Scene3();
 						try {
 							hi.start(primaryStage);
 							primaryStage.setWidth(900);
@@ -99,6 +100,7 @@ public class Rain extends Application{
 				        	break;
 				      }
 				    });
+				*/
 
 			}
 		}));

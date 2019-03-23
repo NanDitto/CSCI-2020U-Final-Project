@@ -23,9 +23,10 @@ public class Pong extends Application{
 	//IF PLAYER BEATS COMPUTER PASS LEVEL
 	public boolean pass = false;
 	// Board Layout
-	private final String background_Image = "res/GrassBackGround.png";
-	private final String log_image = "res/Log.png";
-	private final String ball_image = "res/ball1.png";
+	String cwd = System.getProperty("user.dir");
+	private final String background_Image = "file:" + cwd + "/src/main/resources/GrassBackground.png";
+	private final String log_image = "file:" + cwd + "/src/main/resources/Log.png";
+	private final String ball_image = "file:" + cwd + "/src/main/resources/ball1.png";
 
 	public final static int TIME = 60;
 	public static int time = TIME;
@@ -186,7 +187,7 @@ public class Pong extends Application{
 		        	Tick.play();
 	        	break;
 		        case ESCAPE:
-		        	Scence3 hi = new Scence3();
+		        	Scene3 hi = new Scene3();
 				try {
 					hi.start(stage);
 					stage.setHeight(910);

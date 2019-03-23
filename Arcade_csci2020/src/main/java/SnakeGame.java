@@ -19,7 +19,8 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 public class SnakeGame extends Application {
 //Images
-	private final String background_Image = "res/GrassBackGround.png";
+	String cwd = System.getProperty("user.dir");
+	private final String background_Image = "file:" + cwd + "/src/main/resources/GrassBackground.png";
 //Board Size
 private final int HEIGHT = 800;
 private final int WIDTH = 1200;
@@ -138,7 +139,7 @@ private final int SPEED = 20;
 			        	LEFT = false;
 			        	break;
 		        case ESCAPE:
-		        	Scence3 hi = new Scence3();
+		        	Scene3 hi = new Scene3();
 				try {
 					hi.start(primaryStage);
 					primaryStage.setWidth(900);

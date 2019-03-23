@@ -14,4 +14,4 @@ repositories {
     jcenter() 
 }
 
-mainClassName = 'mainApp.Scene1' 
+mainClassName = 'mainApp.Scene3' 
