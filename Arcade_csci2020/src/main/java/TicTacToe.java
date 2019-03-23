@@ -17,29 +17,47 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.util.ArrayList;
+import java.util.*;
+
 
 public class TicTacToe extends Application {
-    private int level = 1;
-    private char currentPlayer = 'X';
+
     public boolean WIN;
+    private char currentPlayer = 'X';
     private Cell[][] cell = new Cell[3][3];
     private Label status = new Label("X must play\t");
     int wins = 0;
     int losses = 0;
+    public String ret = "";
+    static String cwd = System.getProperty("user.dir"); // used to read the user current directory
+
     private Label score = new Label("Wins: " + wins + "\tLosses: " + losses + "\t");
 
     private GridPane pane = new GridPane();
-
-    public void RecieveData(int levelsUnlocked){
-  		level = levelsUnlocked;
+    public String temp;
+    public String file;
+    public void settemp(String temp,String file){
+        this.temp = temp;
+        this.file = file;
     }
     @Override
     public void start(Stage primaryStage) {
-        WIN =false;
+        WIN = false;
+        ret = File.separator;
+
         for(int i = 0;i < 3;i++){
             for(int j = 0; j<3; j++){
                 cell[i][j] = new Cell();
                 pane.add(cell[i][j], j, i);
+
             }
         }
 
@@ -70,11 +88,16 @@ public class TicTacToe extends Application {
         scene.setOnKeyPressed(e -> {
               switch (e.getCode()) {
                 case ESCAPE:
+                    if(WIN == true){
+                        readAdd();
+                    }
                     Scene3 hi = new Scene3();
                 try {
+                    hi.settemp(temp,file);
                     hi.start(primaryStage);
-                    primaryStage.setWidth(910);
-                    primaryStage.setHeight(930);
+                    hi.curentLevel();
+                    primaryStage.setWidth(900);
+                    primaryStage.setHeight(900);
                 }catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -95,6 +118,16 @@ public class TicTacToe extends Application {
         }
         return true;
     }
+    
+    public void readAdd(){
+        CSV savea = new CSV();
+        try{
+            savea.read(temp, file,"1");
+            savea.save(file);
+        }catch (IOException e){}
+
+    }
+
 
     public boolean hasWon(char player){
         for(int i = 0;i < 3;i++){
@@ -105,13 +138,13 @@ public class TicTacToe extends Application {
         }
         for(int i = 0;i < 3;i++){
             if(cell[0][i].getPlayer() == player && cell[1][i].getPlayer() == player && cell[2][i].getPlayer() == player){
-                WIN = true;
+                WIN=true;
                 return true;
             }
         }
 
         if(cell[0][0].getPlayer() == player && cell[1][1].getPlayer() == player && cell[2][2].getPlayer() == player){
-            WIN = true;
+            WIN =true;
             return true;
         }
 

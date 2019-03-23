@@ -19,6 +19,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.util.Random;
+import java.io.IOException;
 public class Pong extends Application{
 	//IF PLAYER BEATS COMPUTER PASS LEVEL
 	public boolean pass = false;
@@ -29,7 +30,7 @@ public class Pong extends Application{
 	private final String ball_image = "file:" + cwd + "/src/main/resources/ball1.png";
 
 	public final static int TIME = 60;
-	public static int time = TIME;
+	public int time = TIME;
 	public final static int HEIGHT = 600;
 	public final static int WIDTH = 1000;
 	public final Pane Board = new Pane();
@@ -49,6 +50,7 @@ public class Pong extends Application{
 	float xspeed = 0;
 	float yspeed = -4;
 	public final int SIZE = 15;
+	public boolean WIN;
 
 	/*Paddle Properties:
 	 * Y Speed
@@ -61,9 +63,16 @@ public class Pong extends Application{
 	public final float DELTA_Y = 10;
 	public final float LENGTH = 100;
 	public final float W = 20;
+	public String temp;
+  	public String file;
+  	public void settemp(String temp,String file){
+        this.temp = temp;
+        this.file = file;
+  	}
 	@Override
 	@FXML
 	public void start(Stage stage) {
+		WIN = false;
 		stage.setScene(scene);
 		stage.show();
 		stage.setResizable(false);
@@ -186,20 +195,33 @@ public class Pong extends Application{
 			      	Tick.setCycleCount(TIME);
 		        	Tick.play();
 	        	break;
-		        case ESCAPE:
-		        	Scene3 hi = new Scene3();
-							try {
-								hi.start(stage);
-								stage.setWidth(910);
-								stage.setHeight(930);
-							}catch (Exception e1) {
-								e1.printStackTrace();
-							}
-					        default:
-					        	break;
-					      }
-					    });
+                case ESCAPE:
+                    if(WIN == true){
+                        readAdd();
+                    }
+                    Scene3 hi = new Scene3();
+                try {
+                    hi.settemp(temp,file);
+                    hi.start(stage);
+                    hi.curentLevel();
+                    stage.setWidth(900);
+                    stage.setHeight(900);
+                }catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+		        default:
+		        	break;
+		      }
+		    });
 	}
+	 public void readAdd(){
+        CSV savea = new CSV();
+        try{
+            savea.read(temp, file,"3");
+            savea.save(file);
+        }catch (IOException e){}
+
+    }
 	public void reset(Circle c){
 		Random rand = new Random();
     	float n = rand.nextInt(9) + 1;
@@ -216,6 +238,7 @@ public class Pong extends Application{
 			prompt.setText("You Win!");
 			Board.getChildren().add(prompt);
 			pass = true;
+			WIN = true;
 		}else if(ComputerScore > PlayerScore){
 			prompt.setText("Computer Wins!");
 			Board.getChildren().add(prompt);

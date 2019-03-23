@@ -1,7 +1,9 @@
 package mainApp;
-import javafx.animation.*;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -10,7 +12,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -19,7 +20,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -29,13 +29,20 @@ public class MainMenu extends Application {
     private static final int WIDTH = 900;
     private static final int HEIGHT = 590;
     public Stage window2;
+    public String temp;
+    public String file;
+    public void settemp(String temp,String file){
+        this.temp = temp;
+        this.file = file;
+    }
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("Play", () -> {
                 window2.setResizable(false);
                 Scene3 hi = new Scene3();
+                hi.settemp(temp,file);
                 hi.start(window2);
-                window2.setWidth(910);
-                window2.setHeight(930);
+                window2.setWidth(900);
+                window2.setWidth(900);
             }),
             new Pair<String, Runnable>("Instructions", () -> {
             }),

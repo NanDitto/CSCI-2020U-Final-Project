@@ -43,11 +43,11 @@ import java.io.FileInputStream;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundSize;
+import java.io.IOException;
 
 
 public class Blackjack extends Application {
 	public boolean WIN = false;
-	private final int LEVEL = 2;
 	private VBox pane = new VBox(); // main pane
 	private HBox cardi = new HBox(); // used to store cards
 	private HBox computer = new HBox(); // used to store computer cards
@@ -64,6 +64,12 @@ public class Blackjack extends Application {
 	boolean check = true;
 	Stage Window; // main window
 	Scene newScene; // window with won or loss
+  public String temp;
+  public String file;
+  public void settemp(String temp,String file){
+        this.temp = temp;
+        this.file = file;
+  }
 
 	String source = "file:" + cwd + "/src/main/resources/Cards/";
   	public void start(Stage primaryStage) {
@@ -145,22 +151,18 @@ public class Blackjack extends Application {
 	      			}
       			}
       			if (points > 21){ // if the points are greater than 21 on computer side, switch to computer won
-      				StackPane layout1 = new StackPane();
-      				Label newSenelabe = new Label("Computer Won!");
-					newSenelabe.setStyle("-fx-font-weight: bold");
-      				layout1.getChildren().add(newSenelabe);
-      				newSenelabe.setFont(Font.font ("Verdana", 22));
-      				newScene = new Scene(layout1,200,200);
-      				Window.setScene(newScene);
+              hit.setDisable(true);
+              pane.getChildren().clear();
+              Label youWon = new Label("Computer Won");
+              pane.getChildren().add(youWon);
+      				WIN = false;
+
 	      		}
       			if(points == 21){
-      				StackPane layout1 = new StackPane(); // if the points are greater than 21 on computer side,user won
-      				Label newSenelabe = new Label("YOU WON!");
-					newSenelabe.setStyle("-fx-font-weight: bold");
-      				layout1.getChildren().add(newSenelabe);
-      				newSenelabe.setFont(Font.font ("Verdana", 22));
-      				newScene = new Scene(layout1,200,200);
-      				Window.setScene(newScene);
+              hit.setDisable(true);
+              pane.getChildren().clear();
+              Label youWon = new Label("You WON!");
+              pane.getChildren().add(youWon);
 							WIN = true;
       			}
 
@@ -186,23 +188,18 @@ public class Blackjack extends Application {
       				nameOfcard.remove(ButtonRan);
       			}
       			if(computerpoints > 21){
-      				StackPane layout1 = new StackPane();
-      				Label newSenelabe = new Label("YOU WON!");
-					newSenelabe.setStyle("-fx-font-weight: bold");
-      				layout1.getChildren().add(newSenelabe);
-      				newSenelabe.setFont(Font.font ("Verdana", 22));
-      				newScene = new Scene(layout1,200,200);
-      				Window.setScene(newScene);
-							WIN = true;
+              stand.setDisable(true);
+              pane.getChildren().clear();
+              Label youWon = new Label("You WON!");
+              pane.getChildren().add(youWon);
+              WIN = true;
       			}
       			if(computerpoints == 21){
-      				StackPane layout1 = new StackPane();
-      				Label newSenelabe = new Label("Computer Won!");
-					newSenelabe.setStyle("-fx-font-weight: bold");
-      				layout1.getChildren().add(newSenelabe);
-      				newSenelabe.setFont(Font.font ("Verdana", 22));
-      				newScene = new Scene(layout1,200,200);
-      				Window.setScene(newScene);
+              stand.setDisable(true);
+              pane.getChildren().clear();
+              Label youWon = new Label("Computer Won!");
+              pane.getChildren().add(youWon);
+      				WIN = false;
       			}
 
 
@@ -227,21 +224,34 @@ public class Blackjack extends Application {
       	Window.setScene(scene); // Place the scene in the stage
       	Window.show(); // Display the stage
 				scene.setOnKeyPressed(e -> {
-		    switch (e.getCode()) {
-		    case ESCAPE:
-		    Scene3 hi = new Scene3();
-				try {
-					hi.start(primaryStage);
-					primaryStage.setWidth(910);
-					primaryStage.setHeight(930);
-				}catch (Exception e1) {
-					e1.printStackTrace();
-				}
-		        default:
-		        	break;
-		      }
-		    });
+              switch (e.getCode()) {
+                case ESCAPE:
+                    if(WIN == true){
+                        readAdd();
+                    }
+                    Scene3 hi = new Scene3();
+                try {
+                    hi.settemp(temp,file);
+                    hi.start(primaryStage);
+                    hi.curentLevel();
+                    primaryStage.setWidth(900);
+                    primaryStage.setHeight(900);
+                }catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                default:
+                    break;
+              }
+            });
    }
+    public void readAdd(){
+        CSV savea = new CSV();
+        try{
+            savea.read(temp, file,"2");
+            savea.save(file);
+        }catch (IOException e){}
+
+    }
    public static void main(String[] args) {
     	launch(args);
   }

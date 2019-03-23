@@ -142,8 +142,8 @@ private final int SPEED = 20;
 		        	Scene3 hi = new Scene3();
 				try {
 					hi.start(primaryStage);
-					primaryStage.setWidth(910);
-					primaryStage.setHeight(930);
+					primaryStage.setWidth(900);
+					primaryStage.setHeight(900);
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}

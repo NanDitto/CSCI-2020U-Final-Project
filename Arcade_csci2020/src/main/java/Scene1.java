@@ -72,11 +72,16 @@ public class Scene1 extends Application {
 	static String cwd = System.getProperty("user.dir"); // used to read the user current directory
 	static String ret = "";
 	static String chck ="";
+	public String temp1 ="";
+	public String temp2 = "";
+
+	public String getUser(){
+		return temp1;
+	}
 
 	public String currentFilename = (cwd + ret + "src" + ret + "main" + ret + "java" + ret +  "progress.csv"); // intial file name
 
 	public void start(Stage primaryStage) {
-		System.out.print(currentFilename);
 		CurrentWindow = primaryStage;
 		/*
 		Media media = new Media(finalsDes + "music.mp3");
@@ -108,6 +113,7 @@ public class Scene1 extends Application {
 		CurrentWindow.setTitle("Welcome!"); // Set the stage title
 		CurrentWindow.setScene(scene); // Place the scene in the stage
 		CurrentWindow.show(); // Display the stage
+		
 	}
 	public static void main(String[] args) {
 		ret = File.separator; // to get file seperator according to the os
@@ -162,17 +168,18 @@ public class Scene1 extends Application {
 		            while(sc.hasNextLine()){ // read the file until its not the end
 		                String line = sc.nextLine();
 		                String[] details = line.split(",");
-		                String temp1 = login.getText().trim();
-		                String temp2 = new String(password.getPassword());
+		                temp1 = login.getText().trim();
+		                temp2 = new String(password.getPassword());
 						if(details[0].equals(temp1) && details[1].equals(temp2)){ // if the username and password are same, then continue
 							ImageView image = new ImageView("cm.gif");
 						    pane.getChildren().add(image);
 						    fadeTran(1,0,image,5);
 						    opt = true;
-						    
-						    MenuDriver hi = new MenuDriver();
-						    hi.start(CurrentWindow);
-						   	
+						    MainMenu hi = new MainMenu();
+						    hi.settemp(temp1, currentFilename);
+						    Timer t = new Timer(2000, hi.start(CurrentWindow));
+							t.setRepeats(false);
+							t.start();
 						}
 					}
 					if(opt == false){
@@ -213,7 +220,7 @@ public class Scene1 extends Application {
 	            temp3 = email.getText().trim();
 	            temp4 = age.getText().trim();
 				if (res == JOptionPane.OK_OPTION) {
-					out.write(temp1+","+temp2+","+temp3+","+temp4); // appeding the information collected from the user into the file
+					out.write(temp1+","+temp2+","+temp3+","+temp4+","+"0"); // appeding the information collected from the user into the file
 					out.newLine();
 				}
 				out.close();
