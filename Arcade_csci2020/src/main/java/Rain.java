@@ -1,4 +1,4 @@
-package main.java;
+package mainApp;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -38,15 +38,11 @@ public class Rain extends Application{
 
 
 	@Override
-<<<<<<< HEAD
-    public void start(Stage primaryStage) {  
+    public void start(Stage primaryStage) {
 		String backg = "file:" + cwd + "/src/main/resources/retro.png";
        	ImageView back = new ImageView(backg); // main background image
 		pane.getChildren().add(back);
 
-=======
-    public void start(Stage primaryStage) {
->>>>>>> 01c9aae3eb62c95334d83672b61ab6e7ade51581
 
         for(int i =0;i<MAX;i++){
         	letters[i] = new Text();
@@ -84,7 +80,6 @@ public class Rain extends Application{
 				checkLoss();
 
 		        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
 		            public void handle(KeyEvent ke) {
 		            	for(int i =0;i<MAX;i++){
 		            		if(letters[i].getText().equals(ke.getText().toLowerCase())) {
@@ -95,23 +90,6 @@ public class Rain extends Application{
 		            	}
 		            }
 		        });
-		        /*
-		        scene.setOnKeyPressed(e -> {
-				      switch (e.getCode()) {
-				        case ESCAPE:
-				        	Scene3 hi = new Scene3();
-						try {
-							hi.start(primaryStage);
-							primaryStage.setWidth(900);
-		                  primaryStage.setHeight(900);
-						}catch (Exception e1) {
-							e1.printStackTrace();
-						}
-				        default:
-				        	break;
-				      }
-				    });
-				*/
 
 			}
 		}));
@@ -133,7 +111,6 @@ public class Rain extends Application{
     	Tok.setCycleCount(Timeline.INDEFINITE);
         Tick.play();
         Tok.play();
-
 
 
 	}
@@ -166,6 +143,7 @@ public class Rain extends Application{
 		for(int i = 0; i<MAX; i++){
 			respawnLetter(i);
 		}
+
 	}
 
 
