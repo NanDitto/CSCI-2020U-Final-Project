@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class TicTacToe extends Application {
 
     private char currentPlayer = 'X';
-
+    public boolean WIN;
     private Cell[][] cell = new Cell[3][3];
     private Label status = new Label("X must play\t");
     int wins = 0;
@@ -32,6 +32,7 @@ public class TicTacToe extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        WIN =false;
 
 
         for(int i = 0;i < 3;i++){
@@ -65,6 +66,25 @@ public class TicTacToe extends Application {
         primaryStage.setTitle("Tic Tac Toe");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        scene.setOnKeyPressed(e -> {
+              switch (e.getCode()) {
+                case ESCAPE:
+                    Scene3 hi = new Scene3();
+                try {
+                    hi.sentData(WIN);
+                    hi.start(primaryStage);
+
+                    primaryStage.setWidth(900);
+                    primaryStage.setHeight(900);
+                }catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                default:
+                    break;
+              }
+            });
+
     }
 
     public boolean isBoardFull(){
@@ -81,20 +101,24 @@ public class TicTacToe extends Application {
     public boolean hasWon(char player){
         for(int i = 0;i < 3;i++){
             if(cell[i][0].getPlayer() == player && cell[i][1].getPlayer() == player && cell[i][2].getPlayer() == player){
+                WIN = true;
                 return true;
             }
         }
         for(int i = 0;i < 3;i++){
             if(cell[0][i].getPlayer() == player && cell[1][i].getPlayer() == player && cell[2][i].getPlayer() == player){
+                WIN = true;
                 return true;
             }
         }
 
         if(cell[0][0].getPlayer() == player && cell[1][1].getPlayer() == player && cell[2][2].getPlayer() == player){
+            WIN = true;
             return true;
         }
 
         if(cell[0][2].getPlayer() == player && cell[1][1].getPlayer() == player && cell[2][0].getPlayer() == player){
+            WIN = true;
             return true;
         }
         return false;

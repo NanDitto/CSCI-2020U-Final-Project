@@ -1,9 +1,8 @@
 package mainApp;
-
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,6 +10,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -18,30 +18,17 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
+
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class MenuDriver extends Application {
+public class MainMenu extends Application {
 
-    @Override
-    public void start(Stage primaryStage) {
-        Scene scene = new Scene(createContent());
-        primaryStage.setTitle("Arcade Menu");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-    }
-
-    //sets the width and height of the primary Stage
-    private int Width = 900;
-    private int Height = 590;
-
-    //Create a pane, a vbox for the menu, and a line
-    private Pane root = new Pane();
-    private VBox menuBox = new VBox(-5);
-    private Line line;
-
-    //create menu item names and their actions once clicked
+    private static final int WIDTH = 900;
+    private static final int HEIGHT = 590;
+    public Stage window2;
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("Play", () -> {
                 window2.setResizable(false);
@@ -50,45 +37,57 @@ public class MenuDriver extends Application {
                 window2.setWidth(900);
                 window2.setWidth(900);
             }),
-
-            new Pair<String, Runnable>("Instructions", () -> {}),
+            new Pair<String, Runnable>("Instructions", () -> {
+            }),
             new Pair<String, Runnable>("Scores", () -> {}),
             new Pair<String, Runnable>("Credits", () -> {}),
             new Pair<String, Runnable>("Exit to Desktop", Platform::exit)
     );
 
-    //Sets the background, adds the title,
+    public void changeScreenButton(ActionEvent event) throws IOException {
+        Parent creditsParent = FXMLLoader.load(getClass().getResource("sample.FXML"));
+        Scene creditsScene = new Scene (creditsParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+    }
+
+
+    private Pane root = new Pane();
+    private VBox menuBox = new VBox(-5);
+    private Line line;
+
     private Parent createContent() {
         addBackground();
         addTitle();
 
-        double lineX = Width / 2 - 100;
-        double lineY = Height / 4;
+        double lineX = WIDTH / 2 - 100;
+        double lineY = HEIGHT / 4;
 
         addLine(lineX - 5, lineY );
         addMenu(lineX , lineY);
+
         startAnimation();
+
         return root;
     }
 
-    //creates and adds the background
     private void addBackground() {
-        ImageView imageView = new ImageView(new Image(getClass().getResource("res/temp.jpg").toExternalForm()));
-        imageView.setFitWidth(Width);
-        imageView.setFitHeight(Height);
+        ImageView imageView = new ImageView(new Image("temp.jpg"));
+
+        imageView.setFitWidth(WIDTH);
+        imageView.setFitHeight(HEIGHT);
+
         root.getChildren().addAll(imageView);
     }
 
-    //creates and adds the title
     private void addTitle() {
-        MenuTitle title = new MenuTitle("WELCOME TO OUR ARCADE");
-        title.setTranslateX(Width / 2 - title.getTitleWidth() / 2);
-        title.setTranslateY(Height / 11);
+        Title title = new Title("WELCOME TO OUR ARCADE");
+        title.setTranslateX(WIDTH / 2 - title.getTitleWidth() / 2);
+        title.setTranslateY(HEIGHT / 11);
 
         root.getChildren().add(title);
     }
 
-    //adds the animated line for the menu items
     private void addLine(double x, double y) {
         line = new Line(x, y, x, y + 220);
         line.setStrokeWidth(3);
@@ -99,7 +98,6 @@ public class MenuDriver extends Application {
         root.getChildren().add(line);
     }
 
-    //Begins animating the menu objects
     private void startAnimation() {
         ScaleTransition st = new ScaleTransition(Duration.seconds(1), line);
         st.setToY(1);
@@ -117,7 +115,6 @@ public class MenuDriver extends Application {
         st.play();
     }
 
-    //adds the menu items
     private void addMenu(double x, double y) {
         menuBox.setTranslateX(x);
         menuBox.setTranslateY(y);
@@ -137,8 +134,16 @@ public class MenuDriver extends Application {
         root.getChildren().add(menuBox);
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        window2 = primaryStage;
+        Scene scene = new Scene(createContent());
+        window2.setTitle("Arcade Menu");
+        window2.setScene(scene);
+        window2.show();
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
-
 }
