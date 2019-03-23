@@ -170,7 +170,7 @@ public class Scene1 extends Application {
 						    fadeTran(1,0,image,5);
 						    opt = true;
 						    
-						    MainMenu hi = new MainMenu();
+						    MenuDriver hi = new MenuDriver();
 						    hi.start(CurrentWindow);
 						   	
 						}
