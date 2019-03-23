@@ -188,17 +188,17 @@ public class Pong extends Application{
 	        	break;
 		        case ESCAPE:
 		        	Scene3 hi = new Scene3();
-				try {
-					hi.start(stage);
-					stage.setHeight(910);
-		        	stage.setWidth(900);
-				}catch (Exception e1) {
-					e1.printStackTrace();
-				}
-		        default:
-		        	break;
-		      }
-		    });
+							try {
+								hi.start(stage);
+								stage.setWidth(910);
+								stage.setHeight(930);
+							}catch (Exception e1) {
+								e1.printStackTrace();
+							}
+					        default:
+					        	break;
+					      }
+					    });
 	}
 	public void reset(Circle c){
 		Random rand = new Random();

@@ -227,14 +227,13 @@ public class Blackjack extends Application {
       	Window.setScene(scene); // Place the scene in the stage
       	Window.show(); // Display the stage
 				scene.setOnKeyPressed(e -> {
-		      switch (e.getCode()) {
-		        case ESCAPE:
-		        	Scene3 hi = new Scene3();
+		    switch (e.getCode()) {
+		    case ESCAPE:
+		    Scene3 hi = new Scene3();
 				try {
-					hi.sendData(WIN,LEVEL);
 					hi.start(primaryStage);
-					primaryStage.setWidth(900);
-					primaryStage.setHeight(900);
+					primaryStage.setWidth(910);
+					primaryStage.setHeight(930);
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}

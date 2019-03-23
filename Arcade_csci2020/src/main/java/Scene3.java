@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 
 public class Scene3 extends Application {
 	private final int WIDTH = 900;
@@ -21,29 +22,32 @@ public class Scene3 extends Application {
 	private final int GAP = 250;
 	private final int windowWIDTH = 160;
 	private final int windowHEIGHT = 160;
-	public int levelsUnlocked =3;
+	private final int borderWIDTH = 170;
+	private final int borderHEIGHT = 185;
+	public int levelsUnlocked =7;
+
   int currentX= 122;
   int currentY = 140;
   ImageView [] locks = new ImageView[7];
   Pane pane = new Pane();
 	//A USER_NAME thats passed between FILES
-	public String USER_NAME = "INSERT USERS NAME HERE";
+	public String USER_NAME = "PP Boi";
 	public Text user = new Text(20,40,USER_NAME);
   String cwd = System.getProperty("user.dir");
 
 	 @Override
   public void start(Stage stage) {
-		System.out.println(levelsUnlocked);
-    //TicTacToe, Rain, Jeopardy, BlackJack
-    //President, Pong, SnakeGame
+		//Adds User Name to top right
     user.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
     user.setFill(Color.WHITE);
-    user.setX(150);
+    user.setX(WIDTH - 250);
     user.setY(80);
+		//Background image
     Image image = new Image("file:"+ cwd + "/src/main/resources/background.gif");
     ImageView background = new ImageView(image);
-    background.setFitWidth(WIDTH+10);
-    background.setFitHeight(HEIGHT+20);
+    background.setFitWidth(WIDTH+30);
+    background.setFitHeight(HEIGHT+30);
+		//Lighting image
     Image light = new Image("file:"+ cwd + "/src/main/resources/light.png");
     ImageView lights = new ImageView(light);
     lights.setFitWidth(WIDTH+110);
@@ -52,10 +56,16 @@ public class Scene3 extends Application {
     lights.setY(-130);
     pane.getChildren().addAll(background,lights);
 
+		//Hovering border of each window
+		Rectangle window_Outline = new Rectangle(borderWIDTH,borderHEIGHT);
+		window_Outline.setFill(Color.YELLOW);
 
-
+		//All Images to make Stage look nice
+		Image light_border = new Image("file:"+ cwd + "/src/main/resources/lights.gif");
+		Image spaceShip = new Image("file:"+ cwd + "/src/main/resources/ship.gif");
     Image Lock = new Image("file:"+ cwd + "/src/main/resources/lock.png");
     Image back = new Image("file:"+ cwd + "/src/main/resources/left_arrow.gif");
+		Image Planets = new Image("file:"+ cwd + "/src/main/resources/planets.png");
 
     Image game1 = new Image("file:"+ cwd + "/src/main/resources/TicTacToe.png");
     Image game2 = new Image("file:"+ cwd + "/src/main/resources/BlackJack.png");
@@ -66,7 +76,18 @@ public class Scene3 extends Application {
     Image game7 = new Image("file:"+ cwd + "/src/main/resources/Jeopardy.png");
     Image game8 = new Image("file:"+ cwd + "/src/main/resources/LetterFall.png");
 
+		ImageView planet_background = new ImageView(Planets);
+		pane.getChildren().add(planet_background);
+		//planet_background.setFitWidth(300);
+		//planet_background.setFitHeight(200);
 
+		ImageView ss = new ImageView(spaceShip);
+		pane.getChildren().add(ss);
+
+		ImageView border = new ImageView(light_border);
+		pane.getChildren().add(border);
+		border.setFitWidth(WIDTH);
+		border.setFitHeight(HEIGHT);
 
     ImageView Back_Arrow = new ImageView(back);
     Back_Arrow.setX(30);
@@ -174,6 +195,15 @@ public class Scene3 extends Application {
         }
    });
      //TicTacToe
+		 Level1.setOnMouseEntered(e -> {
+	     pane.getChildren().add(window_Outline);
+	     Level1.toFront();
+	     window_Outline.setX(STARTX-10);
+	     window_Outline.setY(126);
+	    });
+    Level1.setOnMouseExited(e -> {
+    	pane.getChildren().remove(window_Outline);
+	    });
     Level1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -184,19 +214,34 @@ public class Scene3 extends Application {
 
         }
    });
+	 Level2.setOnMouseEntered(e -> {
+		 pane.getChildren().add(window_Outline);
+		 Level2.toFront();
+		 window_Outline.setX((STARTX-10)+GAP);
+		 window_Outline.setY(126);
+		});
+	Level2.setOnMouseExited(e -> {
+		pane.getChildren().remove(window_Outline);
+		});
      //BlackJack
     Level2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
             Blackjack hi = new Blackjack();
             hi.start(stage);
-
             stage.setWidth(470);
             stage.setHeight(470);
-
-
         }
    });
+	 Level3.setOnMouseEntered(e -> {
+		 pane.getChildren().add(window_Outline);
+		 Level3.toFront();
+		 window_Outline.setX(STARTX-10 + GAP*2);
+		 window_Outline.setY(126);
+		});
+	Level3.setOnMouseExited(e -> {
+		pane.getChildren().remove(window_Outline);
+		});
      //Pong
     Level3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
@@ -208,6 +253,15 @@ public class Scene3 extends Application {
 
         }
    });
+	 Level4.setOnMouseEntered(e -> {
+		 pane.getChildren().add(window_Outline);
+		 Level4.toFront();
+		 window_Outline.setX(STARTX-10);
+		 window_Outline.setY(386);
+		});
+	Level4.setOnMouseExited(e -> {
+		pane.getChildren().remove(window_Outline);
+		});
     //President
     Level4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
@@ -223,6 +277,15 @@ public class Scene3 extends Application {
 
         }
    });
+	 Level5.setOnMouseEntered(e -> {
+		 pane.getChildren().add(window_Outline);
+		 Level5.toFront();
+		 window_Outline.setX(STARTX-10 + GAP);
+		 window_Outline.setY(386);
+		});
+	Level5.setOnMouseExited(e -> {
+		pane.getChildren().remove(window_Outline);
+		});
      //Snake
     Level5.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
@@ -238,6 +301,15 @@ public class Scene3 extends Application {
 
         }
    });
+	 Level6.setOnMouseEntered(e -> {
+		 pane.getChildren().add(window_Outline);
+		 Level6.toFront();
+		 window_Outline.setX(STARTX-10 + GAP*2);
+		 window_Outline.setY(386);
+		});
+	Level6.setOnMouseExited(e -> {
+		pane.getChildren().remove(window_Outline);
+		});
 
     Level6.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
@@ -249,7 +321,15 @@ public class Scene3 extends Application {
 
         }
    });
-
+	 Level7.setOnMouseEntered(e -> {
+		 pane.getChildren().add(window_Outline);
+		 Level7.toFront();
+		 window_Outline.setX(STARTX-10);
+		 window_Outline.setY(653);
+		});
+	Level7.setOnMouseExited(e -> {
+		pane.getChildren().remove(window_Outline);
+		});
 
     Level7.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
@@ -266,7 +346,15 @@ public class Scene3 extends Application {
 
         }
    });
-
+	 Level8.setOnMouseEntered(e -> {
+		 pane.getChildren().add(window_Outline);
+		 Level8.toFront();
+		 window_Outline.setX(STARTX-10 + GAP);
+		 window_Outline.setY(653);
+		});
+	Level8.setOnMouseExited(e -> {
+		pane.getChildren().remove(window_Outline);
+		});
     Level8.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -276,8 +364,6 @@ public class Scene3 extends Application {
             stage.setHeight(800);
         }
    });
-
-
     //Add everything to the pane
     pane.getChildren().addAll(Back_Arrow,user,Level1,l1,Level2,l2,Level3,l3,Level4,l4,Level5,l5,Level6,l6,Level7,l7,Level8,l8);
   //Create a for loop to place locks on levels and after completion of levels unlock another level
@@ -287,7 +373,6 @@ public class Scene3 extends Application {
     	locks[i] = new ImageView(Lock);
       addLocks(i);
     }
-
     if(levelsUnlocked < 7){Level8.setDisable(true);}
 		if(levelsUnlocked < 6){Level7.setDisable(true);}
 		if(levelsUnlocked < 5){Level6.setDisable(true);}
@@ -295,8 +380,6 @@ public class Scene3 extends Application {
     if(levelsUnlocked < 3){Level4.setDisable(true);}
 		if(levelsUnlocked < 2){Level3.setDisable(true);}
 		if(levelsUnlocked < 1){Level2.setDisable(true);}
-
-
 
     Scene scene = new Scene(pane,WIDTH,HEIGHT);
     stage.setResizable(false);
