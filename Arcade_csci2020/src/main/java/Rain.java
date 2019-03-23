@@ -1,4 +1,4 @@
-package mainApp;
+package main.java;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -33,9 +34,19 @@ public class Rain extends Application{
 	Random rand = new Random();
 	TextField text = new TextField();
 	Text[] letters = new Text[MAX];
+	String cwd = System.getProperty("user.dir");
+
 
 	@Override
+<<<<<<< HEAD
+    public void start(Stage primaryStage) {  
+		String backg = "file:" + cwd + "/src/main/resources/retro.png";
+       	ImageView back = new ImageView(backg); // main background image
+		pane.getChildren().add(back);
+
+=======
     public void start(Stage primaryStage) {
+>>>>>>> 01c9aae3eb62c95334d83672b61ab6e7ade51581
 
         for(int i =0;i<MAX;i++){
         	letters[i] = new Text();
