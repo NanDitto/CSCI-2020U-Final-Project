@@ -21,22 +21,19 @@ public class Scene3 extends Application {
 	private final int GAP = 250;
 	private final int windowWIDTH = 160;
 	private final int windowHEIGHT = 160;
-    int currentX= 122;
-    int currentY = 140;
-    ImageView [] locks = new ImageView[7];
-    Pane pane = new Pane();
+	public int levelsUnlocked =3;
+  int currentX= 122;
+  int currentY = 140;
+  ImageView [] locks = new ImageView[7];
+  Pane pane = new Pane();
 	//A USER_NAME thats passed between FILES
 	public String USER_NAME = "INSERT USERS NAME HERE";
 	public Text user = new Text(20,40,USER_NAME);
-    String cwd = System.getProperty("user.dir");
-    public boolean check;
-  public void sentData(boolean x){
-    System.out.print(x);
-    check = x;
-  }
-  @Override
-  public void start(Stage stage) {
+  String cwd = System.getProperty("user.dir");
 
+	 @Override
+  public void start(Stage stage) {
+		System.out.println(levelsUnlocked);
     //TicTacToe, Rain, Jeopardy, BlackJack
     //President, Pong, SnakeGame
     user.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
@@ -54,13 +51,12 @@ public class Scene3 extends Application {
     lights.setX(-50);
     lights.setY(-130);
     pane.getChildren().addAll(background,lights);
-    
-    
-    
+
+
+
     Image Lock = new Image("file:"+ cwd + "/src/main/resources/lock.png");
     Image back = new Image("file:"+ cwd + "/src/main/resources/left_arrow.gif");
-    
-    
+
     Image game1 = new Image("file:"+ cwd + "/src/main/resources/TicTacToe.png");
     Image game2 = new Image("file:"+ cwd + "/src/main/resources/BlackJack.png");
     Image game3 = new Image("file:"+ cwd + "/src/main/resources/Pong.png");
@@ -69,13 +65,13 @@ public class Scene3 extends Application {
     Image game6 = new Image("file:"+ cwd + "/src/main/resources/HangMan.png");
     Image game7 = new Image("file:"+ cwd + "/src/main/resources/Jeopardy.png");
     Image game8 = new Image("file:"+ cwd + "/src/main/resources/LetterFall.png");
-    
-  
-    
+
+
+
     ImageView Back_Arrow = new ImageView(back);
     Back_Arrow.setX(30);
     Back_Arrow.setY(30);
-    
+
     ImageView Level1 = new ImageView(game1);
     ImageView Level2 = new ImageView(game2);
     ImageView Level3 = new ImageView(game3);
@@ -84,34 +80,34 @@ public class Scene3 extends Application {
     ImageView Level6 = new ImageView(game6);
     ImageView Level7 = new ImageView(game7);
     ImageView Level8 = new ImageView(game8);
-    
-    
-  
+
+
+
     Text l1 = new Text(STARTX,340,"TicTacToe");
     l1.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
-    
-    
+
+
     Text l2 = new Text(STARTX + GAP + 8,340,"Black Jack");
     l2.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
-    
+
     Text l3 = new Text(STARTX + GAP*2 + 33,340,"Pong");
     l3.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
-    
+
     Text l4 = new Text(STARTX+10,595,"President");
     l4.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
-    
+
     Text l5 = new Text(STARTX + GAP,595,"Snake Game");
     l5.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
-    
+
     Text l6 = new Text(STARTX + GAP*2+10,598,"Hang Man");
     l6.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
-    
+
     Text l7 = new Text(STARTX+15,865,"Jeopardy");
     l7.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
-    
+
     Text l8 = new Text(STARTX + GAP+10,865,"LetterFall");
     l8.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
-    
+
     l1.setFill(Color.WHITE);
     l2.setFill(Color.WHITE);
     l3.setFill(Color.WHITE);
@@ -120,43 +116,43 @@ public class Scene3 extends Application {
     l6.setFill(Color.WHITE);
     l7.setFill(Color.WHITE);
     l8.setFill(Color.WHITE);
-    
-    
+
+
     Level1.setFitWidth(152);
     Level1.setFitHeight(167);
     Level1.setX(STARTX);
     Level1.setY(136);
-    
+
     Level2.setFitWidth(152);
     Level2.setFitHeight(166);
     Level2.setX(STARTX + GAP);
     Level2.setY(136);
-    
+
     Level3.setFitWidth(152);
     Level3.setFitHeight(167);
     Level3.setX(STARTX + GAP*2);
     Level3.setY(136);
-    
+
     Level4.setFitWidth(152);
     Level4.setFitHeight(166);
     Level4.setX(STARTX);
     Level4.setY(396);
-    
+
     Level5.setFitWidth(152);
     Level5.setFitHeight(167);
     Level5.setX(STARTX + GAP);
     Level5.setY(397);
-    
+
     Level6.setFitWidth(152);
     Level6.setFitHeight(166);
     Level6.setX(STARTX + GAP*2);
     Level6.setY(400);
-    
+
     Level7.setFitWidth(152);
     Level7.setFitHeight(167);
     Level7.setX(STARTX);
     Level7.setY(663);
-    
+
     Level8.setFitWidth(152);
     Level8.setFitHeight(166);
     Level8.setX(STARTX + GAP);
@@ -170,6 +166,7 @@ public class Scene3 extends Application {
             MainMenu TTT = new MainMenu();
             try {
                 TTT.start(stage);
+								stage.setHeight(590);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -280,69 +277,53 @@ public class Scene3 extends Application {
         }
    });
 
-    
+
     //Add everything to the pane
     pane.getChildren().addAll(Back_Arrow,user,Level1,l1,Level2,l2,Level3,l3,Level4,l4,Level5,l5,Level6,l6,Level7,l7,Level8,l8);
   //Create a for loop to place locks on levels and after completion of levels unlock another level
-    
 
-    for(int i = 0; i < locks.length;i++)
+    for(int i = levelsUnlocked; i < locks.length;i++)
     {
     	locks[i] = new ImageView(Lock);
-        addLocks(locks[i], i);
+      addLocks(i);
     }
 
-    Level8.setDisable(true);
-    Level7.setDisable(true);
-    Level6.setDisable(true);
-    Level5.setDisable(true);
-    Level4.setDisable(true);
-    Level3.setDisable(true);
-    if(check == false){
-        Level2.setDisable(true);
-    }else{
-        Level2.setDisable(false);
-        pane.getChildren().remove(locks[0]);
-        check = true;
-    }
-
-
+    if(levelsUnlocked < 7){Level8.setDisable(true);}
+		if(levelsUnlocked < 6){Level7.setDisable(true);}
+		if(levelsUnlocked < 5){Level6.setDisable(true);}
+		if(levelsUnlocked < 4){Level5.setDisable(true);}
+    if(levelsUnlocked < 3){Level4.setDisable(true);}
+		if(levelsUnlocked < 2){Level3.setDisable(true);}
+		if(levelsUnlocked < 1){Level2.setDisable(true);}
 
 
 
     Scene scene = new Scene(pane,WIDTH,HEIGHT);
     stage.setResizable(false);
-    stage.setTitle("Select A Game"); 
-    stage.setScene(scene); 
-    stage.show();   
+    stage.setTitle("Select A Game");
+    stage.setScene(scene);
+    stage.show();
   }
 
-  public void addLocks(ImageView locks, int number){
+  public void addLocks(int number){
     if((number>=2) && (number <= 4)){
-        locks.setX((STARTX-5)+GAP*(number-2));
-        locks.setY(396);
+        locks[number].setX((STARTX-5)+GAP*(number-2));
+        locks[number].setY(396);
     }
     if((number>=5) && (number <=6)){
-        locks.setX((STARTX-5)+GAP*(number-5));
-        locks.setY(663);
+        locks[number].setX((STARTX-5)+GAP*(number-5));
+        locks[number].setY(663);
     }
     if((number>=0) && (number<=1)){
-        locks.setX(currentX+=GAP);
-        locks.setY(currentY);
+        locks[number].setX((STARTX-5)+GAP*(number+1));
+        locks[number].setY(currentY);
     }
-    locks.setFitWidth(windowWIDTH);
-    locks.setFitHeight(windowHEIGHT);
-    pane.getChildren().add(locks);
+    locks[number].setFitWidth(windowWIDTH);
+    locks[number].setFitHeight(windowHEIGHT);
+    pane.getChildren().add(locks[number]);
   }
 
   public static void main(String[] args) {
     launch(args);
-  }
-  public void checkStatus(ImageView level){
-    TicTacToe able = new TicTacToe();
-    if(able.WIN == true){
-        level.setDisable(false);
-        pane.getChildren().remove(locks[0]);
-    }
   }
 }

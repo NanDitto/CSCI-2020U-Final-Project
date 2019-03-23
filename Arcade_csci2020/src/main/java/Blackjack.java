@@ -47,6 +47,7 @@ import javafx.scene.layout.BackgroundSize;
 
 public class Blackjack extends Application {
 	public boolean WIN = false;
+	private final int LEVEL = 2;
 	private VBox pane = new VBox(); // main pane
 	private HBox cardi = new HBox(); // used to store cards
 	private HBox computer = new HBox(); // used to store computer cards
@@ -230,6 +231,7 @@ public class Blackjack extends Application {
 		        case ESCAPE:
 		        	Scene3 hi = new Scene3();
 				try {
+					hi.sendData(WIN,LEVEL);
 					hi.start(primaryStage);
 					primaryStage.setWidth(900);
 					primaryStage.setHeight(900);

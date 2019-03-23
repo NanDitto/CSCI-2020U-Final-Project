@@ -19,7 +19,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class TicTacToe extends Application {
-
+    private int level = 1;
     private char currentPlayer = 'X';
     public boolean WIN;
     private Cell[][] cell = new Cell[3][3];
@@ -30,16 +30,16 @@ public class TicTacToe extends Application {
 
     private GridPane pane = new GridPane();
 
+    public void RecieveData(int levelsUnlocked){
+  		level = levelsUnlocked;
+    }
     @Override
     public void start(Stage primaryStage) {
         WIN =false;
-
-
         for(int i = 0;i < 3;i++){
             for(int j = 0; j<3; j++){
                 cell[i][j] = new Cell();
                 pane.add(cell[i][j], j, i);
-
             }
         }
 
@@ -72,9 +72,7 @@ public class TicTacToe extends Application {
                 case ESCAPE:
                     Scene3 hi = new Scene3();
                 try {
-                    hi.sentData(WIN);
                     hi.start(primaryStage);
-
                     primaryStage.setWidth(900);
                     primaryStage.setHeight(900);
                 }catch (Exception e1) {

@@ -35,7 +35,7 @@ public class MainMenu extends Application {
                 Scene3 hi = new Scene3();
                 hi.start(window2);
                 window2.setWidth(900);
-                window2.setWidth(900);
+                window2.setHeight(900);
             }),
             new Pair<String, Runnable>("Instructions", () -> {
             }),
