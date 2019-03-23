@@ -46,7 +46,7 @@ public class Hang extends Application {
 	String cwd = System.getProperty("user.dir");
 
 
-	
+
 	@Override
 	public void start(Stage primaryStage) {
 
@@ -87,8 +87,23 @@ public class Hang extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
+    scene.setOnKeyPressed(e -> {
+		      switch (e.getCode()) {
+		        case ESCAPE:
+		        	Scene3 hi = new Scene3();
+				try {
+					hi.start(primaryStage);
+					primaryStage.setWidth(900);
+          primaryStage.setHeight(900);
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+		        default:
+		        	break;
+		      }
+		    });
 	}
-	
+
 	private void hang() {
 
 		Line top = new Line(25, 25, 200, 25);
@@ -111,7 +126,7 @@ public class Hang extends Application {
 		rope.setStrokeWidth(3);
 		children.add(rope);
 	}
-	
+
 	private void body() {
 
 		body = new ArrayList<Shape>();
@@ -159,7 +174,7 @@ public class Hang extends Application {
 		children.add(rightLeg);
 		body.add(rightLeg);
 	}
-	
+
 	private void getWord() {
 
         File file = new File(cwd + "/src/main/resources/translate.txt");
@@ -168,21 +183,21 @@ public class Hang extends Application {
 		} catch (FileNotFoundException e) {
             System.err.println("Error: " + e.getMessage());
 			e.printStackTrace();
-		} 
-     
+		}
+
         while (input.hasNext()) {
           currentWord  = input.next();
           storeWordList.add(currentWord);
         }
         input.close();
-        
+
         int index = rand.nextInt(storeWordList.size());
         currentWord = storeWordList.get(index);
     	System.out.println(currentWord);
     	underlines();
 
     }
-	
+
 	private void underlines(){
 			Line[] blanks = new Line[currentWord.length()];
 			int xStart = 375;
@@ -199,7 +214,7 @@ public class Hang extends Application {
 		}
 			text = initText();
 	}
-	
+
 	private Text[] initText() {
 		Text[] text = new Text[currentWord.length()];
 		int xStartw = 355;
@@ -216,7 +231,7 @@ public class Hang extends Application {
 		}
 		return text;
 	}
-	
+
 	private void play(){
 		// Get the guessed letter
 		String guess = Guess.getText();
@@ -225,7 +240,7 @@ public class Hang extends Application {
 			delay.setOnFinished( event -> prompt3.setVisible(false));
 			delay.play();
 			return;
-			
+
 		}
 
 		if (guess.length() > 1) { // if more than one letter, take only the	first
@@ -247,7 +262,7 @@ public class Hang extends Application {
 		} else {
 			guessedLetters+=guess;
 		}
-		LettersGuessed.setText(guessedLetters);	
+		LettersGuessed.setText(guessedLetters);
 		// Check if the letter is in the word
 		boolean good = false;
 		for (int i = 0; i < currentWord.length(); i++) {
@@ -280,9 +295,9 @@ public class Hang extends Application {
 			Guess.setEditable(false);
 		}
 	}
-	
+
    public static void main(String[] args) {
        launch();
-   } 
-   
-}		
+   }
+
+}

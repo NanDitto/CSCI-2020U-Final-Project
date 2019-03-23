@@ -1,4 +1,3 @@
-
 package mainApp;
 import javafx.beans.binding.Bindings;
 import javafx.scene.effect.BoxBlur;
@@ -38,7 +37,7 @@ public class MenuItems extends Pane {
         text = new Text(name);
         text.setTranslateX(10);
         text.setTranslateY(20);
-        text.setFont(Font.loadFont(MainMenu.class.getResource("res/GamePlayed.otf").toExternalForm(), 20));
+        //text.setFont(Font.loadFont(MainMenu.class.getResource("GamePlayed.otf").toExternalForm(), 20));
         text.setFill(Color.BLACK);
 
         text.effectProperty().bind(

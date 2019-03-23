@@ -12,7 +12,8 @@ No Prerequisites required other than gradle
 
 ### Installing
 
-Download/Clone the file. Open the Arcade_csci2020 folder and run the following commands from terminal 
+Download/Clone the file. Open the Arcade_csci2020 folder and run the following commands from terminal (If using command line on windows,
+use gradlew build instead)
 ```
 ./gradlew build
 ```
@@ -30,4 +31,4 @@ Joseph Fanous #100655452 (GoogleDownload)
 
 Hanan Amer # 100659601
 
-Garry Masaun #
+Garry Masaun #100659425

@@ -69,7 +69,6 @@ public class Scene1 extends Application {
 	Button login = new Button("Login"); // buttons for functionaliy
 	Button register = new Button("Register");
 	Button imports = new Button("Import File");
-
 	static String cwd = System.getProperty("user.dir"); // used to read the user current directory
 	static String ret = "";
 	static String chck ="";
@@ -105,6 +104,7 @@ public class Scene1 extends Application {
 
         Scene scene = new Scene(pane,900,540);
         scene.getStylesheets().add("main.css");  // adding styles using css
+        CurrentWindow.setResizable(false);
 		CurrentWindow.setTitle("Welcome!"); // Set the stage title
 		CurrentWindow.setScene(scene); // Place the scene in the stage
 		CurrentWindow.show(); // Display the stage
@@ -169,10 +169,10 @@ public class Scene1 extends Application {
 						    pane.getChildren().add(image);
 						    fadeTran(1,0,image,5);
 						    opt = true;
-						    /*
-						    Scene3 hi = new Scene3();
+						    
+						    MainMenu hi = new MainMenu();
 						    hi.start(CurrentWindow);
-						   	*/
+						   	
 						}
 					}
 					if(opt == false){
