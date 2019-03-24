@@ -1,4 +1,5 @@
 package mainApp;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -6,8 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
@@ -26,12 +27,15 @@ import java.util.Scanner;
 
 public class Hang extends Application {
 
+	private String cwd = System.getProperty("user.dir");
+	private final String backg = "file:" + cwd + "/src/main/resources/noose.png";
+   	private ImageView back = new ImageView(backg); // main background image
     private ArrayList<String> storeWordList = new ArrayList<String>();
     private String currentWord = new String();
 	private TextField Guess = new TextField();
 	private TextField LettersGuessed = new TextField();
 	private PauseTransition delay = new PauseTransition(Duration.seconds(1));
-	private Text prompt1 = new Text(300,175, "");
+	private Text prompt1 = new Text(235,175, "");
 	private Text prompt2 = new Text(100,175, "");
 	private Text prompt3 = new Text(300,175, "");
 	private Text prompt4 = new Text(140,175, "");
@@ -43,15 +47,22 @@ public class Hang extends Application {
 	private String guessedLetters = "";
 	private Scanner input;
 	private Text[] text;
-	String cwd = System.getProperty("user.dir");
-
 
 
 	@Override
 	public void start(Stage primaryStage) {
-
+		//adjusting and setting the scene to display everything correctly
+		//also adjusting text sizes and color and positions
 		Pane pane = new Pane();
+		Guess.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+		LettersGuessed.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+		Guess.setLayoutX(485);
+		Guess.setLayoutY(15);
+		LettersGuessed.setLayoutX(485);
+		LettersGuessed.setLayoutY(60);
 		children = pane.getChildren();
+		pane.getChildren().add(back);
+		back.toBack();
 		// draw the hang
 		hang();
 		// initialize the body
@@ -59,21 +70,37 @@ public class Hang extends Application {
 		getWord();
 		Guess.setOnAction(e -> play());
 		left = 6;
-		GridPane gridPane = new GridPane(); // Create UI
-		gridPane.setHgap(5);
-		gridPane.setVgap(5);
-		gridPane.add(new Label("Enter a letter:"), 0, 0);
-		gridPane.add(Guess, 1, 0);
-		gridPane.add(new Label("Letters Guessed:"), 0, 1);
-		gridPane.add(LettersGuessed, 1, 1);
+		Label e = new Label("Guesses Remaining:");
+		e.setStyle("-fx-font-weight: bold");
+		e.setTextFill(Color.web("#FF0000"));
+		e.setLayoutX(345);
+		e.setLayoutY(110);
+		e.setFont(new Font(15));
+		pane.getChildren().addAll(Guess,e);
+		Label l = new Label("Letters Guessed:");
+		l.setStyle("-fx-font-weight: bold");
+		l.setTextFill(Color.web("#FF0000"));
+		l.setLayoutX(368);
+		l.setLayoutY(62);
+		l.setFont(new Font(15));
+		pane.getChildren().addAll(LettersGuessed,l);
 		LettersGuessed.setEditable(false);
-		gridPane.add(new Label("Guesses Remaining: "), 0, 2);
+		Label g = new Label("Enter a letter: ");
+		g.setStyle("-fx-font-weight: bold");
+		g.setTextFill(Color.web("#FF0000"));
+		g.setLayoutX(385);
+		g.setLayoutY(16);
+		g.setFont(new Font(15));
 		guessesRemaining = new Label(String.valueOf(left));
-		gridPane.add(guessesRemaining, 1, 2);
+		guessesRemaining.setStyle("-fx-font-weight: bold");
+		guessesRemaining.setTextFill(Color.web("#FF0000"));
+		guessesRemaining.setLayoutX(500);
+		guessesRemaining.setLayoutY(100);
+		guessesRemaining.setFont(new Font(25));
+		pane.getChildren().addAll(guessesRemaining,g);
 		BorderPane bPane = new BorderPane();
-		bPane.setRight(gridPane);
-		bPane.setCenter(pane);
-		prompt1.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
+		bPane.setRight(pane);
+		prompt1.setFont(Font.font("Times New Roman",FontWeight.BOLD, 20));
 		prompt1.setFill(Color.RED);
 		prompt2.setFont(Font.font("Times New Roman",FontWeight.BOLD, 20));
 		prompt2.setFill(Color.RED);
@@ -87,23 +114,9 @@ public class Hang extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
-    scene.setOnKeyPressed(e -> {
-		      switch (e.getCode()) {
-		        case ESCAPE:
-		        	Scene3 hi = new Scene3();
-				try {
-					hi.start(primaryStage);
-					primaryStage.setWidth(900);
-          primaryStage.setHeight(900);
-				}catch (Exception e1) {
-					e1.printStackTrace();
-				}
-		        default:
-		        	break;
-		      }
-		    });
 	}
-
+	
+	//function that draws the structure that the man hangs from
 	private void hang() {
 
 		Line top = new Line(25, 25, 200, 25);
@@ -126,7 +139,8 @@ public class Hang extends Application {
 		rope.setStrokeWidth(3);
 		children.add(rope);
 	}
-
+	
+	//function that draws the man's body parts
 	private void body() {
 
 		body = new ArrayList<Shape>();
@@ -174,39 +188,38 @@ public class Hang extends Application {
 		children.add(rightLeg);
 		body.add(rightLeg);
 	}
-
+	
+	//function that gets random words from a text file and sets that word as the current word to be guessed
 	private void getWord() {
 
-        File file = new File(cwd + "/src/main/resources/translate.txt");
+        File file = new File("d:/Users/Joseph/Desktop/translate.txt");
 		try {
 			input = new Scanner(file);
 		} catch (FileNotFoundException e) {
             System.err.println("Error: " + e.getMessage());
 			e.printStackTrace();
-		}
-
+		} 
+     
         while (input.hasNext()) {
           currentWord  = input.next();
           storeWordList.add(currentWord);
         }
         input.close();
-
+        
         int index = rand.nextInt(storeWordList.size());
         currentWord = storeWordList.get(index);
-    	System.out.println(currentWord);
     	underlines();
 
     }
-
+	
+	//function that creates the right amount of underlines according to the word
 	private void underlines(){
 			Line[] blanks = new Line[currentWord.length()];
 			int xStart = 375;
 			int lineLength = 25;
 			int lineSpacing = 35;
 			for (int i = 0; i < currentWord.length(); i++){
-				// Calculate the starting point of the line segment
 				int xcoord = xStart + (lineSpacing * i);
-				// create the line
 				blanks[i] = new Line(xcoord, 225, xcoord - lineLength, 225);
 				blanks[i].setStroke(Color.BLACK);
 				blanks[i].setStrokeWidth(3);
@@ -214,24 +227,27 @@ public class Hang extends Application {
 		}
 			text = initText();
 	}
-
+	
+	//function that associates the underlines to a letter of the current word
 	private Text[] initText() {
 		Text[] text = new Text[currentWord.length()];
 		int xStartw = 355;
 		int lineSpacingw = 35;
 		for (int i = 0; i < text.length; i++) {
-			// Calculate the starting point of the line segment
 			int xcoordw = xStartw + (lineSpacingw * i);
 			text[i] = new Text(currentWord.substring(i, i + 1));
-			text[i].setFont(new Font(30));
+			text[i].setFont(new Font(40));
 			text[i].setX(xcoordw);
 			text[i].setY(220);
 			text[i].setVisible(false);
+			text[i].setFill(Color.RED);
 			children.add(text[i]);
 		}
 		return text;
 	}
-
+	
+	
+	//function that plays the game
 	private void play(){
 		// Get the guessed letter
 		String guess = Guess.getText();
@@ -240,7 +256,7 @@ public class Hang extends Application {
 			delay.setOnFinished( event -> prompt3.setVisible(false));
 			delay.play();
 			return;
-
+			
 		}
 
 		if (guess.length() > 1) { // if more than one letter, take only the	first
@@ -278,9 +294,9 @@ public class Hang extends Application {
 			guessesRemaining.setText(String.valueOf(left));
 		}
 		if (left == 0) {
-			prompt1.setText("You have 0 tries left, you lose.");
+			prompt1.setText("You have 0 tries left, you lose. The word was: " + currentWord);
 			Guess.setEditable(false);
-
+			
 		}
 		// Check if word is solved
 		boolean solved = true;
@@ -295,9 +311,9 @@ public class Hang extends Application {
 			Guess.setEditable(false);
 		}
 	}
-
+	
    public static void main(String[] args) {
        launch();
-   }
-
-}
+   } 
+   
+}		
