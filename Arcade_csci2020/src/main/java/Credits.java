@@ -22,7 +22,7 @@ public class Credits extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Pane pane = new Pane();
-        VBox box = new VBox(5);
+        VBox box = new VBox(60);
 
         MenuTitle title = new MenuTitle("Credits");
         title.setTranslateX(Width / 2 - title.getTitleWidth() / 2);
@@ -30,39 +30,25 @@ public class Credits extends Application {
 
         pane.getChildren().add(title);
 
-        Text text = new Text("Hanan Amer");
-        text.setX(Width/2 - text.getLayoutBounds().getWidth() - 24);
-        text.setY(100);
-        text.setFill(Color.WHITE);
-        text.setFont(Font.loadFont(MenuDriver.class.getResource("/src/main/resources/HyperspaceBold.otf").toExternalForm(), 30));
+        Text[] text = {new Text("Hanan Amer"), new Text("Nandor Gallo"), new Text("Joseph Fanous"),
+                new Text("Garry Masaun")};
 
-        Text text1 = new Text("Nandor Gallo");
-        text1.setX(Width/2 - text1.getLayoutBounds().getWidth()- 24);
-        text1.setY(200);
-        text1.setFill(Color.WHITE);
-        text1.setFont(Font.loadFont(MenuDriver.class.getResource("/src/main/resources/HyperspaceBold.otf").toExternalForm(), 30));
-
-        Text text2 = new Text("Joseph Fanous");
-        text2.setX(Width/2 - text2.getLayoutBounds().getWidth()- 24);
-        text2.setY(300);
-        text2.setFill(Color.WHITE);
-        text2.setFont(Font.loadFont(MenuDriver.class.getResource("/src/main/resources/HyperspaceBold.otf").toExternalForm(), 30));
-
-        Text text3 = new Text("Garry Masaun");
-        text3.setX(Width/2 - text3.getLayoutBounds().getWidth()- 24);
-        text3.setY(400);
-        text3.setFill(Color.WHITE);
-        text3.setFont(Font.loadFont(MenuDriver.class.getResource("/src/main/resources/HyperspaceBold.otf").toExternalForm(), 30));
-
+        for(int i=0; i<4; i++){
+            text[i].setFill(Color.WHITE);
+            text[i].setFont(Font.loadFont(MenuDriver.class.getResource("res/HyperspaceBold.otf").toExternalForm(), 30));
+            box.getChildren().addAll(text[i]);
+        }
         Button button = new Button("Back");
 
-        button.setTranslateX(Width/2 - 30);
-        button.setTranslateY(500);
-
         button.setOnAction(actionEvent -> primaryStage.close());
+        button.setTranslateX(80);
+        box.getChildren().addAll(button);
 
-        //box.getChildren().addAll(label, label1, label2, label3, label4, button);
-        pane.getChildren().addAll(text, text1, text2, text3, button);
+
+        box.setTranslateX(Width/3 +30);
+        box.setTranslateY(Height/5);
+
+        pane.getChildren().addAll(box);
 
         pane.setStyle("-fx-background-color: black");
         primaryStage.setTitle("Credits");
@@ -75,4 +61,3 @@ public class Credits extends Application {
         launch(args);
     }
 }
-
