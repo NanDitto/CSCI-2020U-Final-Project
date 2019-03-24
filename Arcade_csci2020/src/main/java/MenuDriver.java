@@ -65,7 +65,15 @@ public class MenuDriver extends Application {
                     e.printStackTrace();
                 }
             }),
-            new Pair<String, Runnable>("Scores", () -> {}),
+            new Pair<String, Runnable>("Scores", () -> {
+				Scores scores = new Scores();
+                Stage stage = new Stage();
+                try {
+                    scores.start(stage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+			}),
             new Pair<String, Runnable>("Credits", () -> {
                 Credits credits = new Credits();
                 Stage stage = new Stage();
