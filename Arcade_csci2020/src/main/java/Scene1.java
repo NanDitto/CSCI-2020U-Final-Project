@@ -175,7 +175,7 @@ public class Scene1 extends Application {
 						    pane.getChildren().add(image);
 						    fadeTran(1,0,image,5);
 						    opt = true;
-						    MainMenu hi = new MainMenu();
+						    MenuDriver hi = new MenuDriver();
 						    hi.settemp(temp1, currentFilename);
 						    Timer t = new Timer(2000, hi.start(CurrentWindow));
 							t.setRepeats(false);
