@@ -28,7 +28,7 @@ public class MenuItems extends Pane implements Runnable {
 		Polygon menuTextBackground = new Polygon(0, 0, 200, 0, 200, 15, 200, 30, 0, 30);
 
 		// sets the color properties of the item background
-		menuTextBackground.setStroke(Color.color(1, 1, 1, 0.75));
+		menuTextBackground.setStroke(Color.color(1, 1, 1, 0.7));
 		menuTextBackground.setEffect(new GaussianBlur(5));
 
 		// sets color properties when a menu item is pressed

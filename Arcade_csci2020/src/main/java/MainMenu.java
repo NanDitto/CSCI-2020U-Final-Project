@@ -27,6 +27,10 @@ import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 
+//Citation: Baimagambetov, Almas (Published 2017)
+//[Source code] : https://github.com/AlmasB/FXTutorials/blob/master/src/com/almasb/civ6menu/Civ6MenuApp.java
+
+
 public class MainMenu extends Application {
 
 	public Stage window2;
@@ -43,8 +47,8 @@ public class MainMenu extends Application {
 	private int Height = 590;
 
 	// Create a pane, a vbox for the menu, and a line
-	private Pane root = new Pane();
 	private VBox menu = new VBox(5);
+	private Pane pane = new Pane();
 	private Line line;
 
 	@Override
@@ -56,11 +60,31 @@ public class MainMenu extends Application {
 		window2.show();
 
 	}
+	
+	//creates and adds the menu items
+	private void addMenuItems(double x, double y) {
+		menu.setTranslateX(x);
+		menu.setTranslateY(y);
+
+		for (Pair<String, Runnable> data : menuData) {
+			
+			MenuItems item = new MenuItems(data.getKey());
+			item.setOnAction(data.getValue());
+			item.run();
+			Rectangle clip = new Rectangle(250, 40); //animated rectangle
+			item.setTranslateX(-250);
+			item.setClip(clip); //rectangle is binded to menu item
+			clip.translateXProperty().bind(item.translateXProperty().negate());
+			menu.getChildren().add(item);
+		}
+
+		pane.getChildren().add(menu);
+	}
 
 	// create menu item names and their actions once clicked
 	private List<Pair<String, Runnable>> menuData = Arrays.asList(
 	
-			new Pair<String, Runnable>("Play", () -> {
+			new Pair<String, Runnable>("Play", () -> { //Directs to arcade games screen
 				Scene3 hi = new Scene3();
 				hi.settemp(temp, file);
 				hi.start(window2);
@@ -68,7 +92,7 @@ public class MainMenu extends Application {
 				window2.setHeight(920);
 			}),
 
-			new Pair<String, Runnable>("Instructions", () -> {
+			new Pair<String, Runnable>("Instructions", () -> { //directs to instructions page(how to play)
 				Instructions instructions = new Instructions();
 				Stage stage = new Stage();
 				try {
@@ -76,7 +100,7 @@ public class MainMenu extends Application {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}), new Pair<String, Runnable>("Scores", () -> {
+			}), new Pair<String, Runnable>("Scores", () -> { //directs to scores screen(shows progress)
 				Scores scores = new Scores();
 				Stage stage = new Stage();
 				try {
@@ -84,7 +108,7 @@ public class MainMenu extends Application {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}), new Pair<String, Runnable>("Credits", () -> {
+			}), new Pair<String, Runnable>("Credits", () -> { //shows credits (us)
 				Credits credits = new Credits();
 				Stage stage = new Stage();
 				try {
@@ -112,37 +136,9 @@ public class MainMenu extends Application {
 		addLine(lineX - 6, lineY - 5);
 		addMenuItems(lineX, lineY - 22);
 		animateMenuItems();
-		return root;
+		return pane;
 	}
-
-	// creates and adds the background
-	private void addBackground() {
-		ImageView imageView = new ImageView(new Image("temp.jpg"));
-		imageView.setFitWidth(Width);
-		imageView.setFitHeight(Height);
-		root.getChildren().addAll(imageView);
-	}
-
-	// creates and adds the title
-	private void addTitle() {
-		Title title = new Title("WELCOME TO OUR ARCADE");
-		title.setTranslateX(Width / 2 - title.getTitleWidth() / 2);
-		title.setTranslateY(Height / 11);
-
-		root.getChildren().add(title);
-	}
-
-	// adds the animated line for the menu items
-	private void addLine(double x, double y) {
-		line = new Line(x, y, x, y + 220);
-		line.setStrokeWidth(3);
-		line.setStroke(Color.color(1, 1, 1, 0.7));
-		line.setEffect(new DropShadow(3, Color.BLACK));
-		line.setScaleY(0);
-
-		root.getChildren().add(line);
-	}
-
+	
 	// Begins animating the menu objects
 	private void animateMenuItems() {
 		// Animate the side bar
@@ -163,27 +159,35 @@ public class MainMenu extends Application {
 		sideBar.play();
 	}
 
-	//creates and adds the menu items
-	private void addMenuItems(double x, double y) {
-		menu.setTranslateX(x);
-		menu.setTranslateY(y);
-
-		for (Pair<String, Runnable> data : menuData) {
-			MenuItems item = new MenuItems(data.getKey());
-			item.setOnAction(data.getValue());
-			item.run();
-
-			item.setTranslateX(-300);
-
-			Rectangle clip = new Rectangle(300, 30);
-			clip.translateXProperty().bind(item.translateXProperty().negate());
-			item.setClip(clip);
-			menu.getChildren().addAll(item);
-		}
-
-		root.getChildren().add(menu);
+	
+		// creates and adds the title
+	private void addTitle() {
+		Title title = new Title("WELCOME TO OUR ARCADE");
+		title.setTranslateX(Width / 2 - title.getTitleWidth() / 2);
+		title.setTranslateY(Height / 11);
+		pane.getChildren().add(title);
 	}
 
+
+	// adds the animated line for the menu items
+	private void addLine(double x, double y) {
+		line = new Line(x, y, x, y + 220);
+		line.setEffect(new DropShadow(3, Color.BLACK));
+		line.setStroke(Color.color(1, 1, 1, 0.7));
+		line.setScaleY(0);
+		line.setStrokeWidth(3);
+		pane.getChildren().add(line);
+	}
+	
+		
+	// creates and adds the background
+	private void addBackground() {
+		ImageView imageView = new ImageView(new Image("temp.jpg"));
+		imageView.setFitHeight(Height);
+		imageView.setFitWidth(Width);
+		pane.getChildren().add(imageView);
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
