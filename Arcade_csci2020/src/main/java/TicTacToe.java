@@ -17,19 +17,21 @@ import java.io.IOException;
 
 public class TicTacToe extends Application {
 
+	//determines if player has won
 	public boolean WIN;
 	private char currentPlayer = 'X';
 
-	private Cell[][] cell = new Cell[3][3];
-	private Label status = new Label("---");
+	private Cell[][] cell = new Cell[3][3]; //a 3x3 cell matrix which is the tictactoe board
+	private Label status = new Label("---"); //announces if player or computer has won
 	int wins = 0;
 	int losses = 0;
-	private Label score = new Label("Wins: " + wins + "\tLosses: " + losses + "\t");
+	private Label score = new Label("Wins: " + wins + "\tLosses: " + losses + "\t"); //status of wins and losses of player
 
 	private GridPane pane = new GridPane();
 	public String temp;
 	public String file;
 
+	//sets the username from player database file
 	public void settemp(String temp, String file) {
 		this.temp = temp;
 		this.file = file;
@@ -39,6 +41,7 @@ public class TicTacToe extends Application {
 	public void start(Stage primaryStage) {
 		WIN = false;
 
+		//construct the board with cells
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				cell[i][j] = new Cell();
@@ -48,16 +51,11 @@ public class TicTacToe extends Application {
 		}
 
 		pane.setStyle("-fx-background-color: Beige");
+		
+		//resets the board (empties each cell)
 		Button reset = new Button("Reset");
 		reset.setOnAction(e -> {
-			pane.getChildren().clear();
-			for (int i = 0; i < 3; i++) {
-				for (int j = 0; j < 3; j++) {
-					cell[i][j] = new Cell();
-					pane.add(cell[i][j], j, i);
-
-				}
-			}
+			clearBoard();
 		});
 
 		status.setTranslateX(60);
@@ -66,6 +64,7 @@ public class TicTacToe extends Application {
 		HBox statusBar = new HBox(100);
 		statusBar.getChildren().addAll(status, score, reset);
 
+		//add nodes to scene
 		BorderPane borderPane = new BorderPane();
 		borderPane.setCenter(pane);
 		borderPane.setBottom(statusBar);
@@ -74,6 +73,8 @@ public class TicTacToe extends Application {
 		primaryStage.setTitle("Tic Tac Toe");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		//returns to the arcade menu once escape button is pressed
 		scene.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
 			case ESCAPE:
@@ -96,6 +97,7 @@ public class TicTacToe extends Application {
 		});
 	}
 
+	//checks if the board is filled with x's and o's
 	public boolean isBoardFull() {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
@@ -107,6 +109,7 @@ public class TicTacToe extends Application {
 		return true;
 	}
 
+	
 	public void readAdd() {
 		CSV savea = new CSV();
 		try {
@@ -117,6 +120,7 @@ public class TicTacToe extends Application {
 
 	}
 
+	//determines if a player has won
 	public boolean hasWon(char player) {
 		for (int i = 0; i < 3; i++) {
 			if (cell[i][0].getPlayer() == player && cell[i][1].getPlayer() == player
@@ -146,6 +150,7 @@ public class TicTacToe extends Application {
 
 	}
 
+	//sets prperties of the cell
 	public class Cell extends Pane {
 		private char player = ' ';
 
@@ -161,6 +166,8 @@ public class TicTacToe extends Application {
 			});
 		}
 
+		//once a cell is clicked, the current players move is recorded on the board
+		//and checks if the currentplayer has won, or if it was a draw
 		private void handleClick() throws InterruptedException {
 			if (player == ' ' && currentPlayer == 'X') {
 				setPlayer(currentPlayer);
@@ -196,6 +203,7 @@ public class TicTacToe extends Application {
 			}
 		}
 
+		//clears the board
 		public void clearBoard() {
 			pane.getChildren().clear();
 			for (int i = 0; i < 3; i++) {
@@ -207,10 +215,12 @@ public class TicTacToe extends Application {
 			}
 		}
 
+		//returns current player
 		public char getPlayer() {
 			return player;
 		}
 
+		//updates the score status
 		public void updateScore(char c) {
 			if (c == 'X') {
 				wins += 1;
@@ -221,6 +231,7 @@ public class TicTacToe extends Application {
 			}
 		}
 
+		//Determines the computers next move
 		public void computerMove() {
 			Random rand = new Random();
 
@@ -245,6 +256,7 @@ public class TicTacToe extends Application {
 		private Image X = new Image("x.png", 150, 85, false, false);
 		private Image O = new Image("o.png", 150, 85, false, false);
 
+		//creates an x or o on the selected cell 
 		public void setPlayer(char c) {
 			player = c;
 

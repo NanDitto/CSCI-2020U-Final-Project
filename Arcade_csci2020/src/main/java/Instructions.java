@@ -30,11 +30,18 @@ public class Instructions extends Application {
 		pane.getChildren().add(title);
 
 		//add scene subtext
-		Text[] text = { new Text("TicTacToe:"), new Text("Blackjack:"), new Text("Snake:"), new Text("Jeopardy:"),
-				new Text("President:"), new Text("Rain"), new Text("Pong:"), new Text("Hangman:") };
-
+		 Text[] text = {new Text("TicTacToe: Click on a cell to make a move, must get 3 'x' in a row\n to win, to reset the game press the reset button."),
+                new Text("Blackjack: Use mouse to click cards"),
+                new Text("Snake: Use the arrow keys to direct the snake towards the dots."),
+                new Text("Jeopardy: Get at least 3000 points by answering questions."),
+                new Text("President: A 2 player on the same computer, first one to lose all their cards wins"),
+                new Text("Rain: Type letters on screen before they fall to the ground."),
+                new Text("Pong: User arrow keys to direct you player."),
+                new Text("Hangman: Use keyboard to guess a letter."), 
+				new Text("*In order to unlock new games, you must win the previous game.")};
+				
 		//set text style
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 9; i++) {
 			text[i].setFill(Color.WHITE);
 			Font myFont = Font.loadFont(getClass().getResourceAsStream("/HyperspaceBold.otf"), 15);
 			text[i].setFont(myFont);
