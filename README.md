@@ -25,11 +25,11 @@ gradle run
 ```
 
 
-Nandor Gallo #100662966 (NanDitto)
+Nandor Gallo #100662966 (NanDitto) (Snake Game, Pong, Scene3 with Hanan, debug program)
 
 Joseph Fanous #100655452 (GoogleDownload)
 
-Hanan Amer # 100659601 (Hanan0110)
+Hanan Amer # 100659601 (Hanan0110) (Jeopardy, President, BlackJack, Scene1)
 
 Garry Masaun #100659425 (xGarry)
 
