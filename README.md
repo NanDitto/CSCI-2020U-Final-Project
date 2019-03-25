@@ -25,10 +25,15 @@ gradle run
 ```
 
 
-Nandor Gallo #100662966
+Nandor Gallo #100662966 (NanDitto) (Snake Game, Pong, Scene3 with Hanan, debug program)
 
 Joseph Fanous #100655452 (GoogleDownload)
 
-Hanan Amer # 100659601
+Hanan Amer # 100659601 (Hanan0110) (Jeopardy, President, BlackJack, Scene1)
 
-Garry Masaun #100659425
+Garry Masaun #100659425 (xGarry)
+
+Link to public repository containing the final project:
+```
+https://github.com/NanDitto/CSCI-2020U-Final-Project
+```

@@ -13,56 +13,45 @@ import javafx.scene.text.Text;
 
 public class MenuItems extends Pane implements Runnable {
 
-    private String name;
-    private Text text;
-    private Effect shadow = new DropShadow(5, Color.WHITE);
-    private Effect blur = new BoxBlur(0, 0, 0);
+	private String name;
+	private Text text;
+	private Effect shadow = new DropShadow(5, Color.WHITE);
+	private Effect blur = new BoxBlur(0, 0, 0);
 
-    //creates a rectangular button type background for each menu item
-    public MenuItems(String name) {
-        this.name = name;
-    }
+	// creates a rectangular button type background for each menu item
+	public MenuItems(String name) {
+		this.name = name;
+	}
 
-    public void run(){
-        Polygon menuTextBackground = new Polygon(
-            0, 0,
-            200, 0,
-            200, 15,
-            200, 30,
-            0, 30
-        );
+	public void run() {
+		Polygon menuTextBackground = new Polygon(0, 0, 200, 0, 200, 15, 200, 30, 0, 30);
 
-        //sets the color properties of the item background
-        menuTextBackground.setStroke(Color.color(1, 1, 1, 0.75));
-        menuTextBackground.setEffect(new GaussianBlur(5));
+		// sets the color properties of the item background
+		menuTextBackground.setStroke(Color.color(1, 1, 1, 0.75));
+		menuTextBackground.setEffect(new GaussianBlur(5));
 
-        //sets color properties when a menu item is pressed
-        menuTextBackground.fillProperty().bind(
-                Bindings.when(pressedProperty())
-                    .then(Color.color(0, 0, 0, 0.75))
-                            .otherwise(Color.color(0, 0, 0, 0.25))
-        );
+		// sets color properties when a menu item is pressed
+		menuTextBackground.fillProperty().bind(Bindings.when(pressedProperty()).then(Color.color(0, 0, 0, 0.75))
+				.otherwise(Color.color(0, 0, 0, 0.25)));
 
-        text = new Text(name);
-        text.setTranslateX(10);
-        text.setTranslateY(20);
+		text = new Text(name);
+		text.setTranslateX(10);
+		text.setTranslateY(20);
 
-        Font myFont = Font.loadFont(getClass().getResourceAsStream("/GamePlayed.otf"), 20);
-        text.setFont(myFont);
-        text.setFill(Color.BLACK);
+		Font myFont = Font.loadFont(getClass().getResourceAsStream("/GamePlayed.otf"), 20);
+		text.setFont(myFont);
+		text.setFill(Color.BLACK);
 
-        text.effectProperty().bind(
-                Bindings.when(hoverProperty()).then(shadow).otherwise(blur)
-        );
+		text.effectProperty().bind(Bindings.when(hoverProperty()).then(shadow).otherwise(blur));
 
-        getChildren().addAll(menuTextBackground, text);
-    }
+		getChildren().addAll(menuTextBackground, text);
+	}
 
-    public void run(Runnable action){
-        action.run();
-    }
+	public void run(Runnable action) {
+		action.run();
+	}
 
-    public void setOnAction(Runnable action) {
-          setOnMouseClicked(e -> run(action));
-    }
+	public void setOnAction(Runnable action) {
+		setOnMouseClicked(e -> run(action));
+	}
 }

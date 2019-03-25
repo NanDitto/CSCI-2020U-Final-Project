@@ -19,39 +19,54 @@ import javafx.stage.Stage;
 */
 public class Credits extends Application {
 
-    private int Width = 900;
-    private int Height = 590;
+	//sets width and height of stage
+	private int Width = 900;
+	private int Height = 590;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Pane pane = new Pane();
-        VBox box = new VBox(60);
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Pane pane = new Pane();
+		VBox box = new VBox(60);
 
-        Title title = new Title("Credits");
-        title.setTranslateX(Width / 2 - title.getTitleWidth() / 2);
-        title.setTranslateY(Height / 11);
+		//create a title for the scene
+		Title title = new Title("Credits");
+		title.setTranslateX(Width / 2 - title.getTitleWidth() / 2);
+		title.setTranslateY(Height / 11);
 
-        pane.getChildren().add(title);
+		pane.getChildren().add(title);
 
-        Text[] text = {new Text("Hanan Amer"), new Text("Nandor Gallo"), new Text("Joseph Fanous"),
-                new Text("Garry Masaun")};
+		//add scene text
+		Text[] text = { new Text("Hanan Amer"), new Text("Nandor Gallo"), new Text("Joseph Fanous"),
+				new Text("Garry Masaun") };
 
-        for(int i=0; i<4; i++){
-            text[i].setFill(Color.WHITE);
-            Font myFont = Font.loadFont(getClass().getResourceAsStream("/HyperspaceBold.otf"), 30);
-            text[i].setFont(myFont);
-            box.getChildren().addAll(text[i]);
-        }
-        Button button = new Button("Back");
+				
+		//set text style, and add to scene
+		for (int i = 0; i < 4; i++) {
+			text[i].setFill(Color.WHITE);
+			Font myFont = Font.loadFont(getClass().getResourceAsStream("/HyperspaceBold.otf"), 30);
+			text[i].setFont(myFont);
+			box.getChildren().addAll(text[i]);
+		}
+		
+		//create button that takes you back to menu scene
+		Button button = new Button("Back");
+		button.setOnAction(actionEvent -> primaryStage.close());
+		button.setTranslateX(80);
+		box.getChildren().addAll(button);
 
-        button.setOnAction(actionEvent -> primaryStage.close());
-        button.setTranslateX(80);
-        box.getChildren().addAll(button);
+		box.setTranslateX(Width / 3 + 30);
+		box.setTranslateY(Height / 5);
 
+		pane.getChildren().addAll(box);
 
-        box.setTranslateX(Width/3 +30);
-        box.setTranslateY(Height/5);
+		//add scene to stage
+		pane.setStyle("-fx-background-color: black");
+		primaryStage.setTitle("Credits");
+		primaryStage.setScene(new Scene(pane, Width, Height));
+		primaryStage.show();
+	}
 
+<<<<<<< HEAD
         pane.getChildren().addAll(box);
 
         pane.setStyle("-fx-background-color: black");
@@ -65,3 +80,9 @@ public class Credits extends Application {
         launch(args);
     }
 }
+=======
+	public static void main(String[] args) {
+		launch(args);
+	}
+}
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896

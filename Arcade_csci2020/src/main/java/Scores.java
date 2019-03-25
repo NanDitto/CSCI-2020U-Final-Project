@@ -98,4 +98,8 @@ public class Scores extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896

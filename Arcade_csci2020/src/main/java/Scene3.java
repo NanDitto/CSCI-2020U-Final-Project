@@ -46,7 +46,10 @@ public class Scene3 extends Application {
 
 	int currentX = 122;
 	int currentY = 140;
+<<<<<<< HEAD
 	// Array of images, for locks
+=======
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	ImageView[] locks = new ImageView[7];
 	Pane pane = new Pane();
 
@@ -62,11 +65,19 @@ public class Scene3 extends Application {
 	client clt;
 	Stage secondStage = new Stage();
 	Stage sStage = new Stage();
+<<<<<<< HEAD
+=======
+	// A USER_NAME thats passed between FILES
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	public boolean check = false;
 
 	@Override
 	public void start(Stage stage) {
+<<<<<<< HEAD
 		// Displays Username at the top right
+=======
+
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		String USER_NAME = "Welcome: " + temp;
 		Text user = new Text(10, 30, USER_NAME);
 		try {
@@ -77,7 +88,11 @@ public class Scene3 extends Application {
 		// Adds User Name to top right
 		user.setFont(Font.font("Times New Roman", FontWeight.BOLD, 30));
 		user.setFill(Color.WHITE);
+<<<<<<< HEAD
 		user.setX(WIDTH - 400);
+=======
+		user.setX(WIDTH - 250);
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		user.setY(80);
 		// Background image
 		Image image = new Image("file:" + cwd + "/src/main/resources/background.gif");
@@ -85,6 +100,10 @@ public class Scene3 extends Application {
 		background.setFitWidth(WIDTH + 30);
 		background.setFitHeight(HEIGHT + 30);
 		// Lighting image
+<<<<<<< HEAD
+=======
+
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		Image light = new Image("file:" + cwd + "/src/main/resources/light.png");
 		ImageView lights = new ImageView(light);
 		lights.setFitWidth(WIDTH + 110);
@@ -130,7 +149,11 @@ public class Scene3 extends Application {
 		ImageView Back_Arrow = new ImageView(back);
 		Back_Arrow.setX(30);
 		Back_Arrow.setY(30);
+<<<<<<< HEAD
 		// Add images of the games
+=======
+
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		ImageView Level1 = new ImageView(game1);
 		ImageView Level2 = new ImageView(game2);
 		ImageView Level3 = new ImageView(game3);
@@ -251,7 +274,12 @@ public class Scene3 extends Application {
 
 		});
 		// Event for each level being clicked
+<<<<<<< HEAD
 		// And adds the yellow border if it enters the image views rectangle
+=======
+
+		// Event for each level being clicked
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		Back_Arrow.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -503,7 +531,11 @@ public class Scene3 extends Application {
 		ft.setCycleCount(1); // do the fade just once
 		ft.play();
 	}
+<<<<<<< HEAD
 	//Function which decices how many locks their are and where to add the locks
+=======
+
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	public void addLocks(int number) {
 		if ((number >= 2) && (number <= 4)) {
 			locks[number].setX((STARTX - 5) + GAP * (number - 2));
@@ -521,7 +553,11 @@ public class Scene3 extends Application {
 		locks[number].setFitHeight(windowHEIGHT);
 		pane.getChildren().add(locks[number]);
 	}
+<<<<<<< HEAD
 	//Fetch current level of the player from the progress.csv file
+=======
+
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	public void curentLevel() throws IOException {
 		BufferedReader br = null;
 		try {
@@ -540,4 +576,8 @@ public class Scene3 extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
