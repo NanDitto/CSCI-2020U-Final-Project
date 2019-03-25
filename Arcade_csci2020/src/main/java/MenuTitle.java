@@ -6,18 +6,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class Title extends Pane {
+public class MenuTitle extends Pane {
 	private Text text;
 
-	public Title(String name) {
+	public MenuTitle(String name) {
 		String spread = "";
 		for (char c : name.toCharArray()) {
-			spread += c + "";
+			spread += c;
 		}
 
 		text = new Text(spread);
-		Font myFont = Font.loadFont(getClass().getResourceAsStream("/atarifull.ttf"), 36);
-		text.setFont(myFont);
+		text.setFont(
+				Font.loadFont(MenuDriver.class.getResource("/src/main/resources/atarifull.ttf").toExternalForm(), 36));
 		text.setFill(Color.WHITE);
 		text.setEffect(new DropShadow(30, Color.BLACK));
 
@@ -26,9 +26,5 @@ public class Title extends Pane {
 
 	public double getTitleWidth() {
 		return text.getLayoutBounds().getWidth();
-	}
-
-	public double getTitleHeight() {
-		return text.getLayoutBounds().getHeight();
 	}
 }

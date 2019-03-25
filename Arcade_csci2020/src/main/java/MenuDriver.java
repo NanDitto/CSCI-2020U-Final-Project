@@ -20,22 +20,21 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainMenu extends Application {
+public class MenuDriver extends Application {
 
-	private static final int WIDTH = 900;
-	private static final int HEIGHT = 590;
 	public Stage window2;
-	public String temp;
-	public String file;
 
-	public void settemp(String temp, String file) {
-		this.temp = temp;
-		this.file = file;
+	@Override
+	public void start(Stage window2) {
+		Scene scene = new Scene(createContent());
+		window2.setTitle("Arcade Menu");
+		window2.setScene(scene);
+		window2.show();
+
 	}
 
 	// sets the width and height of the primary Stage
@@ -47,23 +46,13 @@ public class MainMenu extends Application {
 	private VBox menu = new VBox(5);
 	private Line line;
 
-	@Override
-	public void start(Stage primaryStage) {
-		window2 = primaryStage;
-		Scene scene = new Scene(createContent());
-		window2.setTitle("Arcade Menu");
-		window2.setScene(scene);
-		window2.show();
-
-	}
-
 	// create menu item names and their actions once clicked
 	private List<Pair<String, Runnable>> menuData = Arrays.asList(new Pair<String, Runnable>("Play", () -> {
-		Scene3 hi = new Scene3();
-		hi.settemp(temp, file);
-		hi.start(window2);
-		window2.setWidth(900);
-		window2.setHeight(920);
+		//
+		// Scene3 hi = new Scene3();
+		// hi.start(window2);
+		// window2.setWidth(900);
+		// window2.setWidth(900);
 	}),
 
 			new Pair<String, Runnable>("Instructions", () -> {
@@ -115,7 +104,8 @@ public class MainMenu extends Application {
 
 	// creates and adds the background
 	private void addBackground() {
-		ImageView imageView = new ImageView(new Image("temp.jpg"));
+		ImageView imageView = new ImageView(
+				new Image(getClass().getResource("/src/main/resources/temp.jpg").toExternalForm()));
 		imageView.setFitWidth(Width);
 		imageView.setFitHeight(Height);
 		root.getChildren().addAll(imageView);
@@ -123,7 +113,7 @@ public class MainMenu extends Application {
 
 	// creates and adds the title
 	private void addTitle() {
-		Title title = new Title("WELCOME TO OUR ARCADE");
+		MenuTitle title = new MenuTitle("WELCOME TO OUR ARCADE");
 		title.setTranslateX(Width / 2 - title.getTitleWidth() / 2);
 		title.setTranslateY(Height / 11);
 
@@ -144,7 +134,7 @@ public class MainMenu extends Application {
 	// Begins animating the menu objects
 	private void animateMenuItems() {
 		// Animate the side bar
-		ScaleTransition sideBar = new ScaleTransition(Duration.seconds(1), line);
+		ScaleTransition sideBar = new ScaleTransition(Duration.seconds(2), line);
 		sideBar.setToY(1.15);
 
 		// after line has finished animating, animate the menu items in order
@@ -169,7 +159,8 @@ public class MainMenu extends Application {
 		for (Pair<String, Runnable> data : menuData) {
 			MenuItems item = new MenuItems(data.getKey());
 			item.setOnAction(data.getValue());
-			item.run();
+			Thread thread = new Thread(item);
+			thread.start();
 
 			item.setTranslateX(-300);
 
