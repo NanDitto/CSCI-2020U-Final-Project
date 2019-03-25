@@ -33,7 +33,7 @@ public class Scene3 extends Application {
     private final int windowHEIGHT = 160;
     private final int borderWIDTH = 170;
     private final int borderHEIGHT = 185;
-    public int levelsUnlocked =8;
+    public int levelsUnlocked =0;
     public String ret = "";
     static String cwd = System.getProperty("user.dir"); // used to read the user current directory
     public String userName;
@@ -43,7 +43,7 @@ public class Scene3 extends Application {
     int currentY = 140;
     ImageView [] locks = new ImageView[7];
     Pane pane = new Pane();
-    
+
     public String temp;
     public String file;
     public void settemp(String temp,String file){
@@ -62,11 +62,11 @@ public class Scene3 extends Application {
 
     String USER_NAME = "Welcome: " + temp;
     Text user = new Text(10,30,USER_NAME);
-    /*
+
     try{
        curentLevel();
     }catch (IOException e){}
-    */
+    
     ret = File.separator;
         //Adds User Name to top right
     user.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
@@ -104,7 +104,7 @@ public class Scene3 extends Application {
 
     Image game1 = new Image("file:"+ cwd + "/src/main/resources/TicTacToe.png");
     Image game2 = new Image("file:"+ cwd + "/src/main/resources/BlackJack.png");
-    Image game3 = new Image("file:"+ cwd + "/src/main/resources/Pong.png"); 
+    Image game3 = new Image("file:"+ cwd + "/src/main/resources/Pong.png");
     Image game4 = new Image("file:"+ cwd + "/src/main/resources/SnakeGame.png");
     Image game5 = new Image("file:"+ cwd + "/src/main/resources/HangMan.png");
     Image game6 = new Image("file:"+ cwd + "/src/main/resources/Jeopardy.png");
@@ -244,14 +244,14 @@ public class Scene3 extends Application {
         type = 1;
     });
     join.setOnAction(actionEvent -> {
-        
+
         clt = new client();
         clt.start(sStage);
         clt.action(temp);
         //clt.action(String.valueOf(levelsUnlocked));
         host.setDisable(true);
         type = 2;
-        
+
     });
     //Event for each level being clicked
 
@@ -481,7 +481,7 @@ public class Scene3 extends Application {
 
 
     Scene scene = new Scene(pane,WIDTH,HEIGHT);
-    scene.getStylesheets().add("main.css");  
+    scene.getStylesheets().add("main.css");
     stage.setResizable(false);
     stage.setTitle("Select A Game");
     stage.setScene(scene);
