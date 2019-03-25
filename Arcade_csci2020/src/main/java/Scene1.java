@@ -65,6 +65,10 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 public class Scene1 extends Application {
+	/*
+		Nodes for Window, adds design to the stages
+
+	*/
 	public Stage CurrentWindow;
 	VBox buttons = new VBox(10);
 	StackPane pane = new StackPane(); // main pane
@@ -85,18 +89,32 @@ public class Scene1 extends Application {
 		return temp1;
 	}
 
+<<<<<<< HEAD
+	public String currentFilename = (cwd + ret + "src" + ret + "main" + ret + "java" + ret +  "progress.csv"); // intial file name
+//Start method to the stage
+=======
 	public String currentFilename = (cwd + ret + "src" + ret + "main" + ret + "java" + ret + "progress.csv"); // intial
 																												// file
 																												// name
 
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	public void start(Stage primaryStage) {
+		//Adds objects to the stage
 		CurrentWindow = primaryStage;
 		/*
+<<<<<<< HEAD
+		Media media = new Media("music.mp3");
+       	MediaPlayer player = new MediaPlayer(media); // used for playig music at the background
+       	player.play();
+    */
+    ImageView home = new ImageView("q.gif"); // main background image
+=======
 		 * Media media = new Media("music.mp3"); MediaPlayer player = new
 		 * MediaPlayer(media); // used for playig music at the background
 		 * player.play();
 		 */
 		ImageView home = new ImageView("q.gif"); // main background image
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		pane.getChildren().add(home);
 		login.setId("button");
 		register.setId("button");
@@ -108,6 +126,20 @@ public class Scene1 extends Application {
 		pane.getChildren().addAll(buttons);
 		buttons.setAlignment(Pos.CENTER);
 
+<<<<<<< HEAD
+		fadeTran(1,0.8,home,2); // fade transiton of picture
+  	pathTran(100,20,950,600,login); // path transition of the buttons
+    pathTran(100,20,-950,600,register);
+    pathTran(100,20,-450,600,imports);
+    login.setOnAction(this::handleButtonAction);
+    register.setOnAction(this::handleButtonAction);
+    imports.setOnAction(this::handleButtonAction);
+
+		//Create new scene
+    Scene scene = new Scene(pane,900,540);
+    scene.getStylesheets().add("main.css");  // adding styles using css
+    CurrentWindow.setResizable(false);
+=======
 		fadeTran(1, 0.8, home, 2); // fade transiton of picture
 		pathTran(100, 20, 950, 600, login); // path transition of the buttons
 		pathTran(100, 20, -950, 600, register);
@@ -120,6 +152,7 @@ public class Scene1 extends Application {
 		Scene scene = new Scene(pane, 900, 540);
 		scene.getStylesheets().add("main.css"); // adding styles using css
 		CurrentWindow.setResizable(false);
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		CurrentWindow.setTitle("Welcome!"); // Set the stage title
 		CurrentWindow.setScene(scene); // Place the scene in the stage
 		CurrentWindow.show(); // Display the stage
@@ -200,6 +233,28 @@ public class Scene1 extends Application {
 																					// then
 																					// continue
 							ImageView image = new ImageView("cm.gif");
+<<<<<<< HEAD
+						    pane.getChildren().add(image);
+						    fadeTran(1,0,image,5);
+						    opt = true;
+								serverSocket t = new serverSocket();
+								client user = new client();
+								Stage chatBox = new Stage();
+								Stage clt = new Stage();
+						    new Thread( () -> {
+									//Multi thread to allow checkmark/ O gif to play
+						    	MainMenu hi = new MainMenu();
+						    	try{
+						    		Thread.sleep(3300);
+						    	}catch (InterruptedException e){}
+								hi.settemp(temp1, currentFilename);
+								 Platform.runLater(() -> hi.start(CurrentWindow));
+						    }).start();
+								t.start(chatBox);
+								user.start(clt);
+								user.action("hi");
+								t.action("Hello");
+=======
 							pane.getChildren().add(image);
 							fadeTran(1, 0, image, 5);
 							opt = true;
@@ -212,6 +267,7 @@ public class Scene1 extends Application {
 								hi.settemp(temp1, currentFilename);
 								Platform.runLater(() -> hi.start(CurrentWindow));
 							}).start();
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 						}
 					}
 					if (opt == false) {
@@ -232,12 +288,21 @@ public class Scene1 extends Application {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+<<<<<<< HEAD
+       }
+			 //User registering fo a new account
+			 //Builds window and gets inputs from user
+        if(event.getSource() == register){
+        	try{
+        		BufferedWriter out = new BufferedWriter(new FileWriter(currentFilename,true)); // reading the file
+=======
 		}
 		if (event.getSource() == register) {
 			try {
 				BufferedWriter out = new BufferedWriter(new FileWriter(currentFilename, true)); // reading
 																								// the
 																								// file
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 
 				JLabel label_login = new JLabel("Username:");
 				JTextField login = new JTextField();

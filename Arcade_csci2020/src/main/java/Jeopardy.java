@@ -254,6 +254,15 @@ public class Jeopardy extends Application {
 		Button[] catButton = new Button[5];
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
+<<<<<<< HEAD
+        for (int i=1; i<11; i++) {
+            list.add(new Integer(i));
+        }
+        Collections.shuffle(list);
+        // for (int i=0; i<=5; i++) {
+        //     list.get(i);
+        // }
+=======
 		for (int i = 1; i < 11; i++) {
 			list.add(new Integer(i));
 		}
@@ -261,10 +270,28 @@ public class Jeopardy extends Application {
 		for (int i = 0; i < 5; i++) {
 			list.get(i);
 		}
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 
-		firstCat = list.get(0);
-		catButton[0] = new Button(tokens.get(list.get(0)));
+		firstCat = list.get(1);
+		catButton[0] = new Button(tokens.get(list.get(1)));
 
+<<<<<<< HEAD
+
+		secondCat = list.get(2);
+		catButton[1] = new Button(tokens.get(list.get(2)));
+
+
+		thirdCat = list.get(3);
+		catButton[2] = new Button(tokens.get(list.get(3)));
+
+
+		fourthCat = list.get(4);
+		catButton[3] = new Button(tokens.get(list.get(4)));
+
+
+		fifthCat = list.get(5);
+		catButton[4] = new Button(tokens.get(list.get(5)));
+=======
 		secondCat = list.get(1);
 		catButton[1] = new Button(tokens.get(list.get(1)));
 
@@ -276,6 +303,7 @@ public class Jeopardy extends Application {
 
 		fifthCat = list.get(4);
 		catButton[4] = new Button(tokens.get(list.get(4)));
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 
 		for (int i = 0; i < catButton.length; i++) {
 			numbers.add(catButton[i], i + 1, 0);

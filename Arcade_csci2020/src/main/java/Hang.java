@@ -182,7 +182,11 @@ public class Hang extends Application {
 		children.add(rope);
 	}
 
+<<<<<<< HEAD
+	//function that draws the man's body parts
+=======
 	// function that draws the man's body parts
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	private void body() {
 
 		body = new ArrayList<Shape>();
@@ -231,8 +235,12 @@ public class Hang extends Application {
 		body.add(rightLeg);
 	}
 
+<<<<<<< HEAD
+	//function that gets random words from a text file and sets that word as the current word to be guessed
+=======
 	// function that gets random words from a text file and sets that word as
 	// the current word to be guessed
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	private void getWord() {
 
 		File file = new File(cwd + "/src/main/resources/translate.txt");
@@ -241,6 +249,35 @@ public class Hang extends Application {
 		} catch (FileNotFoundException e) {
 			System.err.println("Error: " + e.getMessage());
 			e.printStackTrace();
+<<<<<<< HEAD
+		}
+
+        while (input.hasNext()) {
+          currentWord  = input.next();
+          storeWordList.add(currentWord);
+        }
+        input.close();
+
+        int index = rand.nextInt(storeWordList.size());
+        currentWord = storeWordList.get(index);
+    	underlines();
+
+    }
+
+	//function that creates the right amount of underlines according to the word
+	private void underlines(){
+			Line[] blanks = new Line[currentWord.length()];
+			int xStart = 375;
+			int lineLength = 25;
+			int lineSpacing = 35;
+			for (int i = 0; i < currentWord.length(); i++){
+				int xcoord = xStart + (lineSpacing * i);
+				blanks[i] = new Line(xcoord, 225, xcoord - lineLength, 225);
+				blanks[i].setStroke(Color.BLACK);
+				blanks[i].setStrokeWidth(3);
+				children.add(blanks[i]);
+=======
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		}
 
 		while (input.hasNext()) {
@@ -255,6 +292,9 @@ public class Hang extends Application {
 
 	}
 
+<<<<<<< HEAD
+	//function that associates the underlines to a letter of the current word
+=======
 	// function that creates the right amount of underlines according to the
 	// word
 	private void underlines() {
@@ -273,6 +313,7 @@ public class Hang extends Application {
 	}
 
 	// function that associates the underlines to a letter of the current word
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	private Text[] initText() {
 		Text[] text = new Text[currentWord.length()];
 		int xStartw = 355;
@@ -290,8 +331,14 @@ public class Hang extends Application {
 		return text;
 	}
 
+<<<<<<< HEAD
+
+	//function that plays the game
+	private void play(){
+=======
 	// function that plays the game
 	private void play() {
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		// Get the guessed letter
 		String guess = Guess.getText();
 		if (guess.length() == 0) {
@@ -356,9 +403,17 @@ public class Hang extends Application {
 			Guess.setEditable(false);
 		}
 	}
+<<<<<<< HEAD
+   public static void main(String[] args) {
+       launch();
+   }
+
+}
+=======
 
 	public static void main(String[] args) {
 		launch();
 	}
 
 }
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896

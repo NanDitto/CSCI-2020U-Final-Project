@@ -9,7 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/*
+  A stage that displays instructions to the user using javafx
+*/
 public class Instructions extends Application {
 
 	//sets width and height of scene
@@ -68,7 +70,29 @@ public class Instructions extends Application {
 		primaryStage.show();
 	}
 
+<<<<<<< HEAD
+        box.getChildren().addAll(button);
+        box.setTranslateX(Width/4 + 20);
+        box.setTranslateY(Height/4);
+
+        pane.getChildren().addAll(box);
+        pane.setStyle("-fx-background-color: black");
+
+        primaryStage.setTitle("Instructions");
+        Scene scene = new Scene(pane, Width, Height);
+        primaryStage.setScene(scene);
+        scene.getStylesheets().add("main.css");
+        primaryStage.show();
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+=======
 	public static void main(String[] args) {
 		launch(args);
 	}
 }
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896

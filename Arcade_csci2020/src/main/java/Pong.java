@@ -166,8 +166,68 @@ public class Pong extends Application {
 				}
 			}
 		}));
-
+		//Controls for paddle and if space or esc is pressed
 		scene.setOnKeyPressed(e -> {
+<<<<<<< HEAD
+		      switch (e.getCode()) {
+		        case DOWN:
+		        	if(Paddle1.getY() + LENGTH + DELTA_Y >= HEIGHT){
+		        		Paddle1.setY(HEIGHT - LENGTH);
+		        	}else{
+		        		Paddle1.setY(Paddle1.getY() + DELTA_Y);
+		        	}break;
+		        case UP:
+		        	if(Paddle1.getY() - DELTA_Y <= 0){
+		        		Paddle1.setY(0);
+		        	}else{
+		        		Paddle1.setY(Paddle1.getY() - DELTA_Y);
+		        	}break;
+		        case SPACE:
+	        	//When Space key is pressed Start The movement and Timer
+	        	Board.getChildren().remove(prompt);
+		    		Score1.setFill(Color.WHITE);
+		    		Score2.setFill(Color.WHITE);
+		    		Score1.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
+		    		Score2.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
+	        	Board.getChildren().addAll(ball,Score1,Score2);
+	        	reset(ball);
+		        Movement.setCycleCount(Timeline.INDEFINITE);
+	        	Movement.play();
+		      	Tick.setCycleCount(TIME);
+	        	Tick.play();
+	        	break;
+                case ESCAPE:
+                    if(WIN == true){
+                        readAdd();
+                    }
+                    Scene3 hi = new Scene3();
+                try {
+									//If escape is pressed
+                    hi.settemp(temp,file);
+                    hi.start(stage);
+                    hi.curentLevel();
+                    stage.setWidth(900);
+                    stage.setHeight(910);
+                }catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+		        default:
+		        	break;
+		      }
+		    });
+	}
+
+	 public void readAdd(){
+        CSV savea = new CSV();
+        try{
+            savea.read(temp, file,"3");
+            savea.save(file);
+        }catch (IOException e){}
+
+    }
+		//Function that adds the ball back to the middle with a random x speed, and updates scores
+	public void reset(Circle c){
+=======
 			switch (e.getCode()) {
 			case DOWN:
 				if (Paddle1.getY() + LENGTH + DELTA_Y >= HEIGHT) {
@@ -228,6 +288,7 @@ public class Pong extends Application {
 	}
 
 	public void reset(Circle c) {
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		Random rand = new Random();
 		float n = rand.nextInt(9) + 1;
 		xspeed = n;
@@ -237,8 +298,13 @@ public class Pong extends Application {
 		Score1.setText(Integer.toString(PlayerScore));
 		Score2.setText(Integer.toString(ComputerScore));
 	}
+<<<<<<< HEAD
+	//Function to see whos score is higher, higher score determines winner
+	public void DetermineWinner(){
+=======
 
 	public void DetermineWinner() {
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		prompt.setX(250);
 		if (PlayerScore > ComputerScore) {
 			prompt.setText("You Win!");

@@ -14,6 +14,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/*
+  A window that displays credits to the user
+*/
 public class Credits extends Application {
 
 	//sets width and height of stage
@@ -63,7 +66,23 @@ public class Credits extends Application {
 		primaryStage.show();
 	}
 
+<<<<<<< HEAD
+        pane.getChildren().addAll(box);
+
+        pane.setStyle("-fx-background-color: black");
+        primaryStage.setTitle("Credits");
+        primaryStage.setScene(new Scene(pane, Width, Height));
+        primaryStage.show();
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+=======
 	public static void main(String[] args) {
 		launch(args);
 	}
 }
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896

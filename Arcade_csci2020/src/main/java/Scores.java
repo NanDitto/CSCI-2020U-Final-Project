@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
 
+/*
+ A window to display all historic user scores
+*/
 public class Scores extends Application {
 
 	private int Width = 900;
@@ -95,4 +98,8 @@ public class Scores extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
