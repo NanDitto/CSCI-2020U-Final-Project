@@ -58,13 +58,15 @@ public class MainMenu extends Application {
 	}
 
 	// create menu item names and their actions once clicked
-	private List<Pair<String, Runnable>> menuData = Arrays.asList(new Pair<String, Runnable>("Play", () -> {
-		Scene3 hi = new Scene3();
-		hi.settemp(temp, file);
-		hi.start(window2);
-		window2.setWidth(900);
-		window2.setHeight(920);
-	}),
+	private List<Pair<String, Runnable>> menuData = Arrays.asList(
+	
+			new Pair<String, Runnable>("Play", () -> {
+				Scene3 hi = new Scene3();
+				hi.settemp(temp, file);
+				hi.start(window2);
+				window2.setWidth(900);
+				window2.setHeight(920);
+			}),
 
 			new Pair<String, Runnable>("Instructions", () -> {
 				Instructions instructions = new Instructions();
