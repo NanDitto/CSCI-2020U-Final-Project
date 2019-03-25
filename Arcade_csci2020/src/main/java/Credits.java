@@ -14,6 +14,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/*
+  A window that displays credits to the user
+*/
 public class Credits extends Application {
 
     private int Width = 900;

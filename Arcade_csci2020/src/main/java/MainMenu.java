@@ -23,7 +23,10 @@ import javafx.util.Pair;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
+/*
+  A window that displays all the buttons and displays
+  where the user wants to go
+*/
 public class MainMenu extends Application {
 
     private static final int WIDTH = 900;

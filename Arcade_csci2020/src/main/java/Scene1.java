@@ -64,6 +64,10 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 public class Scene1 extends Application {
+	/*
+		Nodes for Window, adds design to the stages
+
+	*/
 	public Stage CurrentWindow;
 	VBox buttons = new VBox(10);
 	StackPane pane = new StackPane(); // main pane
@@ -84,15 +88,16 @@ public class Scene1 extends Application {
 	}
 
 	public String currentFilename = (cwd + ret + "src" + ret + "main" + ret + "java" + ret +  "progress.csv"); // intial file name
-
+//Start method to the stage
 	public void start(Stage primaryStage) {
+		//Adds objects to the stage
 		CurrentWindow = primaryStage;
 		/*
 		Media media = new Media("music.mp3");
        	MediaPlayer player = new MediaPlayer(media); // used for playig music at the background
        	player.play();
-       	*/
-       	ImageView home = new ImageView("q.gif"); // main background image
+    */
+    ImageView home = new ImageView("q.gif"); // main background image
 		pane.getChildren().add(home);
 		login.setId("button");
 		register.setId("button");
@@ -103,23 +108,21 @@ public class Scene1 extends Application {
 		buttons.setAlignment(Pos.CENTER);
 
 		fadeTran(1,0.8,home,2); // fade transiton of picture
-        pathTran(100,20,950,600,login); // path transition of the buttons
-        pathTran(100,20,-950,600,register);
-        pathTran(100,20,-450,600,imports);
-  
+  	pathTran(100,20,950,600,login); // path transition of the buttons
+    pathTran(100,20,-950,600,register);
+    pathTran(100,20,-450,600,imports);
+    login.setOnAction(this::handleButtonAction);
+    register.setOnAction(this::handleButtonAction);
+    imports.setOnAction(this::handleButtonAction);
 
-        login.setOnAction(this::handleButtonAction);
-        register.setOnAction(this::handleButtonAction);
-        imports.setOnAction(this::handleButtonAction);
-       
-
-        Scene scene = new Scene(pane,900,540);
-        scene.getStylesheets().add("main.css");  // adding styles using css
-        CurrentWindow.setResizable(false);
+		//Create new scene
+    Scene scene = new Scene(pane,900,540);
+    scene.getStylesheets().add("main.css");  // adding styles using css
+    CurrentWindow.setResizable(false);
 		CurrentWindow.setTitle("Welcome!"); // Set the stage title
 		CurrentWindow.setScene(scene); // Place the scene in the stage
 		CurrentWindow.show(); // Display the stage
-		
+
 	}
 	public static void main(String[] args) {
 		ret = File.separator; // to get file seperator according to the os
@@ -181,7 +184,12 @@ public class Scene1 extends Application {
 						    pane.getChildren().add(image);
 						    fadeTran(1,0,image,5);
 						    opt = true;
+								serverSocket t = new serverSocket();
+								client user = new client();
+								Stage chatBox = new Stage();
+								Stage clt = new Stage();
 						    new Thread( () -> {
+									//Multi thread to allow checkmark/ O gif to play
 						    	MainMenu hi = new MainMenu();
 						    	try{
 						    		Thread.sleep(3300);
@@ -189,6 +197,10 @@ public class Scene1 extends Application {
 								hi.settemp(temp1, currentFilename);
 								 Platform.runLater(() -> hi.start(CurrentWindow));
 						    }).start();
+								t.start(chatBox);
+								user.start(clt);
+								user.action("hi");
+								t.action("Hello");
 						}
 					}
 					if(opt == false){
@@ -205,6 +217,8 @@ public class Scene1 extends Application {
 				e.printStackTrace();
 			}
        }
+			 //User registering fo a new account
+			 //Builds window and gets inputs from user
         if(event.getSource() == register){
         	try{
         		BufferedWriter out = new BufferedWriter(new FileWriter(currentFilename,true)); // reading the file

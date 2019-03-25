@@ -177,7 +177,7 @@ public class Hang extends Application {
 		rope.setStrokeWidth(3);
 		children.add(rope);
 	}
-	
+
 	//function that draws the man's body parts
 	private void body() {
 
@@ -226,7 +226,7 @@ public class Hang extends Application {
 		children.add(rightLeg);
 		body.add(rightLeg);
 	}
-	
+
 	//function that gets random words from a text file and sets that word as the current word to be guessed
 	private void getWord() {
 
@@ -236,20 +236,20 @@ public class Hang extends Application {
 		} catch (FileNotFoundException e) {
             System.err.println("Error: " + e.getMessage());
 			e.printStackTrace();
-		} 
-     
+		}
+
         while (input.hasNext()) {
           currentWord  = input.next();
           storeWordList.add(currentWord);
         }
         input.close();
-        
+
         int index = rand.nextInt(storeWordList.size());
         currentWord = storeWordList.get(index);
     	underlines();
 
     }
-	
+
 	//function that creates the right amount of underlines according to the word
 	private void underlines(){
 			Line[] blanks = new Line[currentWord.length()];
@@ -265,7 +265,7 @@ public class Hang extends Application {
 		}
 			text = initText();
 	}
-	
+
 	//function that associates the underlines to a letter of the current word
 	private Text[] initText() {
 		Text[] text = new Text[currentWord.length()];
@@ -283,8 +283,8 @@ public class Hang extends Application {
 		}
 		return text;
 	}
-	
-	
+
+
 	//function that plays the game
 	private void play(){
 		// Get the guessed letter
@@ -294,7 +294,7 @@ public class Hang extends Application {
 			delay.setOnFinished( event -> prompt3.setVisible(false));
 			delay.play();
 			return;
-			
+
 		}
 
 		if (guess.length() > 1) { // if more than one letter, take only the	first
@@ -334,7 +334,7 @@ public class Hang extends Application {
 		if (left == 0) {
 			prompt1.setText("    You LOST! The word was: " + currentWord);
 			Guess.setEditable(false);
-			
+
 		}
 		// Check if word is solved
 		boolean solved = true;
@@ -350,9 +350,8 @@ public class Hang extends Application {
 			Guess.setEditable(false);
 		}
 	}
-	
    public static void main(String[] args) {
        launch();
-   } 
-   
-}		
+   }
+
+}

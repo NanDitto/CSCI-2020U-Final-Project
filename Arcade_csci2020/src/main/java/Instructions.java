@@ -9,7 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/*
+  A stage that displays instructions to the user using javafx
+*/
 public class Instructions extends Application {
 
     private int Width = 900;

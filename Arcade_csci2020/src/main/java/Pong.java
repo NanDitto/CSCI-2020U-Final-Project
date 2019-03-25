@@ -166,7 +166,7 @@ public class Pong extends Application{
 				}
 			}
 		}));
-
+		//Controls for paddle and if space or esc is pressed
 		scene.setOnKeyPressed(e -> {
 		      switch (e.getCode()) {
 		        case DOWN:
@@ -182,18 +182,18 @@ public class Pong extends Application{
 		        		Paddle1.setY(Paddle1.getY() - DELTA_Y);
 		        	}break;
 		        case SPACE:
-		        	//When Space key is pressed Start The movement and Timer
-		        	Board.getChildren().remove(prompt);
+	        	//When Space key is pressed Start The movement and Timer
+	        	Board.getChildren().remove(prompt);
 		    		Score1.setFill(Color.WHITE);
 		    		Score2.setFill(Color.WHITE);
 		    		Score1.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
 		    		Score2.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
-		        	Board.getChildren().addAll(ball,Score1,Score2);
-		        	reset(ball);
-			        Movement.setCycleCount(Timeline.INDEFINITE);
-		        	Movement.play();
-			      	Tick.setCycleCount(TIME);
-		        	Tick.play();
+	        	Board.getChildren().addAll(ball,Score1,Score2);
+	        	reset(ball);
+		        Movement.setCycleCount(Timeline.INDEFINITE);
+	        	Movement.play();
+		      	Tick.setCycleCount(TIME);
+	        	Tick.play();
 	        	break;
                 case ESCAPE:
                     if(WIN == true){
@@ -201,6 +201,7 @@ public class Pong extends Application{
                     }
                     Scene3 hi = new Scene3();
                 try {
+									//If escape is pressed
                     hi.settemp(temp,file);
                     hi.start(stage);
                     hi.curentLevel();
@@ -214,6 +215,7 @@ public class Pong extends Application{
 		      }
 		    });
 	}
+
 	 public void readAdd(){
         CSV savea = new CSV();
         try{
@@ -222,6 +224,7 @@ public class Pong extends Application{
         }catch (IOException e){}
 
     }
+		//Function that adds the ball back to the middle with a random x speed, and updates scores
 	public void reset(Circle c){
 		Random rand = new Random();
     	float n = rand.nextInt(9) + 1;
@@ -232,6 +235,7 @@ public class Pong extends Application{
 		Score1.setText(Integer.toString(PlayerScore));
 		Score2.setText(Integer.toString(ComputerScore));
 	}
+	//Function to see whos score is higher, higher score determines winner
 	public void DetermineWinner(){
 		prompt.setX(250);
 		if(PlayerScore>ComputerScore){
