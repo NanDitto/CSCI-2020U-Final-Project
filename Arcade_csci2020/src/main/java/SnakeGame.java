@@ -17,40 +17,48 @@ import javafx.event.EventHandler;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import java.io.IOException;
 public class SnakeGame extends Application {
 //Images
 	String cwd = System.getProperty("user.dir");
 	private final String background_Image = "file:" + cwd + "/src/main/resources/GrassBackground.png";
-//Board Size
-private final int HEIGHT = 800;
-private final int WIDTH = 1200;
-private Pane pane = new Pane();
-private int SCORE = 0;
-boolean start = true;
-boolean dead = true;
-//Size of each square in the board
-private final int LENGTH = 20;
-//Food for head
-Rectangle food = new Rectangle(LENGTH,LENGTH);
-//Messages
-Text scoreTxt = new Text("0"); // SHOW SCORE WHEN GAME IS OVER
-Text prompts = new Text(150,390,"PRESS SPACE TO START!");
-//head Properties
-boolean RIGHT = true;
-boolean LEFT = false;
-boolean UP = false;
-boolean DOWN = false;
+	//Board Size
+	private final int HEIGHT = 800;
+	private final int WIDTH = 1200;
+	private Pane pane = new Pane();
+	private int SCORE = 0;
+	boolean start = true;
+	boolean dead = true;
+	//Size of each square in the board
+	private final int LENGTH = 20;
+	//Food for head
+	Rectangle food = new Rectangle(LENGTH,LENGTH);
+	//Messages
+	Text scoreTxt = new Text("0"); // SHOW SCORE WHEN GAME IS OVER
+	Text prompts = new Text(35,250,"PRESS SPACE TO START!");
+	//head Properties
+	boolean RIGHT = true;
+	boolean LEFT = false;
+	boolean UP = false;
+	boolean DOWN = false;
+	public String temp;
+    public String file;
+    public void settemp(String temp,String file){
+        this.temp = temp;
+        this.file = file;
+    }
+    boolean WIN;
+	private ArrayList<double[]> prevTailPos = new ArrayList<double[]>();
 
-private ArrayList<double[]> prevTailPos = new ArrayList<double[]>();
+	private Rectangle head = new Rectangle(WIDTH/2,HEIGHT/2,LENGTH,LENGTH);
 
-private Rectangle head = new Rectangle(WIDTH/2,HEIGHT/2,LENGTH,LENGTH);
+	private ArrayList<Rectangle> tails = new ArrayList<Rectangle>();
 
-private ArrayList<Rectangle> tails = new ArrayList<Rectangle>();
-
-private int dots = 0;
-private final int SPEED = 20;
+	private int dots = 0;
+	private final int SPEED = 20;
   @Override // Override the start method in the Application class
   public void start(Stage primaryStage) throws InterruptedException {
+  	WIN = false;
 	primaryStage.setResizable(false);
     // Create a scene and place it in the stage
     Scene scene = new Scene(pane, WIDTH, HEIGHT,Color.BLACK);
@@ -141,9 +149,10 @@ private final int SPEED = 20;
 		        case ESCAPE:
 		        	Scene3 hi = new Scene3();
 				try {
+					hi.settemp(temp,file);
 					hi.start(primaryStage);
 					primaryStage.setWidth(900);
-					primaryStage.setHeight(900);
+					primaryStage.setHeight(910);
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -164,7 +173,15 @@ private final int SPEED = 20;
 		        	break;
 		      }
 		    });
-}
+	}
+	public void readAdd(){
+	    CSV savea = new CSV();
+	    try{
+	        savea.read(temp, file,"4");
+	        savea.save(file);
+	    }catch (IOException e){}
+
+    }
   private boolean checkDead() {
 	  	//Dies if touches tail or wall
 	  	  //Bottom wall and top wall
@@ -235,6 +252,9 @@ private void extendTail(){
 	  //Check if the head, touches the food
 	  if(head.getX() == food.getX() && head.getY() == food.getY()){
 		  SCORE+= 100;
+		  if(SCORE >= 3000){
+		  	WIN = true;
+		  }
 		  dots++;
 		  extendTail();
 		  GenerateFruit();

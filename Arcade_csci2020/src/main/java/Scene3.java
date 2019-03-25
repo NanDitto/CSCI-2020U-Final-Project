@@ -23,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import javafx.util.Duration;
 import javafx.animation.FadeTransition;
+
 public class Scene3 extends Application {
 	private final int WIDTH = 900;
     private final int HEIGHT = 900;
@@ -36,15 +37,12 @@ public class Scene3 extends Application {
     public String ret = "";
     static String cwd = System.getProperty("user.dir"); // used to read the user current directory
     public String userName;
+    public int type;
 
     int currentX= 122;
     int currentY = 140;
     ImageView [] locks = new ImageView[7];
     Pane pane = new Pane();
-  
-	//A USER_NAME thats passed between FILES
-    public String USER_NAME = "PP Boi";
-	public Text user = new Text(20,40,USER_NAME);
     
     public String temp;
     public String file;
@@ -52,12 +50,20 @@ public class Scene3 extends Application {
         this.temp = temp;
         this.file = file;
     }
+    serverSocket server;
+    client clt;
+    Stage secondStage = new Stage();
+    Stage sStage = new Stage();
+     //A USER_NAME thats passed between FILES
     public boolean check=false;
 
      @Override
-  public void start(Stage stage) {
+    public void start(Stage stage) {
+
+    String USER_NAME = "Welcome: " + temp;
+    Text user = new Text(10,30,USER_NAME);
     try{
-        curentLevel();
+       curentLevel();
     }catch (IOException e){}
     ret = File.separator;
         //Adds User Name to top right
@@ -71,46 +77,50 @@ public class Scene3 extends Application {
     background.setFitWidth(WIDTH+30);
     background.setFitHeight(HEIGHT+30);
         //Lighting image
+
     Image light = new Image("file:"+ cwd + "/src/main/resources/light.png");
     ImageView lights = new ImageView(light);
     lights.setFitWidth(WIDTH+110);
     lights.setFitHeight(HEIGHT+110);
     lights.setX(-50);
     lights.setY(-130);
+
+
+
     pane.getChildren().addAll(background,lights);
 
-        //Hovering border of each window
-        Rectangle window_Outline = new Rectangle(borderWIDTH,borderHEIGHT);
-        window_Outline.setFill(Color.YELLOW);
+    //Hovering border of each window
+    Rectangle window_Outline = new Rectangle(borderWIDTH,borderHEIGHT);
+    window_Outline.setFill(Color.YELLOW);
 
         //All Images to make Stage look nice
-        Image light_border = new Image("file:"+ cwd + "/src/main/resources/lights.gif");
-        Image spaceShip = new Image("file:"+ cwd + "/src/main/resources/ship.gif");
+    Image light_border = new Image("file:"+ cwd + "/src/main/resources/lights.gif");
+    Image spaceShip = new Image("file:"+ cwd + "/src/main/resources/ship.gif");
     Image Lock = new Image("file:"+ cwd + "/src/main/resources/lock.png");
     Image back = new Image("file:"+ cwd + "/src/main/resources/left_arrow.gif");
-        Image Planets = new Image("file:"+ cwd + "/src/main/resources/planets.png");
+    Image Planets = new Image("file:"+ cwd + "/src/main/resources/planets.png");
 
     Image game1 = new Image("file:"+ cwd + "/src/main/resources/TicTacToe.png");
     Image game2 = new Image("file:"+ cwd + "/src/main/resources/BlackJack.png");
-    Image game3 = new Image("file:"+ cwd + "/src/main/resources/Pong.png");
-    Image game4 = new Image("file:"+ cwd + "/src/main/resources/President.png");
-    Image game5 = new Image("file:"+ cwd + "/src/main/resources/SnakeGame.png");
-    Image game6 = new Image("file:"+ cwd + "/src/main/resources/HangMan.png");
-    Image game7 = new Image("file:"+ cwd + "/src/main/resources/Jeopardy.png");
-    Image game8 = new Image("file:"+ cwd + "/src/main/resources/LetterFall.png");
+    Image game3 = new Image("file:"+ cwd + "/src/main/resources/Pong.png"); 
+    Image game4 = new Image("file:"+ cwd + "/src/main/resources/SnakeGame.png");
+    Image game5 = new Image("file:"+ cwd + "/src/main/resources/HangMan.png");
+    Image game6 = new Image("file:"+ cwd + "/src/main/resources/Jeopardy.png");
+    Image game7 = new Image("file:"+ cwd + "/src/main/resources/LetterFall.png");
+    Image game8 = new Image("file:"+ cwd + "/src/main/resources/President.png");
 
-        ImageView planet_background = new ImageView(Planets);
-        pane.getChildren().add(planet_background);
-        //planet_background.setFitWidth(300);
-        //planet_background.setFitHeight(200);
+    ImageView planet_background = new ImageView(Planets);
+    pane.getChildren().add(planet_background);
+    //planet_background.setFitWidth(300);
+    //planet_background.setFitHeight(200);
 
-        ImageView ss = new ImageView(spaceShip);
-        pane.getChildren().add(ss);
+    ImageView ss = new ImageView(spaceShip);
+    pane.getChildren().add(ss);
 
-        ImageView border = new ImageView(light_border);
-        pane.getChildren().add(border);
-        border.setFitWidth(WIDTH);
-        border.setFitHeight(HEIGHT);
+    ImageView border = new ImageView(light_border);
+    pane.getChildren().add(border);
+    border.setFitWidth(WIDTH);
+    border.setFitHeight(HEIGHT);
 
     ImageView Back_Arrow = new ImageView(back);
     Back_Arrow.setX(30);
@@ -124,8 +134,19 @@ public class Scene3 extends Application {
     ImageView Level6 = new ImageView(game6);
     ImageView Level7 = new ImageView(game7);
     ImageView Level8 = new ImageView(game8);
+    Button join = new Button("Join");
+    join.setId("button");
+    Button host = new Button("Host");
+    host.setId("button");
 
 
+    if(levelsUnlocked == 8){
+        join.setDisable(false);
+        host.setDisable(false);
+    }else{
+        join.setDisable(true);
+        host.setDisable(true);
+    }
 
     Text l1 = new Text(STARTX,340,"TicTacToe");
     l1.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
@@ -137,19 +158,19 @@ public class Scene3 extends Application {
     Text l3 = new Text(STARTX + GAP*2 + 33,340,"Pong");
     l3.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
 
-    Text l4 = new Text(STARTX+10,595,"President");
+    Text l4 = new Text(STARTX+10,595,"Snake Game");
     l4.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
 
-    Text l5 = new Text(STARTX + GAP,595,"Snake Game");
+    Text l5 = new Text(STARTX + GAP,595,"Hang Man");
     l5.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
 
-    Text l6 = new Text(STARTX + GAP*2+10,598,"Hang Man");
+    Text l6 = new Text(STARTX + GAP*2+10,598,"Jeopardy");
     l6.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
 
-    Text l7 = new Text(STARTX+15,865,"Jeopardy");
+    Text l7 = new Text(STARTX+15,865,"LetterFall");
     l7.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
 
-    Text l8 = new Text(STARTX + GAP+10,865,"LetterFall");
+    Text l8 = new Text(STARTX + GAP-40,865,"President(2 Plys)");
     l8.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
 
     l1.setFill(Color.WHITE);
@@ -201,16 +222,47 @@ public class Scene3 extends Application {
     Level8.setFitHeight(166);
     Level8.setX(STARTX + GAP);
     Level8.setY(663);
+
+;
+    join.setLayoutX(STARTX + GAP*2);
+    join.setLayoutY(710);
+
+    host.setLayoutX(STARTX + GAP*2);
+    host.setLayoutY(770);
+
+
+
+
+    host.setOnAction(actionEvent -> {
+        server = new serverSocket();
+        server.start(secondStage);
+        server.action(temp);
+        //server.action(String.valueOf(levelsUnlocked));
+        join.setDisable(true);
+        type = 1;
+    });
+    join.setOnAction(actionEvent -> {
+        
+        clt = new client();
+        clt.start(sStage);
+        clt.action(temp);
+        //clt.action(String.valueOf(levelsUnlocked));
+        host.setDisable(true);
+        type = 2;
+        
+    });
     //Event for each level being clicked
 
         //Event for each level being clicked
     Back_Arrow.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            MenuDriver TTT = new MenuDriver();
+            MainMenu TTT = new MainMenu();
             try {
                 TTT.start(stage);
-                                stage.setHeight(590);
+                TTT.settemp(temp,file);
+                stage.setHeight(590);
+                stage.setWidth(910);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -231,10 +283,11 @@ public class Scene3 extends Application {
         @Override
         public void handle(MouseEvent event) {
             TicTacToe TTT = new TicTacToe();
+
             TTT.settemp(temp,file);
             TTT.start(stage);
             stage.setWidth(450);
-            stage.setHeight(300);
+            stage.setHeight(300+20);
 
         }
    });
@@ -255,7 +308,7 @@ public class Scene3 extends Application {
             hi.settemp(temp,file);
             hi.start(stage);
             stage.setWidth(470);
-            stage.setHeight(470);
+            stage.setHeight(470+20);
         }
    });
      Level3.setOnMouseEntered(e -> {
@@ -274,7 +327,7 @@ public class Scene3 extends Application {
             Pong TTT = new Pong();
             TTT.settemp(temp,file);
             TTT.start(stage);
-            stage.setHeight(600);
+            stage.setHeight(600+20);
             stage.setWidth(1000);
 
         }
@@ -292,11 +345,12 @@ public class Scene3 extends Application {
     Level4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            Pres hi = new Pres();
+            SnakeGame hi = new SnakeGame();
             try {
+                hi.settemp(temp,file);
                 hi.start(stage);
-                stage.setHeight(800);
-                stage.setWidth(650);
+                stage.setHeight(800+20);
+                stage.setWidth(1200);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -316,12 +370,13 @@ public class Scene3 extends Application {
     Level5.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            SnakeGame TTT = new SnakeGame();
+            Hang TTT = new Hang();
             try {
+                TTT.settemp(temp,file);
                 TTT.start(stage);
-                stage.setWidth(1200);
-                stage.setHeight(800+20);
-            } catch (InterruptedException e) {
+                stage.setWidth(700);
+                stage.setHeight(400+20);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -340,10 +395,15 @@ public class Scene3 extends Application {
     Level6.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            Hang hi = new Hang();
-            hi.start(stage);
-            stage.setWidth(700);
-            stage.setHeight(400);
+            Jeopardy hi = new Jeopardy();
+            try{
+                hi.settemp(temp,file);
+                hi.start(stage);
+                stage.setWidth(950);
+                stage.setHeight(570+20);
+            }catch (Exception e){
+                 e.printStackTrace();
+            }
 
         }
    });
@@ -360,11 +420,12 @@ public class Scene3 extends Application {
     Level7.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            Jeopardy TTT = new Jeopardy();
+            Rain TTT = new Rain();
             try {
+                TTT.settemp(temp,file);
                 TTT.start(stage);
-                stage.setWidth(950);
-                stage.setHeight(570);
+                stage.setWidth(700);
+                stage.setHeight(800+20);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -384,29 +445,27 @@ public class Scene3 extends Application {
     Level8.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            Rain hi = new Rain();
-            hi.start(stage);
-            stage.setWidth(700);
-            stage.setHeight(800);
+            Pres hi = new Pres();
+            try{
+                hi.settemp(temp,file);
+                hi.start(stage);
+                stage.setWidth(650);
+                stage.setHeight(800+20);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
    });
     //Add everything to the pane
-    pane.getChildren().addAll(Back_Arrow,user,Level1,l1,Level2,l2,Level3,l3,Level4,l4,Level5,l5,Level6,l6,Level7,l7,Level8,l8);
+    pane.getChildren().addAll(Back_Arrow,user,Level1,l1,Level2,l2,Level3,l3,Level5,l5,Level6,l6,Level7,l7,Level8,l8,Level4,l4,join,host);
   //Create a for loop to place locks on levels and after completion of levels unlock another level
 
     for(int i = levelsUnlocked; i < locks.length;i++)
     {
         locks[i] = new ImageView(Lock);
         addLocks(i);
-        FadeTransition ft = new FadeTransition(Duration.seconds(2), locks[i]);
-        ft.setFromValue(0); // go from the number
-        ft.setToValue(1); // go to the number
-        ft.setCycleCount(1); // do the fade just once
-        ft.play();
+        FadeEffect(2, locks[i], 0,1);
     }
-
-
-
 
 
     if(levelsUnlocked < 7){Level8.setDisable(true);}
@@ -419,12 +478,19 @@ public class Scene3 extends Application {
 
 
 
-
     Scene scene = new Scene(pane,WIDTH,HEIGHT);
+    scene.getStylesheets().add("main.css");  
     stage.setResizable(false);
     stage.setTitle("Select A Game");
     stage.setScene(scene);
     stage.show();
+  }
+  public void FadeEffect(int time, ImageView img, int from, int to){
+        FadeTransition ft = new FadeTransition(Duration.seconds(time), img);
+        ft.setFromValue(from); // go from the number
+        ft.setToValue(to); // go to the number
+        ft.setCycleCount(1); // do the fade just once
+        ft.play();
   }
 
   public void addLocks(int number){
@@ -451,9 +517,7 @@ public class Scene3 extends Application {
             String strLine = "";
             while((strLine = br.readLine()) != null){
                 String[] details = strLine.split(",");
-                System.out.print(details[0]);
                 if(details[0].equals(temp)){
-                    System.out.print("sdasd");
                     levelsUnlocked = Integer.parseInt(details[details.length-1]);
                 }
             }

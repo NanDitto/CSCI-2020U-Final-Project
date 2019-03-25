@@ -55,6 +55,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
+import javafx.application.Platform;
 import javafx.scene.control.Dialog.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -69,11 +70,14 @@ public class Scene1 extends Application {
 	Button login = new Button("Login"); // buttons for functionaliy
 	Button register = new Button("Register");
 	Button imports = new Button("Import File");
+	Button host = new Button("Host");
+	Button joins = new Button("Join");
 	static String cwd = System.getProperty("user.dir"); // used to read the user current directory
 	static String ret = "";
 	static String chck ="";
 	public String temp1 ="";
 	public String temp2 = "";
+	public int type;
 
 	public String getUser(){
 		return temp1;
@@ -84,7 +88,7 @@ public class Scene1 extends Application {
 	public void start(Stage primaryStage) {
 		CurrentWindow = primaryStage;
 		/*
-		Media media = new Media(finalsDes + "music.mp3");
+		Media media = new Media("music.mp3");
        	MediaPlayer player = new MediaPlayer(media); // used for playig music at the background
        	player.play();
        	*/
@@ -102,10 +106,12 @@ public class Scene1 extends Application {
         pathTran(100,20,950,600,login); // path transition of the buttons
         pathTran(100,20,-950,600,register);
         pathTran(100,20,-450,600,imports);
+  
 
         login.setOnAction(this::handleButtonAction);
         register.setOnAction(this::handleButtonAction);
         imports.setOnAction(this::handleButtonAction);
+       
 
         Scene scene = new Scene(pane,900,540);
         scene.getStylesheets().add("main.css");  // adding styles using css
@@ -175,11 +181,14 @@ public class Scene1 extends Application {
 						    pane.getChildren().add(image);
 						    fadeTran(1,0,image,5);
 						    opt = true;
-						    MenuDriver hi = new MenuDriver();
-						    hi.settemp(temp1, currentFilename);
-						    Timer t = new Timer(2000, hi.start(CurrentWindow));
-							t.setRepeats(false);
-							t.start();
+						    new Thread( () -> {
+						    	MainMenu hi = new MainMenu();
+						    	try{
+						    		Thread.sleep(3300);
+						    	}catch (InterruptedException e){}
+								hi.settemp(temp1, currentFilename);
+								 Platform.runLater(() -> hi.start(CurrentWindow));
+						    }).start();
 						}
 					}
 					if(opt == false){
@@ -227,7 +236,6 @@ public class Scene1 extends Application {
         	}catch (IOException e){
         		e.printStackTrace();
         	}
-
         }
         if(event.getSource() == imports){
         	FileChooser fileChooser = new FileChooser(); // new filechoser

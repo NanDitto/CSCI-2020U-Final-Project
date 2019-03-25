@@ -40,6 +40,8 @@ import javafx.animation.FadeTransition;
 import java.util.Scanner;
 import javafx.scene.shape.Rectangle;
 import java.util.Collections;
+import java.io.IOException;
+
 
 
 public class Pres extends Application {
@@ -51,7 +53,7 @@ public class Pres extends Application {
     Button resetDeck = new Button("RESET");
     int usercounter=0;
     int usertwocounter=0;
-
+    public boolean WIN;
     // playertwo boxes
     private HBox cardstwo = new HBox();
     private HBox playertwo = new HBox();
@@ -74,6 +76,13 @@ public class Pres extends Application {
 
     private Random rand = new Random(); // random number generator
     private int count = 0,countt=0;
+
+    public String temp;
+    public String file;
+    public void settemp(String temp,String file){
+        this.temp = temp;
+        this.file = file;
+    }
 
     public void start(Stage primaryStage) throws Exception{
 
@@ -167,11 +176,14 @@ public class Pres extends Application {
         scene.setOnKeyPressed(e -> {
 		      switch (e.getCode()) {
 		        case ESCAPE:
+                    if(WIN == true){
+                        readAdd();
+                    }
 		        	Scene3 hi = new Scene3();
 				try {
 				hi.start(primaryStage);
 				primaryStage.setWidth(900);
-                primaryStage.setHeight(900);
+                primaryStage.setHeight(920);
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -183,6 +195,14 @@ public class Pres extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+    public void readAdd(){
+    CSV savea = new CSV();
+    try{
+        savea.read(temp, file,"5");
+        savea.save(file);
+    }catch (IOException e){}
+
     }
 
 
@@ -301,6 +321,7 @@ public class Pres extends Application {
         trans.play();
         x.setDisable(true);
         if((usertwocounter == 12) || (usercounter == 12)){ // checking if the either the 12 buttons are pressed or not
+            WIN = true;
             System.exit(0);
         }
     }

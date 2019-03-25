@@ -36,13 +36,19 @@ public class CSV {
                 row++;
             }
         }
-        
+        boolean cheack =false;
         try (Scanner scan2 = new Scanner(file)) {
             while (scan2.hasNextLine()){
                     String line = scan2.nextLine();
                     String[] details = line.split(",");
-                    if(details[0].equals(userName) && !details[details.length-1].equals(level)){
+                    for(int i=0; i<details.length;i++){
+                        if (details[0].equals(userName) && !details[i].equals(level)){
+                            cheack = true;
+                        }
+                    }
+                    if(details[0].equals(userName) && !details[details.length-1].equals(level) && cheack == true){
                         outer.get(col).add(level);
+        
                     }
                 }
         }

@@ -21,7 +21,7 @@ public class Instructions extends Application {
 
         Pane pane = new Pane();
 
-        MenuTitle title = new MenuTitle("Instructions");
+        Title title = new Title("Instructions");
         title.setTranslateX(Width / 2 - title.getTitleWidth() / 2);
         title.setTranslateY(Height / 11);
 
@@ -33,11 +33,13 @@ public class Instructions extends Application {
 
         for(int i=0; i<8; i++){
             text[i].setFill(Color.WHITE);
-            text[i].setFont(Font.loadFont(MenuDriver.class.getResource("res/HyperspaceBold.otf").toExternalForm(), 15));
+            Font myFont = Font.loadFont(getClass().getResourceAsStream("/HyperspaceBold.otf"), 15);
+            text[i].setFont(myFont);
             box.getChildren().addAll(text[i]);
         }
 
         Button button = new Button("Back");
+        button.setId("button");
         button.setOnAction(actionEvent -> primaryStage.close());
 
         box.getChildren().addAll(button);
@@ -48,7 +50,9 @@ public class Instructions extends Application {
         pane.setStyle("-fx-background-color: black");
 
         primaryStage.setTitle("Instructions");
-        primaryStage.setScene(new Scene(pane, Width, Height));
+        Scene scene = new Scene(pane, Width, Height);
+        primaryStage.setScene(scene);
+        scene.getStylesheets().add("main.css");
         primaryStage.show();
     }
 

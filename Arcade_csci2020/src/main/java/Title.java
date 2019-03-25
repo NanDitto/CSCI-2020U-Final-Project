@@ -16,7 +16,8 @@ public class Title extends Pane {
         }
 
         text = new Text(spread);
-        //text.setFont(Font.loadFont(MainMenu.class.getResource("atarifull.ttf").toExternalForm(), 36));
+        Font myFont = Font.loadFont(getClass().getResourceAsStream("/atarifull.ttf"), 36);
+        text.setFont(myFont);
         text.setFill(Color.WHITE);
         text.setEffect(new DropShadow(30, Color.BLACK));
 

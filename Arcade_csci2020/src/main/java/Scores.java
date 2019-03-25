@@ -1,4 +1,4 @@
-package sample;
+package mainApp;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -10,45 +10,71 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.util.ArrayList;
+import java.io.File;
+import java.util.Scanner;
 
 public class Scores extends Application {
 
     private int Width = 900;
     private int Height = 590;
+    String cwd = System.getProperty("user.dir"); 
+    String ret = "";
+    String currentFile = "";
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Scene1 input = new Scene1();
+        currentFile = input.currentFilename; 
         Pane pane = new Pane();
         VBox box = new VBox(10);
 
-        MenuTitle title = new MenuTitle("Scores");
+        Title title = new Title("Scores");
         title.setTranslateX(Width / 2 - title.getTitleWidth() / 2);
         title.setTranslateY(Height / 11);
 
         pane.getChildren().add(title);
 
-        int dataSize = 8; //number of players currently registered
-        int[] levels = new int[dataSize];
-        String[] users = new String[dataSize];
-        Text[] text = new Text[dataSize];
+        ArrayList<String> user = new ArrayList<String>();
+        ArrayList<String> levels = new ArrayList<String>();
 
-        for(int i = 0; i<dataSize;i++){
-            users[i] = "user";
-            levels[i] = i; //store levels in an array
+        //ret = File.separator;
+        File file = new File(currentFile);
+        try (Scanner scan = new Scanner(file)) {
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();
+                String[] details = line.split(",");
+                for(int i=0;i<details.length;i++){
+                    if(i == 0){
+                        user.add(details[0]);
+                    }
+                    if(i == (details.length-1)){
+                        levels.add(details[details.length-1]);
+                    }
+                }
+            }
         }
 
-        for(int i = 0; i<dataSize;i++){
-            text[i] = new Text(users[i] + ": " + levels[i]);
+        Text[] text = new Text[user.size()];
+
+        for(int i = 0; i<user.size();i++){
+            if(i==0){
+                text[i] = new Text(user.get(i) + "   " + levels.get(i));
+            }else{
+                text[i] = new Text(user.get(i) + ":        " + levels.get(i));
+            }
         }
 
 
-        for(int i=0; i<dataSize; i++){
+        for(int i=0; i<user.size(); i++){
             text[i].setFill(Color.WHITE);
-            text[i].setFont(Font.loadFont(MenuDriver.class.getResource("res/HyperspaceBold.otf").toExternalForm(), 15));
+            Font myFont = Font.loadFont(getClass().getResourceAsStream("/HyperspaceBold.otf"), 20);
+            text[i].setFont(myFont);
             box.getChildren().addAll(text[i]);
         }
 
         Button button = new Button("Back");
+        button.setId("button");
 
         button.setOnAction(actionEvent -> primaryStage.close());
         button.setTranslateX(80);
@@ -61,8 +87,10 @@ public class Scores extends Application {
         pane.getChildren().addAll(box);
 
         pane.setStyle("-fx-background-color: black");
-        primaryStage.setTitle("Credits");
-        primaryStage.setScene(new Scene(pane, Width, Height));
+        primaryStage.setTitle("Scores");
+        Scene scene = new Scene(pane, Width, Height);
+        primaryStage.setScene(scene);
+        scene.getStylesheets().add("main.css");
         primaryStage.show();
     }
 

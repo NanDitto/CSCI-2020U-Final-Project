@@ -13,9 +13,11 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.io.IOException;
 
 public class TicTacToe extends Application {
 
+    public boolean WIN;
     private char currentPlayer = 'X';
 
 
@@ -26,9 +28,16 @@ public class TicTacToe extends Application {
     private Label score = new Label("Wins: " + wins + "\tLosses: " + losses + "\t");
 
     private GridPane pane = new GridPane();
+    public String temp;
+    public String file;
+    public void settemp(String temp,String file){
+        this.temp = temp;
+        this.file = file;
+    }
 
     @Override
     public void start(Stage primaryStage) {
+    WIN = false;
 
 
         for(int i = 0;i < 3;i++){
@@ -66,6 +75,26 @@ public class TicTacToe extends Application {
         primaryStage.setTitle("Tic Tac Toe");
         primaryStage.setScene(scene);
         primaryStage.show();
+        scene.setOnKeyPressed(e -> {
+              switch (e.getCode()) {
+                case ESCAPE:
+                    if(WIN == true){
+                        readAdd();
+                    }
+                    Scene3 hi = new Scene3();
+                try {
+                    hi.settemp(temp,file);
+                    hi.start(primaryStage);
+                    hi.curentLevel();
+                    primaryStage.setWidth(900);
+                    primaryStage.setHeight(920);
+                }catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                default:
+                    break;
+              }
+            });
     }
 
     public boolean isBoardFull(){
@@ -78,25 +107,37 @@ public class TicTacToe extends Application {
         }
         return true;
     }
+    public void readAdd(){
+    CSV savea = new CSV();
+    try{
+        savea.read(temp, file,"1");
+        savea.save(file);
+    }catch (IOException e){}
+
+    }
 
 
     public boolean hasWon(char player){
         for(int i = 0;i < 3;i++){
             if(cell[i][0].getPlayer() == player && cell[i][1].getPlayer() == player && cell[i][2].getPlayer() == player){
+                WIN = true;
                 return true;
             }
         }
         for(int i = 0;i < 3;i++){
             if(cell[0][i].getPlayer() == player && cell[1][i].getPlayer() == player && cell[2][i].getPlayer() == player){
+                WIN = true;
                 return true;
             }
         }
 
         if(cell[0][0].getPlayer() == player && cell[1][1].getPlayer() == player && cell[2][2].getPlayer() == player){
+            WIN = true;
             return true;
         }
 
         if(cell[0][2].getPlayer() == player && cell[1][1].getPlayer() == player && cell[2][0].getPlayer() == player){
+            WIN = true;
             return true;
         }
         return false;
@@ -203,8 +244,8 @@ public class TicTacToe extends Application {
             }
         }
 
-        private Image X = new Image("file:///C:/Users/Garry/Downloads/image/x.png", 150, 91, false, false);
-        private Image O = new Image("file:///C:/Users/Garry/Downloads/image/o.png", 150, 91, false, false);
+        private Image X = new Image("x.png", 150, 85, false, false);
+        private Image O = new Image("o.png", 150, 85, false, false);
 
         public void setPlayer(char c){
             player = c;

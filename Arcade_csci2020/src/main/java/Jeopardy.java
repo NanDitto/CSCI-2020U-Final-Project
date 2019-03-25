@@ -74,14 +74,21 @@ public class Jeopardy extends Application {
 	private int firstCat,secondCat,temp,thirdCat,fourthCat,fifthCat;
 	String cwd = System.getProperty("user.dir");
 	Random rand = new Random();
-
+	public String temp2;
+    public String file;
+    public void settemp(String temp,String file){
+        this.temp2 = temp;
+        this.file = file;
+    }
+    boolean WIN;
 	public void start(Stage primaryStage) throws Exception {
+		WIN = false;
 		Window = primaryStage;
 		layout();
 		ImageView title = new ImageView("file:" + cwd + "/src/main/resources/title.gif"); // title on top
 		title.setFitHeight(150);
 		title.setFitWidth(960);
-		ImageView main = new ImageView("file:" + cwd + "/src/main/resources/back.gif"); // background image
+		ImageView main = new ImageView("file:" + cwd + "/src/main/resources/back.png"); // background image
 		main.setFitHeight(600);
 		main.setFitWidth(960);
 		showLines(cwd + "/src/main/resources/questionAnswers.txt"); // for getting random category with random question in that category
@@ -120,9 +127,10 @@ public class Jeopardy extends Application {
 		        case ESCAPE:
 		        	Scene3 hi = new Scene3();
 				try {
+					hi.settemp(temp2,file);
 					hi.start(primaryStage);
 					primaryStage.setWidth(900);
-                primaryStage.setHeight(900);
+                primaryStage.setHeight(910);
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -136,6 +144,14 @@ public class Jeopardy extends Application {
    public static void main(String[] args) {
     	launch(args);
   }
+  public void readAdd(){
+    CSV savea = new CSV();
+    try{
+        savea.read(temp2, file,"6");
+        savea.save(file);
+    }catch (IOException e){}
+
+    }
   public void layout(){ // to make a 5 by 5 with name acccording to the row and column
   	for(int i = 1; i<= 5; i++){
           for( int p=1; p<= 5; p++){
@@ -203,7 +219,7 @@ public class Jeopardy extends Application {
 		Button[] catButton = new Button[5];
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
-        for (int i=1; i<=11; i++) {
+        for (int i=1; i<11; i++) {
             list.add(new Integer(i));
         }
         Collections.shuffle(list);
@@ -363,11 +379,13 @@ public class Jeopardy extends Application {
 
 		}
 		if(mainCounter == 25){ // if all the boxes are pressed on, then output the dialog
-				JOptionPane.showMessageDialog(null, "You won! You money will be tranfered to you in 1 decade.", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
-				try{
-					Thread.sleep(2000);
-				}catch(Exception e){}
-				System.exit(0);
+				if(score >= 2000){
+					JOptionPane.showMessageDialog(null, "You won! You money will be tranfered to you in 1 decade.", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
+					WIN = true;
+				}
+				if(score <=2000){
+					JOptionPane.showMessageDialog(null, "You lost! Try again to unlock the next level", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
+				}
 		}
 
 
@@ -390,9 +408,11 @@ public class Jeopardy extends Application {
 		if (result.isPresent()) { // taking the input and storing it
 		    entered = result.get();
 		}
+		System.out.print(entered);
 		if (entered.toUpperCase().contains(answers[number].get(temp).toUpperCase())){ // checking userinput and answer
 			score = score + points;
 		}
+		System.out.print(answers[number].get(temp));
 		update(score); // updating score
 
 		answers[number].remove(temp);

@@ -24,7 +24,7 @@ public class Credits extends Application {
         Pane pane = new Pane();
         VBox box = new VBox(60);
 
-        MenuTitle title = new MenuTitle("Credits");
+        Title title = new Title("Credits");
         title.setTranslateX(Width / 2 - title.getTitleWidth() / 2);
         title.setTranslateY(Height / 11);
 
@@ -35,7 +35,8 @@ public class Credits extends Application {
 
         for(int i=0; i<4; i++){
             text[i].setFill(Color.WHITE);
-            text[i].setFont(Font.loadFont(MenuDriver.class.getResource("res/HyperspaceBold.otf").toExternalForm(), 30));
+            Font myFont = Font.loadFont(getClass().getResourceAsStream("/HyperspaceBold.otf"), 30);
+            text[i].setFont(myFont);
             box.getChildren().addAll(text[i]);
         }
         Button button = new Button("Back");

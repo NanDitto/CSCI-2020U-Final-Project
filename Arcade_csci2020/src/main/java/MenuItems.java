@@ -46,7 +46,9 @@ public class MenuItems extends Pane implements Runnable {
         text = new Text(name);
         text.setTranslateX(10);
         text.setTranslateY(20);
-        text.setFont(Font.loadFont(MenuDriver.class.getResource("/src/main/resources/GamePlayed.otf").toExternalForm(), 20));
+
+        Font myFont = Font.loadFont(getClass().getResourceAsStream("/GamePlayed.otf"), 20);
+        text.setFont(myFont);
         text.setFill(Color.BLACK);
 
         text.effectProperty().bind(

@@ -1,6 +1,4 @@
 package mainApp;
-
-
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -25,12 +23,13 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Hang extends Application {
 
 	private String cwd = System.getProperty("user.dir");
-	private final String backg = "file:" + cwd + "/src/main/resources/noose.png";
-   	private ImageView back = new ImageView(backg); // main background image
+   	private ImageView back = new ImageView("test.gif"); // main background image
+
     private ArrayList<String> storeWordList = new ArrayList<String>();
     private String currentWord = new String();
 	private TextField Guess = new TextField();
@@ -48,10 +47,20 @@ public class Hang extends Application {
 	private String guessedLetters = "";
 	private Scanner input;
 	private Text[] text;
+	public String temp;
+    public String file;
+    public void settemp(String temp,String file){
+        this.temp = temp;
+        this.file = file;
+    }
+    public boolean WIN;
 
 
 	@Override
 	public void start(Stage primaryStage) {
+		WIN = false;
+		back.setFitHeight(400);
+		back.setFitWidth(700);
 		//adjusting and setting the scene to display everything correctly
 		//also adjusting text sizes and color and positions
 		Pane pane = new Pane();
@@ -74,14 +83,14 @@ public class Hang extends Application {
 		Label e = new Label("Guesses Remaining:");
 		e.setStyle("-fx-font-weight: bold");
 		e.setTextFill(Color.web("#FF0000"));
-		e.setLayoutX(345);
-		e.setLayoutY(110);
+		e.setLayoutX(320);
+		e.setLayoutY(103);
 		e.setFont(new Font(15));
 		pane.getChildren().addAll(Guess,e);
 		Label l = new Label("Letters Guessed:");
 		l.setStyle("-fx-font-weight: bold");
 		l.setTextFill(Color.web("#FF0000"));
-		l.setLayoutX(368);
+		l.setLayoutX(320);
 		l.setLayoutY(62);
 		l.setFont(new Font(15));
 		pane.getChildren().addAll(LettersGuessed,l);
@@ -89,7 +98,7 @@ public class Hang extends Application {
 		Label g = new Label("Enter a letter: ");
 		g.setStyle("-fx-font-weight: bold");
 		g.setTextFill(Color.web("#FF0000"));
-		g.setLayoutX(385);
+		g.setLayoutX(330);
 		g.setLayoutY(16);
 		g.setFont(new Font(15));
 		guessesRemaining = new Label(String.valueOf(left));
@@ -111,12 +120,40 @@ public class Hang extends Application {
 		prompt4.setFill(Color.RED);
 		pane.getChildren().addAll(prompt1,prompt2,prompt3,prompt4);
 		Scene scene = new Scene(bPane, 700, 400, Color.BLACK);
-		primaryStage.setTitle("Show Hangman");
+		primaryStage.setTitle("Hangman");
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
+		scene.setOnKeyPressed(h -> {
+              switch (h.getCode()) {
+                case ESCAPE:
+                    if(WIN == true){
+                        readAdd();
+                    }
+                    Scene3 hi = new Scene3();
+                try {
+                    hi.settemp(temp,file);
+                    hi.start(primaryStage);
+                    hi.curentLevel();
+                    primaryStage.setWidth(900);
+                    primaryStage.setHeight(910);
+                }catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                default:
+                    break;
+              }
+            });
 	}
-	
+	public void readAdd(){
+    CSV savea = new CSV();
+    try{
+        savea.read(temp, file,"5");
+        savea.save(file);
+    }catch (IOException e){}
+
+    }
+
 	//function that draws the structure that the man hangs from
 	private void hang() {
 
@@ -193,7 +230,7 @@ public class Hang extends Application {
 	//function that gets random words from a text file and sets that word as the current word to be guessed
 	private void getWord() {
 
-        File file = new File("d:/Users/Joseph/Desktop/translate.txt");
+        File file = new File(cwd + "/src/main/resources/translate.txt");
 		try {
 			input = new Scanner(file);
 		} catch (FileNotFoundException e) {
@@ -269,7 +306,7 @@ public class Hang extends Application {
 
 		if (guessedLetters.length() > 0) {
 			if (guessedLetters.indexOf(guess) > -1) {
-				prompt4.setText("Letter has already been guessed. Try again.");
+				prompt4.setText("Letter has already been guessed. \n                 Try AGAIN.");
 				delay.setOnFinished( event -> prompt4.setVisible(false));
 				delay.play();
 				return;
@@ -295,7 +332,7 @@ public class Hang extends Application {
 			guessesRemaining.setText(String.valueOf(left));
 		}
 		if (left == 0) {
-			prompt1.setText("You have 0 tries left, you lose. The word was: " + currentWord);
+			prompt1.setText("    You LOST! The word was: " + currentWord);
 			Guess.setEditable(false);
 			
 		}
@@ -308,7 +345,8 @@ public class Hang extends Application {
 			}
 		}
 		if (solved) {
-			prompt2.setText("Congratulations, you have successfully guessed the correct letters.");
+			prompt2.setText("             Congratulations, you WON");
+			WIN = true;
 			Guess.setEditable(false);
 		}
 	}

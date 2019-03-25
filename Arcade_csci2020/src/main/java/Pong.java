@@ -35,7 +35,7 @@ public class Pong extends Application{
 	public final static int WIDTH = 1000;
 	public final Pane Board = new Pane();
 	public final Scene scene = new Scene(Board, WIDTH, HEIGHT, Color.BLACK);
-	Text prompt = new Text(150, 300, "Press Space to Start!");
+	Text prompt = new Text(35, 250, "Press Space to Start!");
 	Text timer = new Text(WIDTH/2 , 30,Integer.toString(TIME));
 	//Determine Winner
 	Text Score1 = new Text(40, 30,"0");
@@ -205,7 +205,7 @@ public class Pong extends Application{
                     hi.start(stage);
                     hi.curentLevel();
                     stage.setWidth(900);
-                    stage.setHeight(900);
+                    stage.setHeight(910);
                 }catch (Exception e1) {
                     e1.printStackTrace();
                 }

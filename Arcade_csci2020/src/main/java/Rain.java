@@ -1,5 +1,4 @@
 package mainApp;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -16,7 +15,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 import java.util.Random;
+import java.io.IOException;
 
 public class Rain extends Application{
 
@@ -35,14 +36,17 @@ public class Rain extends Application{
 	Random rand = new Random();
 	TextField text = new TextField();
 	Text[] letters = new Text[MAX];
-	String cwd = System.getProperty("user.dir");
-
-
+	public String temp;
+    public String file;
+    public void settemp(String temp,String file){
+        this.temp = temp;
+        this.file = file;
+    }
+    public boolean WIN; 
 	@Override
     public void start(Stage primaryStage) {
-		
-		String backg = "file:" + cwd + "/src/main/resources/retro.png";
-       	ImageView back = new ImageView(backg); // main background image
+    	WIN = false;
+       	ImageView back = new ImageView("retro.png"); // main background image
 		pane.getChildren().add(back);
 
         for(int i =0;i<MAX;i++){
@@ -90,25 +94,20 @@ public class Rain extends Application{
 		            			break;
 		            		}
 		            	}
+		            	if (ke.getCode() == KeyCode.ESCAPE){
+		            		Scene3 hi = new Scene3();
+							try {
+								hi.settemp(temp,file);
+								hi.start(primaryStage);
+								primaryStage.setWidth(900);
+			                  	primaryStage.setHeight(910);
+							}catch (Exception e1) {
+								e1.printStackTrace();
+							}
+		            	}
 		            }
+
 		        });
-		        /*
-		        scene.setOnKeyPressed(e -> {
-				      switch (e.getCode()) {
-				        case ESCAPE:
-				        	Scene3 hi = new Scene3();
-						try {
-							hi.start(primaryStage);
-							primaryStage.setWidth(900);
-		                  primaryStage.setHeight(900);
-						}catch (Exception e1) {
-							e1.printStackTrace();
-						}
-				        default:
-				        	break;
-				      }
-				    });
-				*/
 
 			}
 		}));
@@ -134,12 +133,22 @@ public class Rain extends Application{
 
 
 	}
+	public void readAdd(){
+	    CSV savea = new CSV();
+	    try{
+	        savea.read(temp, file,"7");
+	        savea.save(file);
+	    }catch (IOException e){}
 
+    }
 	public void checkLoss() {
 		// TODO IF letters.getY() == HEIGHT of pane **BOTTOM OF WINDOW
 		for(int y = 0; y<20; y++){
 			if(letters[y].getY() > HEIGHT-20){
-				prompt.setText("You have achieved a score of: " + score);
+				prompt.setText(" Your score: " + score+ " (50 needed for level unlock)");
+				if(score >= 50){
+					WIN = true;
+				}
 				pane.getChildren().remove(letters);
 
 			}

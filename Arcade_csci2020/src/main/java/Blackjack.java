@@ -153,16 +153,24 @@ public class Blackjack extends Application {
       			if (points > 21){ // if the points are greater than 21 on computer side, switch to computer won
               hit.setDisable(true);
               pane.getChildren().clear();
-              Label youWon = new Label("Computer Won");
-              pane.getChildren().add(youWon);
+              Label youWon = new Label("Computer Won \n Press on Esc");
+              youWon.setStyle("-fx-font-weight: bold");
+              youWon.setFont(Font.font ("Verdana", 22));
+              StackPane temp = new StackPane();
+              temp.getChildren().addAll(youWon);
+              pane.getChildren().add(temp);
       				WIN = false;
 
 	      		}
       			if(points == 21){
               hit.setDisable(true);
               pane.getChildren().clear();
-              Label youWon = new Label("You WON!");
-              pane.getChildren().add(youWon);
+              Label youWon = new Label("   You WON\n Press on Esc");
+              youWon.setStyle("-fx-font-weight: bold");
+              youWon.setFont(Font.font ("Verdana", 22));
+              StackPane temp = new StackPane();
+              temp.getChildren().addAll(youWon);
+              pane.getChildren().add(temp);
 							WIN = true;
       			}
 
@@ -172,7 +180,7 @@ public class Blackjack extends Application {
       	stand.setOnAction(new EventHandler<ActionEvent>() {
       		@Override // Override the handle method
       		public void handle(ActionEvent e) {
-      			if (computerpoints <= 12){
+      			if (computerpoints <= 21){
       				for(int i=0;i<2;i++){
 	      				ButtonRan = rand.nextInt(cards.size());
 	      				computer.getChildren().add(cards.get(ButtonRan));
@@ -190,15 +198,23 @@ public class Blackjack extends Application {
       			if(computerpoints > 21){
               stand.setDisable(true);
               pane.getChildren().clear();
-              Label youWon = new Label("You WON!");
-              pane.getChildren().add(youWon);
+              Label youWon = new Label("   You Won\n Press on Esc");
+              youWon.setStyle("-fx-font-weight: bold");
+              youWon.setFont(Font.font ("Verdana", 22));
+              StackPane temp = new StackPane();
+              temp.getChildren().addAll(youWon);
+              pane.getChildren().add(temp);
               WIN = true;
       			}
       			if(computerpoints == 21){
               stand.setDisable(true);
               pane.getChildren().clear();
-              Label youWon = new Label("Computer Won!");
-              pane.getChildren().add(youWon);
+              Label youWon = new Label("Computer Won \n Press on Esc");
+              youWon.setStyle("-fx-font-weight: bold");
+              youWon.setFont(Font.font ("Verdana", 22));
+              StackPane temp = new StackPane();
+              temp.getChildren().addAll(youWon);
+              pane.getChildren().add(temp);
       				WIN = false;
       			}
 
@@ -220,7 +236,7 @@ public class Blackjack extends Application {
 
     	Scene scene = new Scene(pane,470,470);
 
-     	Window.setTitle("President"); // Set the stage title
+     	Window.setTitle("BlackJack"); // Set the stage title
       	Window.setScene(scene); // Place the scene in the stage
       	Window.show(); // Display the stage
 				scene.setOnKeyPressed(e -> {
@@ -235,7 +251,7 @@ public class Blackjack extends Application {
                     hi.start(primaryStage);
                     hi.curentLevel();
                     primaryStage.setWidth(900);
-                    primaryStage.setHeight(900);
+                    primaryStage.setHeight(910);
                 }catch (Exception e1) {
                     e1.printStackTrace();
                 }
