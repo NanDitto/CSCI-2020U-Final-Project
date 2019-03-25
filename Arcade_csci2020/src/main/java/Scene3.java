@@ -33,7 +33,7 @@ public class Scene3 extends Application {
     private final int windowHEIGHT = 160;
     private final int borderWIDTH = 170;
     private final int borderHEIGHT = 185;
-    public int levelsUnlocked =0;
+    public int levelsUnlocked =8;
     public String ret = "";
     static String cwd = System.getProperty("user.dir"); // used to read the user current directory
     public String userName;
@@ -62,9 +62,11 @@ public class Scene3 extends Application {
 
     String USER_NAME = "Welcome: " + temp;
     Text user = new Text(10,30,USER_NAME);
+    /*
     try{
        curentLevel();
     }catch (IOException e){}
+    */
     ret = File.separator;
         //Adds User Name to top right
     user.setFont(Font.font("Times New Roman",FontWeight.BOLD, 30));
