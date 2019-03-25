@@ -1,14 +1,11 @@
 package mainApp;
 
+import javafx.scene.Scene;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,19 +13,22 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.util.Duration;
 import javafx.util.Pair;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 
 public class MainMenu extends Application {
 
-	private static final int WIDTH = 900;
-	private static final int HEIGHT = 590;
 	public Stage window2;
 	public String temp;
 	public String file;
@@ -50,7 +50,7 @@ public class MainMenu extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		window2 = primaryStage;
-		Scene scene = new Scene(createContent());
+		Scene scene = new Scene(setScene());
 		window2.setTitle("Arcade Menu");
 		window2.setScene(scene);
 		window2.show();
@@ -102,7 +102,7 @@ public class MainMenu extends Application {
 	}
 
 	// Sets the background, adds the title,
-	private Parent createContent() {
+	private Parent setScene() {
 		addBackground();
 		addTitle();
 
@@ -136,8 +136,8 @@ public class MainMenu extends Application {
 	private void addLine(double x, double y) {
 		line = new Line(x, y, x, y + 220);
 		line.setStrokeWidth(3);
-		line.setStroke(Color.color(1, 1, 1, 0.75));
-		line.setEffect(new DropShadow(5, Color.BLACK));
+		line.setStroke(Color.color(1, 1, 1, 0.7));
+		line.setEffect(new DropShadow(3, Color.BLACK));
 		line.setScaleY(0);
 
 		root.getChildren().add(line);
@@ -155,7 +155,7 @@ public class MainMenu extends Application {
 				Node n = menu.getChildren().get(i);
 				TranslateTransition items = new TranslateTransition(Duration.seconds(1 + i * 0.1), n);
 				items.setToX(0);
-				items.setOnFinished(e2 -> n.setClip(null));
+				items.setOnFinished(e1 -> n.setClip(null));
 				items.play();
 			}
 		});
@@ -163,7 +163,7 @@ public class MainMenu extends Application {
 		sideBar.play();
 	}
 
-	// adds the menu items
+	//creates and adds the menu items
 	private void addMenuItems(double x, double y) {
 		menu.setTranslateX(x);
 		menu.setTranslateY(y);
@@ -177,9 +177,7 @@ public class MainMenu extends Application {
 
 			Rectangle clip = new Rectangle(300, 30);
 			clip.translateXProperty().bind(item.translateXProperty().negate());
-
 			item.setClip(clip);
-
 			menu.getChildren().addAll(item);
 		}
 

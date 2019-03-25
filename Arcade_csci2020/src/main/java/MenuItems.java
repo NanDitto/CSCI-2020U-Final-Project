@@ -13,17 +13,18 @@ import javafx.scene.text.Text;
 
 public class MenuItems extends Pane implements Runnable {
 
-	private String name;
-	private Text text;
-	private Effect shadow = new DropShadow(5, Color.WHITE);
+	private String name; //name of menu item
+	private Text text; 	 //text of menu item
+	private Effect highlight = new DropShadow(7, Color.WHITE);
 	private Effect blur = new BoxBlur(0, 0, 0);
 
-	// creates a rectangular button type background for each menu item
 	public MenuItems(String name) {
 		this.name = name;
 	}
 
 	public void run() {
+		
+		// creates a rectangular button type background for each menu item
 		Polygon menuTextBackground = new Polygon(0, 0, 200, 0, 200, 15, 200, 30, 0, 30);
 
 		// sets the color properties of the item background
@@ -31,18 +32,19 @@ public class MenuItems extends Pane implements Runnable {
 		menuTextBackground.setEffect(new GaussianBlur(5));
 
 		// sets color properties when a menu item is pressed
-		menuTextBackground.fillProperty().bind(Bindings.when(pressedProperty()).then(Color.color(0, 0, 0, 0.75))
-				.otherwise(Color.color(0, 0, 0, 0.25)));
+		menuTextBackground.fillProperty().bind(Bindings.when(pressedProperty()).then(Color.color(0, 0, 0, 0.7))
+				.otherwise(Color.color(0, 0, 0, 0.3)));
 
 		text = new Text(name);
-		text.setTranslateX(10);
+		text.setTranslateX(10); //centers the text inside the rectangular background
 		text.setTranslateY(20);
 
-		Font myFont = Font.loadFont(getClass().getResourceAsStream("/GamePlayed.otf"), 20);
-		text.setFont(myFont);
+		Font font = Font.loadFont(getClass().getResourceAsStream("/GamePlayed.otf"), 20);
+		text.setFont(font);
 		text.setFill(Color.BLACK);
 
-		text.effectProperty().bind(Bindings.when(hoverProperty()).then(shadow).otherwise(blur));
+		//sets a glow effect on text when mouse is hovering over it
+		text.effectProperty().bind(Bindings.when(hoverProperty()).then(highlight).otherwise(blur));
 
 		getChildren().addAll(menuTextBackground, text);
 	}
