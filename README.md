@@ -25,13 +25,13 @@ gradle run
 ```
 
 
-Nandor Gallo #100662966
+Nandor Gallo #100662966 (NanDitto)
 
 Joseph Fanous #100655452 (GoogleDownload)
 
-Hanan Amer # 100659601
+Hanan Amer # 100659601 (Hanan0110)
 
-Garry Masaun #100659425
+Garry Masaun #100659425 (xGarry)
 
 Link to public repository containing the final project:
 ```
