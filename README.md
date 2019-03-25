@@ -32,3 +32,8 @@ Joseph Fanous #100655452 (GoogleDownload)
 Hanan Amer # 100659601
 
 Garry Masaun #100659425
+
+Link to public repository containing the final project:
+```
+https://github.com/NanDitto/CSCI-2020U-Final-Project
+```
