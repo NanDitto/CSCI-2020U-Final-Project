@@ -7,7 +7,7 @@
 
 What things you need to install
 ```
-No Prerequisites required other than gradle
+Gradle
 ```
 
 ### Installing
