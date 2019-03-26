@@ -27,7 +27,7 @@ gradle run
 
 Nandor Gallo #100662966 (NanDitto) (Snake Game, Pong, Scene3, Contributed to File I/O and Sockets)
 
-Joseph Fanous #100655452 (GoogleDownload)(Rain game, HangMan, ReadMe, debug program)
+Joseph Fanous #100655452 (GoogleDownload)(Rain game, HangMan, ReadMe, File I/O)
 
 Hanan Amer # 100659601 (Hanan0110) (Jeopardy, President, BlackJack, Scene1, Contributed to File I/O, Multi-Threading and Sockets)
 
