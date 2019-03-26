@@ -32,13 +32,13 @@ If you prefer to be alone
 gradle run --args Offline
 ```
 ### Contributions
-Nandor Gallo #100662966 (NanDitto) (Snake Game, Pong, Scene3, Contributed to File I/O and Sockets)
+Nandor Gallo (NanDitto) (Snake Game, Pong, Scene3, Contributed to File I/O and Sockets, Debuging)
 
-Joseph Fanous #100655452 (GoogleDownload) (Rain game, HangMan, ReadMe, File I/O)
+Joseph Fanous (GoogleDownload) (Rain game, HangMan, ReadMe, File I/O, Debuging)
 
-Hanan Amer # 100659601 (Hanan0110) (Jeopardy, President, BlackJack, Scene1, Contributed to File I/O, Multi-Threading and Sockets)
+Hanan Amer (Hanan0110) (Jeopardy, President, BlackJack, Scene1, Contributed to File I/O, Multi-Threading and Sockets, Debuging)
 
-Garry Masaun #100659425 (xGarry) (Tic-Tac-Toe, Scene2, Multi-threading)
+Garry Masaun (xGarry) (Tic-Tac-Toe, Scene2, Multi-threading, Debuging)
 
 Link to public repository containing the final project:
 ```
