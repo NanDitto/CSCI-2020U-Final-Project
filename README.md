@@ -12,7 +12,7 @@ Gradle
 
 ### Installing
 
-Download/Clone the file. Open the Arcade_csci2020 folder and run the following commands from terminal (If using command line on windows,
+Download/Clone the file. Change directories to the Arcade_csci2020 folder and run the following commands from terminal (If using command line on windows,
 use "gradlew build" instead)
 ```
 ./gradlew build
