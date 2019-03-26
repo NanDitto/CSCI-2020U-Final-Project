@@ -18,12 +18,19 @@ use "gradlew build" instead)
 ./gradlew build
 ```
 
-And then
-
+### Running
+If you're hosting a chat session
 ```
-gradle run
+gradle run --args Host
 ```
-
+If you're joining a chat session
+```
+gradle run --args Join
+```
+If you prefer to be alone
+```
+gradle run --args Offline
+```
 
 Nandor Gallo #100662966 (NanDitto) (Snake Game, Pong, Scene3, Contributed to File I/O and Sockets)
 
