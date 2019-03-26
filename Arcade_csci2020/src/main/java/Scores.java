@@ -19,11 +19,13 @@ import java.util.Scanner;
 */
 public class Scores extends Application {
 
+	//set width and height of stage
 	private int Width = 900;
 	private int Height = 590;
-	String cwd = System.getProperty("user.dir");
-	String ret = "";
-	String currentFile = "";
+	
+	String cwd = System.getProperty("user.dir"); //gets current directory
+	String ret = ""; //
+	String currentFile = ""; //stores file name
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -87,6 +89,7 @@ public class Scores extends Application {
 
 		pane.getChildren().addAll(box);
 
+		
 		pane.setStyle("-fx-background-color: black");
 		primaryStage.setTitle("Scores");
 		Scene scene = new Scene(pane, Width, Height);

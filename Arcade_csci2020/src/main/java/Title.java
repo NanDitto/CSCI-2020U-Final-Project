@@ -26,6 +26,7 @@ public class Title extends Pane {
 		getChildren().addAll(text);
 	}
 
+	//gets the width of the title text
 	public double getTitleWidth() {
 		return text.getLayoutBounds().getWidth();
 	}
