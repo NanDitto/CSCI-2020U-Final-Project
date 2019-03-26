@@ -1,46 +1,33 @@
-# Arcade Game
+# Arcade
 
-### About
-  Single player game, where users complete levels to unlock the next. Game implements a chatbox where users can send messages to each other.
+About the arcade **to be done
 
 ### Prerequisites
 
-What things you need to install
+What things you need to install the software and how to install them
+
 ```
-Gradle
+No Prerequisites required other than gradle
 ```
 
 ### Installing
 
-Download/Clone the file. Change directories to the Arcade_csci2020 folder and run the following commands from terminal (If using command line on windows,
-use "gradlew build" instead)
+Download/Clone the file. Open the Arcade_csci2020 folder and run the following commands from terminal 
 ```
 ./gradlew build
 ```
 
-### Running
-If you're hosting a chat session
-```
-gradle run --args Host
-```
-If you're joining a chat session
-```
-gradle run --args Join
-```
-If you prefer to be alone
-```
-gradle run --args Offline
-```
-### Contributions
-Nandor Gallo (NanDitto) (Snake Game, Pong, Scene3, Contributed to File I/O and Sockets, Debuging)
+And then
 
-Joseph Fanous (GoogleDownload) (Rain game, HangMan, ReadMe, File I/O, Debuging)
-
-Hanan Amer (Hanan0110) (Jeopardy, President, BlackJack, Scene1, Contributed to File I/O, Multi-Threading and Sockets, Debuging)
-
-Garry Masaun (xGarry) (Tic-Tac-Toe, Scene2, Multi-threading, Debuging)
-
-Link to public repository containing the final project:
 ```
-https://github.com/NanDitto/CSCI-2020U-Final-Project
+gradle run
 ```
+
+
+Nandor Gallo #100662966
+
+Joseph Fanous #100655452 (GoogleDownload)
+
+Hanan Amer # 100659601
+
+Garry Masaun #

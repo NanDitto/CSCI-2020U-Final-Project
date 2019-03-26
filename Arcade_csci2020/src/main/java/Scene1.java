@@ -85,12 +85,10 @@ public class Scene1 extends Application {
 
 	public void start(Stage primaryStage) {
 		CurrentWindow = primaryStage;
-		/*
-		Media media = new Media("music.mp3");
-       	MediaPlayer player = new MediaPlayer(media); // used for playig music at the background
-       	player.play();
-       	*/
-       	ImageView home = new ImageView("q.gif"); // main background image
+		Media media = new Media("file:" + cwd + ret + "src" + ret + "main" + ret+ "resources" + ret+ "music.mp3");
+       		MediaPlayer player = new MediaPlayer(media); // used for playig music at the background
+       		player.play();
+       		ImageView home = new ImageView("q.gif"); // main background image
 		pane.getChildren().add(home);
 		login.setId("button");
 		register.setId("button");
@@ -100,19 +98,19 @@ public class Scene1 extends Application {
 		buttons.setAlignment(Pos.CENTER);
 
 		fadeTran(1,0.8,home,2); // fade transiton of picture
-        pathTran(100,20,950,600,login); // path transition of the buttons
-        pathTran(100,20,-950,600,register);
-        pathTran(100,20,-450,600,imports);
+		pathTran(100,20,950,600,login); // path transition of the buttons
+		pathTran(100,20,-950,600,register);
+		pathTran(100,20,-450,600,imports);
  
   
 
-        login.setOnAction(this::handleButtonAction);
-        register.setOnAction(this::handleButtonAction);
-        imports.setOnAction(this::handleButtonAction);  
+		login.setOnAction(this::handleButtonAction);
+		register.setOnAction(this::handleButtonAction);
+		imports.setOnAction(this::handleButtonAction);  
 
-        Scene scene = new Scene(pane,900,540);
-        scene.getStylesheets().add("main.css");  // adding styles using css
-        CurrentWindow.setResizable(false);
+		Scene scene = new Scene(pane,900,540);
+		scene.getStylesheets().add("main.css");  // adding styles using css
+		CurrentWindow.setResizable(false);
 		CurrentWindow.setTitle("Welcome!"); // Set the stage title
 		CurrentWindow.setScene(scene); // Place the scene in the stage
 		CurrentWindow.show(); // Display the stage
