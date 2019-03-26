@@ -51,6 +51,7 @@ public class Rain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		//Building the scene and setting fonts and backgrounds and adding everything to my pane
 		WIN = false;
 		ImageView back = new ImageView("retro.png"); // main background image
 		pane.getChildren().add(back);
