@@ -61,7 +61,7 @@ public class Scene3 extends Application {
 	@Override
 	public void start(Stage stage) {
 		// Displays Username at the top right
-		String USER_NAME = "Welcome: " + temp;
+		String USER_NAME = "Welcome, " + temp;
 		Text user = new Text(10, 30, USER_NAME);
 		try {
 			curentLevel();
@@ -71,7 +71,7 @@ public class Scene3 extends Application {
 		// Adds User Name to top right
 		user.setFont(Font.font("Times New Roman", FontWeight.BOLD, 30));
 		user.setFill(Color.WHITE);
-		user.setX(WIDTH - 400);
+		user.setX(WIDTH - 350);
 		user.setY(80);
 		// Background image
 		Image image = new Image("file:" + cwd + "/src/main/resources/background.gif");
@@ -93,7 +93,6 @@ public class Scene3 extends Application {
 		window_Outline.setFill(Color.YELLOW);
 
 		// All Images to make Stage look nice
-		Image light_border = new Image("file:" + cwd + "/src/main/resources/lights.gif");
 		Image spaceShip = new Image("file:" + cwd + "/src/main/resources/ship.gif");
         Image questionMark = new Image("file:" + cwd + "/src/main/resources/qm.gif");
 		Image Lock = new Image("file:" + cwd + "/src/main/resources/lock.png");
@@ -117,10 +116,6 @@ public class Scene3 extends Application {
 		ImageView ss = new ImageView(spaceShip);
 		pane.getChildren().add(ss);
 
-		ImageView border = new ImageView(light_border);
-		pane.getChildren().add(border);
-		border.setFitWidth(WIDTH);
-		border.setFitHeight(HEIGHT);
 
 		ImageView Back_Arrow = new ImageView(back);
 		Back_Arrow.setX(30);
@@ -228,7 +223,7 @@ public class Scene3 extends Application {
 					TTT.start(stage);
 					TTT.settemp(temp, file);
 					stage.setHeight(590);
-					stage.setWidth(910);
+					stage.setWidth(900);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

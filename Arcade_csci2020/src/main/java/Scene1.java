@@ -64,6 +64,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
 import javafx.scene.media.AudioClip;
+import java.awt.event.MouseEvent;
 
 public class Scene1 extends Application {
 	public Stage CurrentWindow;
@@ -78,6 +79,8 @@ public class Scene1 extends Application {
 	public String temp1 ="";
 	public String temp2 = "";
 	public static boolean type = false;
+	private Button mute;
+
 	private AudioClip audioClip;;
 
 	public String getUser(){
@@ -89,7 +92,7 @@ public class Scene1 extends Application {
 	public void start(Stage primaryStage) {
 		CurrentWindow = primaryStage;
 
-		final URL resource = getClass().getResource("/music.mp3"); // used for playig music at the background
+		final URL resource = getClass().getResource("/music.mp3"); // used for playing music at the background
 		audioClip = new AudioClip(resource.toExternalForm());
 		audioClip.play();
 
@@ -98,17 +101,30 @@ public class Scene1 extends Application {
 		login.setId("button");
 		register.setId("button");
 		imports.setId("button");
+
+		ImageView imMute = new ImageView("mute.png");
+		mute = new Button("Mute");
+  		mute.setGraphic(imMute);
+
+
+		imMute.setFitHeight(40);
+		imMute.setFitWidth(40);
 		buttons.getChildren().addAll(login,register,imports); // adding all the objects to the pane
-		pane.getChildren().addAll(buttons);
+		pane.getChildren().addAll(buttons,mute);
 		buttons.setAlignment(Pos.CENTER);
+		StackPane.setAlignment(mute, Pos.TOP_RIGHT); // settting alignment of 
 
 		fadeTran(1,0.8,home,2); // fade transiton of picture
 		pathTran(100,20,950,600,login); // path transition of the buttons
 		pathTran(100,20,-950,600,register);
 		pathTran(100,20,-450,600,imports);
- 
-  
-
+        mute.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                audioClip.stop();
+                mute.setDisable(true);
+            }
+        });
+	
 		login.setOnAction(this::handleButtonAction);
 		register.setOnAction(this::handleButtonAction);
 		imports.setOnAction(this::handleButtonAction);  
@@ -197,23 +213,15 @@ public class Scene1 extends Application {
 		                temp1 = login.getText().trim();
 		                temp2 = new String(password.getPassword());
 						if(details[0].equals(temp1) && details[1].equals(temp2)){ // if the username and password are same, then continue
-							ImageView image = new ImageView("cm.gif");
-						    pane.getChildren().add(image);
-						    fadeTran(1,0,image,5);
 						    opt = true;
 						    if (type != true){ 
 						    	try{
 									ChatClient p1 = new ChatClient(temp1,"localhost");
 								}catch (Exception e){}
 						    }
-						    new Thread( () -> { // making a new thread  for the next scren 
-						    	MainMenu hi = new MainMenu();
-						    	try{
-						    		Thread.sleep(3300);
-						    	}catch (InterruptedException e){}
-								hi.settemp(temp1, currentFilename);
-								 Platform.runLater(() -> hi.start(CurrentWindow));
-						    }).start();
+						    MainMenu hi = new MainMenu();
+						    hi.settemp(temp1, currentFilename);
+							hi.start(CurrentWindow);
 										   
 						}
 					}

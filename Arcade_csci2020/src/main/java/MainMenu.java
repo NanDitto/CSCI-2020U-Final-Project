@@ -53,8 +53,20 @@ public class MainMenu extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+
 		window2 = primaryStage;
-		Scene scene = new Scene(setScene());
+
+		addBackground();
+		addTitle();
+
+		double lineX = Width / 2 - 100;
+		double lineY = Height / 4;
+
+		addLine(lineX - 6, lineY - 5);
+		addMenuItems(lineX, lineY - 22);
+		animateMenuItems();
+
+		Scene scene = new Scene(pane);
 		window2.setTitle("Arcade Menu");
 		window2.setScene(scene);
 		window2.show();
@@ -123,20 +135,6 @@ public class MainMenu extends Application {
 		Scene creditsScene = new Scene(creditsParent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-	}
-
-	// Sets the background, adds the title,
-	private Parent setScene() {
-		addBackground();
-		addTitle();
-
-		double lineX = Width / 2 - 100;
-		double lineY = Height / 4;
-
-		addLine(lineX - 6, lineY - 5);
-		addMenuItems(lineX, lineY - 22);
-		animateMenuItems();
-		return pane;
 	}
 	
 	// Begins animating the menu objects

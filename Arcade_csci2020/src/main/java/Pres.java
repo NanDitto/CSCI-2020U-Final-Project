@@ -176,6 +176,7 @@ public class Pres extends Application {
 				}
 				Scene3 hi = new Scene3();
 				try {
+					hi.settemp(temp, file); // sending back user and file
 					hi.start(primaryStage);
 					primaryStage.setWidth(900);
 					primaryStage.setHeight(920);

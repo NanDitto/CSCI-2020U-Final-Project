@@ -62,19 +62,13 @@ public class Instructions extends Application {
 		pane.getChildren().addAll(box);
 		pane.setStyle("-fx-background-color: black");
 
+
 		//add scene to stage
 		primaryStage.setTitle("Instructions");
 		Scene scene = new Scene(pane, Width, Height);
 		primaryStage.setScene(scene);
 		scene.getStylesheets().add("main.css");
 		primaryStage.show();
-	
-        box.getChildren().addAll(button);
-        box.setTranslateX(Width/4 + 20);
-        box.setTranslateY(Height/4);
-
-        pane.getChildren().addAll(box);
-        pane.setStyle("-fx-background-color: black");
 
     }
 

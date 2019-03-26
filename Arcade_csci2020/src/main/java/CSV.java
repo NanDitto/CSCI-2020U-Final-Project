@@ -36,15 +36,15 @@ public class CSV {
 				row++; // counter  used to get the number of rows
 			}
 		}
-		boolean cheack = false;
+		boolean cheack = true;
 		try (Scanner scan2 = new Scanner(file)) { // reading the file agian 
 			while (scan2.hasNextLine()) {
 				String line = scan2.nextLine();
 				String[] details = line.split(",");
 				for (int i = 0; i < details.length; i++) {
 					// checking to see if the level needs to be stored or not
-					if (details[0].equals(userName) && !details[i].equals(level)) { 
-						cheack = true;
+					if (details[0].equals(userName) && details[i].equals(level)) { 
+						cheack = false;
 					}
 				}
 				if (details[0].equals(userName) && !details[details.length - 1].equals(level) && cheack == true) {
