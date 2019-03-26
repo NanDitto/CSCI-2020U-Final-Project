@@ -1,5 +1,4 @@
 package mainApp;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.application.Application;
@@ -65,184 +64,146 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 public class Scene1 extends Application {
-	/*
-		Nodes for Window, adds design to the stages
-
-	*/
 	public Stage CurrentWindow;
 	VBox buttons = new VBox(10);
 	StackPane pane = new StackPane(); // main pane
 	Button login = new Button("Login"); // buttons for functionaliy
 	Button register = new Button("Register");
 	Button imports = new Button("Import File");
-	Button host = new Button("Host");
-	Button joins = new Button("Join");
-	static String cwd = System.getProperty("user.dir"); // used to read the user
-														// current directory
+	static String cwd = System.getProperty("user.dir"); // used to read the user current directory
 	static String ret = "";
-	static String chck = "";
-	public String temp1 = "";
+	static String chck ="";
+	public String temp1 ="";
 	public String temp2 = "";
-	public int type;
+	public static boolean type = false;
 
-	public String getUser() {
+	public String getUser(){
 		return temp1;
 	}
 
-<<<<<<< HEAD
 	public String currentFilename = (cwd + ret + "src" + ret + "main" + ret + "java" + ret +  "progress.csv"); // intial file name
-//Start method to the stage
-=======
-	public String currentFilename = (cwd + ret + "src" + ret + "main" + ret + "java" + ret + "progress.csv"); // intial
-																												// file
-																												// name
 
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	public void start(Stage primaryStage) {
-		//Adds objects to the stage
 		CurrentWindow = primaryStage;
 		/*
-<<<<<<< HEAD
 		Media media = new Media("music.mp3");
        	MediaPlayer player = new MediaPlayer(media); // used for playig music at the background
        	player.play();
-    */
-    ImageView home = new ImageView("q.gif"); // main background image
-=======
-		 * Media media = new Media("music.mp3"); MediaPlayer player = new
-		 * MediaPlayer(media); // used for playig music at the background
-		 * player.play();
-		 */
-		ImageView home = new ImageView("q.gif"); // main background image
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
+       	*/
+       	ImageView home = new ImageView("q.gif"); // main background image
 		pane.getChildren().add(home);
 		login.setId("button");
 		register.setId("button");
 		imports.setId("button");
-
-		buttons.getChildren().addAll(login, register, imports); // adding all
-																// the objects
-																// to the pane
+		buttons.getChildren().addAll(login,register,imports); // adding all the objects to the pane
 		pane.getChildren().addAll(buttons);
 		buttons.setAlignment(Pos.CENTER);
 
-<<<<<<< HEAD
 		fadeTran(1,0.8,home,2); // fade transiton of picture
-  	pathTran(100,20,950,600,login); // path transition of the buttons
-    pathTran(100,20,-950,600,register);
-    pathTran(100,20,-450,600,imports);
-    login.setOnAction(this::handleButtonAction);
-    register.setOnAction(this::handleButtonAction);
-    imports.setOnAction(this::handleButtonAction);
+        pathTran(100,20,950,600,login); // path transition of the buttons
+        pathTran(100,20,-950,600,register);
+        pathTran(100,20,-450,600,imports);
+ 
+  
 
-		//Create new scene
-    Scene scene = new Scene(pane,900,540);
-    scene.getStylesheets().add("main.css");  // adding styles using css
-    CurrentWindow.setResizable(false);
-=======
-		fadeTran(1, 0.8, home, 2); // fade transiton of picture
-		pathTran(100, 20, 950, 600, login); // path transition of the buttons
-		pathTran(100, 20, -950, 600, register);
-		pathTran(100, 20, -450, 600, imports);
+        login.setOnAction(this::handleButtonAction);
+        register.setOnAction(this::handleButtonAction);
+        imports.setOnAction(this::handleButtonAction);  
 
-		login.setOnAction(this::handleButtonAction);
-		register.setOnAction(this::handleButtonAction);
-		imports.setOnAction(this::handleButtonAction);
-
-		Scene scene = new Scene(pane, 900, 540);
-		scene.getStylesheets().add("main.css"); // adding styles using css
-		CurrentWindow.setResizable(false);
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
+        Scene scene = new Scene(pane,900,540);
+        scene.getStylesheets().add("main.css");  // adding styles using css
+        CurrentWindow.setResizable(false);
 		CurrentWindow.setTitle("Welcome!"); // Set the stage title
 		CurrentWindow.setScene(scene); // Place the scene in the stage
 		CurrentWindow.show(); // Display the stage
 
+		
 	}
-
 	public static void main(String[] args) {
-		ret = File.separator; // to get file seperator according to the os
-		launch(args);
-	}
+		if(args[0].equals("Host")){
+			new Thread( () -> {
+				try{
+					ChatServer server = new ChatServer();
+					server.process();
+				}catch (Exception e){}
+			}).start();
+			ret = File.separator; // to get file seperator according to the os
+    		launch(args);
+		}
+		if(args[0].equals("Join")){
+			ret = File.separator; // to get file seperator according to the os
+    		launch(args);
+		}
+		if(args[0].equals("Offline")){
+			type = true;
+			ret = File.separator; // to get file seperator according to the os
+    		launch(args);
+		}
 
-	public void pathTran(int x, int y, int moveX, int moveY, Button butto) {
-		Path path = new Path();
-		// Moving to the starting point
-		MoveTo moveTo = new MoveTo(moveX, moveY);
-		// Creating 1st line
-		LineTo line1 = new LineTo(x, y);
-		// Adding all the elements to the path
-		path.getElements().addAll(moveTo, line1);
-		// Creating the path transition
-		PathTransition pathTransition = new PathTransition();
-		// Setting the duration of the transition
-		pathTransition.setDuration(Duration.seconds(2));
-		// Setting the node for the transition
-		pathTransition.setNode(butto);
-		// Setting the path for the transition
-		pathTransition.setPath(path);
-		// Setting the cycle count for the transition
-		pathTransition.setCycleCount(1);
-		// Setting auto reverse value to true
-		pathTransition.setAutoReverse(false);
-		// Playing the animation
-		pathTransition.play();
-	}
 
-	public void fadeTran(double from, double to, ImageView objs, int time) {
+  	}
+  	public void pathTran(int x, int y,int moveX, int moveY,Button butto){
+  		Path path = new Path();
+	    //Moving to the starting point
+	    MoveTo moveTo = new MoveTo(moveX, moveY);
+      	//Creating 1st line
+      	LineTo line1 = new LineTo(x, y);
+      	//Adding all the elements to the path
+      	path.getElements().addAll(moveTo, line1);
+      	//Creating the path transition
+     	PathTransition pathTransition = new PathTransition();
+      	//Setting the duration of the transition
+      	pathTransition.setDuration(Duration.seconds(2));
+      	//Setting the node for the transition
+      	pathTransition.setNode(butto);
+      	//Setting the path for the transition
+      	pathTransition.setPath(path);
+      	//Setting the cycle count for the transition
+      	pathTransition.setCycleCount(1);
+      	//Setting auto reverse value to true
+      	pathTransition.setAutoReverse(false);
+      	//Playing the animation
+      	pathTransition.play();
+  	}
+  	public void fadeTran(double from, double to, ImageView objs, int time){
 
 		FadeTransition ft = new FadeTransition(Duration.seconds(time), objs);
-		ft.setFromValue(from); // go from the number
-		ft.setToValue(to); // go to the number
-		ft.setCycleCount(1); // do the fade just once
-		ft.play();
-	}
-
-	public void handleButtonAction(ActionEvent event) {
-		if (event.getSource() == login) {
-			try {
-				File f = new File(currentFilename);
-				Scanner sc = new Scanner(f);
-				JLabel label_login = new JLabel("Username:"); // username
-																// textfield
+        ft.setFromValue(from); // go from the number
+        ft.setToValue(to); // go to the number
+        ft.setCycleCount(1); // do the fade just once
+        ft.play();
+  	}
+  	public void handleButtonAction(ActionEvent event){
+  		if(event.getSource() == login){
+  			try {
+  				File f = new File(currentFilename);
+	            Scanner sc = new Scanner(f);
+	            JLabel label_login = new JLabel("Username:"); // username textfield
 				JTextField login = new JTextField();
 
-				JLabel label_password = new JLabel("Password:"); // password
-																	// textfield
+				JLabel label_password = new JLabel("Password:"); // password textfield
 				JPasswordField password = new JPasswordField();
-				Object[] array = { label_login, login, label_password, password };
-				int res = JOptionPane.showConfirmDialog(null, array, "Login", JOptionPane.OK_CANCEL_OPTION,
-						JOptionPane.PLAIN_MESSAGE); // Dialog with all the
-													// information
+				Object[] array = { label_login,  login, label_password, password };
+				int res = JOptionPane.showConfirmDialog(null, array, "Login",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE); // Dialog with all the information
 
-				if (res == JOptionPane.OK_OPTION) { // do the following when ok
-													// is pressed
+				if (res == JOptionPane.OK_OPTION) { // do the following when ok is pressed
 					boolean opt = false;
-					while (sc.hasNextLine()) { // read the file until its not
-												// the end
-						String line = sc.nextLine();
-						String[] details = line.split(",");
-						temp1 = login.getText().trim();
-						temp2 = new String(password.getPassword());
-						if (details[0].equals(temp1) && details[1].equals(temp2)) { // if
-																					// the
-																					// username
-																					// and
-																					// password
-																					// are
-																					// same,
-																					// then
-																					// continue
+		            while(sc.hasNextLine()){ // read the file until its not the end
+		                String line = sc.nextLine();
+		                String[] details = line.split(",");
+		                temp1 = login.getText().trim();
+		                temp2 = new String(password.getPassword());
+						if(details[0].equals(temp1) && details[1].equals(temp2)){ // if the username and password are same, then continue
 							ImageView image = new ImageView("cm.gif");
-<<<<<<< HEAD
 						    pane.getChildren().add(image);
 						    fadeTran(1,0,image,5);
 						    opt = true;
-								serverSocket t = new serverSocket();
-								client user = new client();
-								Stage chatBox = new Stage();
-								Stage clt = new Stage();
+						    if (type != true){
+						    	try{
+									ChatClient p1 = new ChatClient(temp1,"localhost");
+								}catch (Exception e){}
+						    }
 						    new Thread( () -> {
-									//Multi thread to allow checkmark/ O gif to play
 						    	MainMenu hi = new MainMenu();
 						    	try{
 						    		Thread.sleep(3300);
@@ -250,61 +211,28 @@ public class Scene1 extends Application {
 								hi.settemp(temp1, currentFilename);
 								 Platform.runLater(() -> hi.start(CurrentWindow));
 						    }).start();
-								t.start(chatBox);
-								user.start(clt);
-								user.action("hi");
-								t.action("Hello");
-=======
-							pane.getChildren().add(image);
-							fadeTran(1, 0, image, 5);
-							opt = true;
-							new Thread(() -> {
-								MainMenu hi = new MainMenu();
-								try {
-									Thread.sleep(3300);
-								} catch (InterruptedException e) {
-								}
-								hi.settemp(temp1, currentFilename);
-								Platform.runLater(() -> hi.start(CurrentWindow));
-							}).start();
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
+										   
 						}
 					}
-					if (opt == false) {
-						ImageView image = new ImageView("x.gif"); // if
-																	// information
-																	// is
-																	// incorrect,
-																	// then try
-																	// again
-						pane.getChildren().add(image);
-						fadeTran(1, 0, image, 2);
-						image.setDisable(true);
+					if(opt == false){
+						ImageView image = new ImageView("x.gif"); // if information is incorrect, then try again
+					    pane.getChildren().add(image);
+					    fadeTran(1,0,image,2);
+					   	image.setDisable(true);
 					}
 				}
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
+	            e.printStackTrace();
+	        } catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-<<<<<<< HEAD
        }
-			 //User registering fo a new account
-			 //Builds window and gets inputs from user
         if(event.getSource() == register){
         	try{
         		BufferedWriter out = new BufferedWriter(new FileWriter(currentFilename,true)); // reading the file
-=======
-		}
-		if (event.getSource() == register) {
-			try {
-				BufferedWriter out = new BufferedWriter(new FileWriter(currentFilename, true)); // reading
-																								// the
-																								// file
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 
-				JLabel label_login = new JLabel("Username:");
+	        	JLabel label_login = new JLabel("Username:");
 				JTextField login = new JTextField();
 
 				JLabel label_password = new JLabel("Password:");
@@ -316,43 +244,26 @@ public class Scene1 extends Application {
 				JLabel age_login = new JLabel("Age:");
 				JTextField age = new JTextField();
 
-				Object[] array = { label_login, login, label_password, password, email_login, email, age_login, age };
-				int res = JOptionPane.showConfirmDialog(null, array, "Register", JOptionPane.OK_CANCEL_OPTION,
-						JOptionPane.PLAIN_MESSAGE);
-				String temp1, temp2, temp3, temp4;
+				Object[] array = { label_login,  login, label_password, password,email_login, email,age_login,age};
+				int res = JOptionPane.showConfirmDialog(null, array, "Register",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+				String temp1,temp2,temp3,temp4;
 				temp1 = login.getText().trim();
-				temp2 = new String(password.getPassword());
-				temp3 = email.getText().trim();
-				temp4 = age.getText().trim();
+	            temp2 = new String(password.getPassword());
+	            temp3 = email.getText().trim();
+	            temp4 = age.getText().trim();
 				if (res == JOptionPane.OK_OPTION) {
-					out.write(temp1 + "," + temp2 + "," + temp3 + "," + temp4 + "," + "0"); // appeding
-																							// the
-																							// information
-																							// collected
-																							// from
-																							// the
-																							// user
-																							// into
-																							// the
-																							// file
+					out.write(temp1+","+temp2+","+temp3+","+temp4+","+"0"); // appeding the information collected from the user into the file
 					out.newLine();
 				}
 				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		if (event.getSource() == imports) {
-			FileChooser fileChooser = new FileChooser(); // new filechoser
-			fileChooser.setInitialDirectory(new File("."));
-			currentFilename = fileChooser.showOpenDialog(CurrentWindow).getAbsolutePath(); // overwriting
-																							// filename
-																							// to
-																							// the
-																							// user
-																							// designated
-																							// file
-																							// destination
-		}
+        	}catch (IOException e){
+        		e.printStackTrace();
+        	}
+        }
+        if(event.getSource() == imports){
+        	FileChooser fileChooser = new FileChooser(); // new filechoser
+	        fileChooser.setInitialDirectory(new File("."));
+	        currentFilename = fileChooser.showOpenDialog(CurrentWindow).getAbsolutePath(); // overwriting filename to the user designated file destination
+        }
 	}
 }

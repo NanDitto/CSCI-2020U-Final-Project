@@ -26,16 +26,10 @@ public class Rain extends Application {
 	private final int HEIGHT = 800;
 	private final int MAX = 20;
 	private final int SPEED = 5;
-<<<<<<< HEAD
 	// Array of the alphabet to see what the user enters
 	private final String[] ALPHABET = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "p",
 			"q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
 	// Concurrent score of the user
-=======
-	private final String[] ALPHABET = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "p",
-			"q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	private int score = 0;
 	private Text Score1 = new Text(40, 30, "0");
 
@@ -82,11 +76,7 @@ public class Rain extends Application {
 		pane.getChildren().addAll(Score1);
 		pane.getChildren().addAll(letters);
 		pane.getChildren().addAll(prompt);
-<<<<<<< HEAD
 		// Timeline to update the letters traveling on the screen
-=======
-
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		Timeline Tick = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent h) {
@@ -123,12 +113,8 @@ public class Rain extends Application {
 
 			}
 		}));
-<<<<<<< HEAD
 		// Timeline that checks if the user losses, and stops the letters from
 		// moving
-=======
-
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		Timeline Tok = new Timeline(new KeyFrame(Duration.millis(1), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent h) {
@@ -148,10 +134,7 @@ public class Rain extends Application {
 
 	}
 
-<<<<<<< HEAD
 	// Read a file and add the next level if they get past a ceratin score
-=======
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	public void readAdd() {
 		CSV savea = new CSV();
 		try {
@@ -162,14 +145,9 @@ public class Rain extends Application {
 
 	}
 
-<<<<<<< HEAD
 	// Check if the letter has reached the bottom, if it reaches the bottom the
 	// game stops
 	public void checkLoss() {
-=======
-	public void checkLoss() {
-		// TODO IF letters.getY() == HEIGHT of pane **BOTTOM OF WINDOW
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		for (int y = 0; y < 20; y++) {
 			if (letters[y].getY() > HEIGHT - 20) {
 				prompt.setText(" Your score: " + score + " (50 needed for level unlock)");
@@ -185,10 +163,7 @@ public class Rain extends Application {
 
 	}
 
-<<<<<<< HEAD
 	// Function that generates random letter and x/y cordinates of the letter
-=======
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	public void respawnLetter(int index) {
 		int randLetter = rand.nextInt(25);
 		int x = rand.nextInt(WIDTH);
@@ -199,11 +174,8 @@ public class Rain extends Application {
 		letters[index].setText(ALPHABET[randLetter]);
 	}
 
-<<<<<<< HEAD
 	// A function that brings 20 letters to the top of the stage/ window, but it
 	// will be outside the top so it falls into the pane
-=======
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	public void spawnLetters() {
 		for (int i = 0; i < MAX; i++) {
 			respawnLetter(i);
@@ -214,8 +186,4 @@ public class Rain extends Application {
 		launch();
 	}
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896

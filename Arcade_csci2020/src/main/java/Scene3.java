@@ -46,10 +46,7 @@ public class Scene3 extends Application {
 
 	int currentX = 122;
 	int currentY = 140;
-<<<<<<< HEAD
 	// Array of images, for locks
-=======
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	ImageView[] locks = new ImageView[7];
 	Pane pane = new Pane();
 
@@ -61,23 +58,9 @@ public class Scene3 extends Application {
 		this.file = file;
 	}
 
-	serverSocket server;
-	client clt;
-	Stage secondStage = new Stage();
-	Stage sStage = new Stage();
-<<<<<<< HEAD
-=======
-	// A USER_NAME thats passed between FILES
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
-	public boolean check = false;
-
 	@Override
 	public void start(Stage stage) {
-<<<<<<< HEAD
 		// Displays Username at the top right
-=======
-
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		String USER_NAME = "Welcome: " + temp;
 		Text user = new Text(10, 30, USER_NAME);
 		try {
@@ -88,11 +71,7 @@ public class Scene3 extends Application {
 		// Adds User Name to top right
 		user.setFont(Font.font("Times New Roman", FontWeight.BOLD, 30));
 		user.setFill(Color.WHITE);
-<<<<<<< HEAD
 		user.setX(WIDTH - 400);
-=======
-		user.setX(WIDTH - 250);
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		user.setY(80);
 		// Background image
 		Image image = new Image("file:" + cwd + "/src/main/resources/background.gif");
@@ -100,10 +79,6 @@ public class Scene3 extends Application {
 		background.setFitWidth(WIDTH + 30);
 		background.setFitHeight(HEIGHT + 30);
 		// Lighting image
-<<<<<<< HEAD
-=======
-
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		Image light = new Image("file:" + cwd + "/src/main/resources/light.png");
 		ImageView lights = new ImageView(light);
 		lights.setFitWidth(WIDTH + 110);
@@ -120,6 +95,7 @@ public class Scene3 extends Application {
 		// All Images to make Stage look nice
 		Image light_border = new Image("file:" + cwd + "/src/main/resources/lights.gif");
 		Image spaceShip = new Image("file:" + cwd + "/src/main/resources/ship.gif");
+        Image questionMark = new Image("file:" + cwd + "/src/main/resources/qm.gif");
 		Image Lock = new Image("file:" + cwd + "/src/main/resources/lock.png");
 		Image back = new Image("file:" + cwd + "/src/main/resources/left_arrow.gif");
 		Image Planets = new Image("file:" + cwd + "/src/main/resources/planets.png");
@@ -133,10 +109,10 @@ public class Scene3 extends Application {
 		Image game7 = new Image("file:" + cwd + "/src/main/resources/LetterFall.png");
 		Image game8 = new Image("file:" + cwd + "/src/main/resources/President.png");
 
+        ImageView comingsoon = new ImageView(questionMark);
+
 		ImageView planet_background = new ImageView(Planets);
 		pane.getChildren().add(planet_background);
-		// planet_background.setFitWidth(300);
-		// planet_background.setFitHeight(200);
 
 		ImageView ss = new ImageView(spaceShip);
 		pane.getChildren().add(ss);
@@ -149,11 +125,7 @@ public class Scene3 extends Application {
 		ImageView Back_Arrow = new ImageView(back);
 		Back_Arrow.setX(30);
 		Back_Arrow.setY(30);
-<<<<<<< HEAD
 		// Add images of the games
-=======
-
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		ImageView Level1 = new ImageView(game1);
 		ImageView Level2 = new ImageView(game2);
 		ImageView Level3 = new ImageView(game3);
@@ -162,19 +134,8 @@ public class Scene3 extends Application {
 		ImageView Level6 = new ImageView(game6);
 		ImageView Level7 = new ImageView(game7);
 		ImageView Level8 = new ImageView(game8);
-		Button join = new Button("Join");
-		join.setId("button");
-		Button host = new Button("Host");
-		host.setId("button");
 
-		if (levelsUnlocked == 8) {
-			join.setDisable(false);
-			host.setDisable(false);
-		} else {
-			join.setDisable(true);
-			host.setDisable(true);
-		}
-
+        // Texts that are underneath eaxh boxes
 		Text l1 = new Text(STARTX, 340, "TicTacToe");
 		l1.setFont(Font.font("Times New Roman", FontWeight.BOLD, 25));
 
@@ -196,8 +157,11 @@ public class Scene3 extends Application {
 		Text l7 = new Text(STARTX + 15, 865, "LetterFall");
 		l7.setFont(Font.font("Times New Roman", FontWeight.BOLD, 25));
 
-		Text l8 = new Text(STARTX + GAP - 40, 865, "President(2 Plys)");
+		Text l8 = new Text(STARTX + GAP +20, 865, "President");
 		l8.setFont(Font.font("Times New Roman", FontWeight.BOLD, 25));
+
+        Text cs = new Text(STARTX + GAP*2, 865, "Coming Soon..");
+        cs.setFont(Font.font("Times New Roman", FontWeight.BOLD, 25));
 
 		l1.setFill(Color.WHITE);
 		l2.setFill(Color.WHITE);
@@ -207,7 +171,8 @@ public class Scene3 extends Application {
 		l6.setFill(Color.WHITE);
 		l7.setFill(Color.WHITE);
 		l8.setFill(Color.WHITE);
-
+        cs.setFill(Color.WHITE);
+        // resizigning  the images
 		Level1.setFitWidth(152);
 		Level1.setFitHeight(167);
 		Level1.setX(STARTX);
@@ -248,38 +213,13 @@ public class Scene3 extends Application {
 		Level8.setX(STARTX + GAP);
 		Level8.setY(663);
 
-		;
-		join.setLayoutX(STARTX + GAP * 2);
-		join.setLayoutY(710);
+        comingsoon.setFitWidth(152);
+        comingsoon.setFitHeight(167);
+        comingsoon.setX(STARTX+GAP*2);
+        comingsoon.setY(663);
 
-		host.setLayoutX(STARTX + GAP * 2);
-		host.setLayoutY(770);
-
-		host.setOnAction(actionEvent -> {
-			server = new serverSocket();
-			server.start(secondStage);
-			server.action(temp);
-			// server.action(String.valueOf(levelsUnlocked));
-			join.setDisable(true);
-			type = 1;
-		});
-		join.setOnAction(actionEvent -> {
-
-			clt = new client();
-			clt.start(sStage);
-			clt.action(temp);
-			// clt.action(String.valueOf(levelsUnlocked));
-			host.setDisable(true);
-			type = 2;
-
-		});
 		// Event for each level being clicked
-<<<<<<< HEAD
 		// And adds the yellow border if it enters the image views rectangle
-=======
-
-		// Event for each level being clicked
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		Back_Arrow.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -367,7 +307,7 @@ public class Scene3 extends Application {
 		Level4.setOnMouseExited(e -> {
 			pane.getChildren().remove(window_Outline);
 		});
-		// President
+		// SnakeGame
 		Level4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -392,7 +332,7 @@ public class Scene3 extends Application {
 		Level5.setOnMouseExited(e -> {
 			pane.getChildren().remove(window_Outline);
 		});
-		// Snake
+		// Hang man
 		Level5.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -417,7 +357,7 @@ public class Scene3 extends Application {
 		Level6.setOnMouseExited(e -> {
 			pane.getChildren().remove(window_Outline);
 		});
-
+        // Jeopardy
 		Level6.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -442,7 +382,7 @@ public class Scene3 extends Application {
 		Level7.setOnMouseExited(e -> {
 			pane.getChildren().remove(window_Outline);
 		});
-
+        // Rain 
 		Level7.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -468,6 +408,7 @@ public class Scene3 extends Application {
 		Level8.setOnMouseExited(e -> {
 			pane.getChildren().remove(window_Outline);
 		});
+        // President
 		Level8.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -484,7 +425,7 @@ public class Scene3 extends Application {
 		});
 		// Add everything to the pane
 		pane.getChildren().addAll(Back_Arrow, user, Level1, l1, Level2, l2, Level3, l3, Level5, l5, Level6, l6, Level7,
-				l7, Level8, l8, Level4, l4, join, host);
+				l7, Level8, l8, Level4, l4, comingsoon,cs);
 		// Create a for loop to place locks on levels and after completion of
 		// levels unlock another level
 
@@ -493,7 +434,7 @@ public class Scene3 extends Application {
 			addLocks(i);
 			FadeEffect(2, locks[i], 0, 1);
 		}
-
+        // conditions for unlock
 		if (levelsUnlocked < 7) {
 			Level8.setDisable(true);
 		}
@@ -531,11 +472,7 @@ public class Scene3 extends Application {
 		ft.setCycleCount(1); // do the fade just once
 		ft.play();
 	}
-<<<<<<< HEAD
 	//Function which decices how many locks their are and where to add the locks
-=======
-
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	public void addLocks(int number) {
 		if ((number >= 2) && (number <= 4)) {
 			locks[number].setX((STARTX - 5) + GAP * (number - 2));
@@ -553,11 +490,7 @@ public class Scene3 extends Application {
 		locks[number].setFitHeight(windowHEIGHT);
 		pane.getChildren().add(locks[number]);
 	}
-<<<<<<< HEAD
 	//Fetch current level of the player from the progress.csv file
-=======
-
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	public void curentLevel() throws IOException {
 		BufferedReader br = null;
 		try {
@@ -576,8 +509,4 @@ public class Scene3 extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896

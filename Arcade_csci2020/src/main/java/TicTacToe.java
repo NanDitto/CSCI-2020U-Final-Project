@@ -55,7 +55,14 @@ public class TicTacToe extends Application {
 		//resets the board (empties each cell)
 		Button reset = new Button("Reset");
 		reset.setOnAction(e -> {
-			clearBoard();
+			pane.getChildren().clear();
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					cell[i][j] = new Cell();
+					pane.add(cell[i][j], j, i);
+
+				}
+			}
 		});
 
 		status.setTranslateX(60);

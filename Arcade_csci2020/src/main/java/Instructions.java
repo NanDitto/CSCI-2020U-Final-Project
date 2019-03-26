@@ -68,9 +68,7 @@ public class Instructions extends Application {
 		primaryStage.setScene(scene);
 		scene.getStylesheets().add("main.css");
 		primaryStage.show();
-	}
-
-<<<<<<< HEAD
+	
         box.getChildren().addAll(button);
         box.setTranslateX(Width/4 + 20);
         box.setTranslateY(Height/4);
@@ -78,11 +76,6 @@ public class Instructions extends Application {
         pane.getChildren().addAll(box);
         pane.setStyle("-fx-background-color: black");
 
-        primaryStage.setTitle("Instructions");
-        Scene scene = new Scene(pane, Width, Height);
-        primaryStage.setScene(scene);
-        scene.getStylesheets().add("main.css");
-        primaryStage.show();
     }
 
 
@@ -90,9 +83,3 @@ public class Instructions extends Application {
         launch(args);
     }
 }
-=======
-	public static void main(String[] args) {
-		launch(args);
-	}
-}
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896

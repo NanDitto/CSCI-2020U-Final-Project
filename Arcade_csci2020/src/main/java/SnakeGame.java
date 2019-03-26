@@ -91,10 +91,7 @@ public class SnakeGame extends Application {
 				// Check if the snake collects a fruit, if it does do certain
 				// things
 				checkCollect();
-<<<<<<< HEAD
 				// Check if the snake is dead
-=======
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 				if (checkDead()) {
 					if (dead) {
 						prompts.setText("Game Over\nScore: " + SCORE + "\nPress Esc To Return");
@@ -108,10 +105,7 @@ public class SnakeGame extends Application {
 			}
 		}));
 
-<<<<<<< HEAD
 		// Remove all elments when the user loses
-=======
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		Timeline Downdate = new Timeline(new KeyFrame(Duration.millis(80), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent t) {
@@ -127,10 +121,7 @@ public class SnakeGame extends Application {
 			}
 		}));
 
-<<<<<<< HEAD
 		// Direction keys to control snake and space to start, and esc to exit
-=======
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		scene.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
 			case DOWN:
@@ -194,10 +185,7 @@ public class SnakeGame extends Application {
 		});
 	}
 
-<<<<<<< HEAD
 	// Add level 4 to the game
-=======
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	public void readAdd() {
 		CSV savea = new CSV();
 		try {
@@ -208,10 +196,7 @@ public class SnakeGame extends Application {
 
 	}
 
-<<<<<<< HEAD
 	// Check if the snake runs into its tail or wall
-=======
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	private boolean checkDead() {
 		// Dies if touches tail or wall
 		// Bottom wall and top wall
@@ -222,7 +207,6 @@ public class SnakeGame extends Application {
 		if (head.getX() < 0 || head.getX() + LENGTH > WIDTH) {
 			return true;
 		}
-<<<<<<< HEAD
 
 		for (int i = 1; i < dots; i++) {
 			if (head.getX() == tails.get(i).getX() && head.getY() == tails.get(i).getY()) {
@@ -238,23 +222,6 @@ public class SnakeGame extends Application {
 			tails.get(i + 1).setX(prevTailPos.get(i)[0]);
 			tails.get(i + 1).setY(prevTailPos.get(i)[1]);
 		}
-=======
-
-		for (int i = 1; i < dots; i++) {
-			if (head.getX() == tails.get(i).getX() && head.getY() == tails.get(i).getY()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	protected void changeDirection() {
-		// Previous Position of Previous tail // head
-		for (int i = 0; i < dots; i++) {
-			tails.get(i + 1).setX(prevTailPos.get(i)[0]);
-			tails.get(i + 1).setY(prevTailPos.get(i)[1]);
-		}
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		// Changes direction of Solo head
 		if (UP) {
 			head.setY(head.getY() - SPEED);
@@ -268,13 +235,8 @@ public class SnakeGame extends Application {
 		}
 	}
 
-<<<<<<< HEAD
 	// add tails to the snake
 	private void checkDirection() {
-=======
-	private void checkDirection() {
-
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 		for (int i = 0; i < dots; i++) {
 			prevTailPos.get(i)[0] = tails.get(i).getX();
 			prevTailPos.get(i)[1] = tails.get(i).getY();
@@ -292,10 +254,7 @@ public class SnakeGame extends Application {
 		food.setFill(Color.BROWN);
 	}
 
-<<<<<<< HEAD
 	// Increases the number of tails the snake has, in the array list
-=======
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	private void extendTail() {
 		prevTailPos.add(new double[2]);
 		Rectangle tail = new Rectangle(LENGTH, LENGTH);
@@ -306,10 +265,7 @@ public class SnakeGame extends Application {
 		pane.getChildren().add(tail);
 	}
 
-<<<<<<< HEAD
 	// Check if the snakes head location is equal to the foods location
-=======
->>>>>>> 92bbedf29cee1d5fb3f4176a18fdc745f7f88896
 	private void checkCollect() {
 		// Check if the head, touches the food
 		if (head.getX() == food.getX() && head.getY() == food.getY()) {
