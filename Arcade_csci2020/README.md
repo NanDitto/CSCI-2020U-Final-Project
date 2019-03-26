@@ -1,6 +1,4 @@
-# Arcade
-
-About the arcade **to be done
+# About Arcade
 
 ### Prerequisites
 
