@@ -1,11 +1,11 @@
-# Arcade
+# Arcade Game
 
-About the arcade **to be done
+### About
+  Single player game, where user completes a level to unlock the next. Game implements a chatbox where two users can send messages to each other.
 
 ### Prerequisites
 
 What things you need to install
-
 ```
 No Prerequisites required other than gradle
 ```
