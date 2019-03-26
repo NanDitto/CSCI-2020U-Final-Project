@@ -48,22 +48,16 @@ import java.io.IOException;
 
 public class Blackjack extends Application {
 	public boolean WIN = false;
-	private VBox pane = new VBox(); // main pane
+	private VBox pane = new VBox(); // main pane 
 	private HBox cardi = new HBox(); // used to store cards
 	private HBox computer = new HBox(); // used to store computer cards
-	private ArrayList<ImageView> cards = new ArrayList<ImageView>(); // storing
-																		// cards
-																		// in an
-																		// arraylist
-	private ArrayList<String> nameOfcard = new ArrayList<String>(); // stroing
-																	// the card
-																	// name in
-																	// arraylist
+	private ArrayList<ImageView> cards = new ArrayList<ImageView>(); // storing cards in an arraylist
+	private ArrayList<String> nameOfcard = new ArrayList<String>(); // stroing the card name in arraylist
 	public int firstRan;
 	public int ButtonRan;
 	public int points = 0;
 	public int computerpoints = 0;
-	String cwd = System.getProperty("user.dir");
+	String cwd = System.getProperty("user.dir"); // used to get the directory where the file is stored 
 	// textfield for score
 	private TextField userPoints = new TextField();
 	private TextField computerpoint = new TextField();
@@ -73,12 +67,12 @@ public class Blackjack extends Application {
 	public String temp;
 	public String file;
 
-	public void settemp(String temp, String file) {
+	public void settemp(String temp, String file) { // setter method for filename and username
 		this.temp = temp;
 		this.file = file;
 	}
 
-	String source = "file:" + cwd + "/src/main/resources/Cards/";
+	String source = "file:" + cwd + "/src/main/resources/Cards/"; 
 
 	public void start(Stage primaryStage) {
 		Window = primaryStage;
@@ -103,6 +97,7 @@ public class Blackjack extends Application {
 		Label com = new Label("Computer Score: "); // label for computer
 		com.setFont(Font.font("Verdana", 22));
 
+		// adding items to the pane
 		player.getChildren().addAll(pla, userPoints);
 		computerboard.getChildren().addAll(com, computerpoint);
 
@@ -146,6 +141,7 @@ public class Blackjack extends Application {
 		if (points > 21) {
 			check = false;
 		}
+		// hit button handler
 		hit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override // Override the handle method
 			public void handle(ActionEvent e) {
@@ -185,15 +181,15 @@ public class Blackjack extends Application {
 
 			}
 		});
-
+		// hit button handler
 		stand.setOnAction(new EventHandler<ActionEvent>() {
 			@Override // Override the handle method
 			public void handle(ActionEvent e) {
 				if (computerpoints <= 21) {
 					for (int i = 0; i < 2; i++) {
-						ButtonRan = rand.nextInt(cards.size());
+						ButtonRan = rand.nextInt(cards.size()); // randomly generates number
 						computer.getChildren().add(cards.get(ButtonRan));
-						computerscore(ButtonRan);
+						computerscore(ButtonRan); 
 						cards.remove(ButtonRan);
 						nameOfcard.remove(ButtonRan);
 					}
@@ -206,7 +202,7 @@ public class Blackjack extends Application {
 				}
 				if (computerpoints > 21) {
 					stand.setDisable(true);
-					pane.getChildren().clear();
+					pane.getChildren().clear(); // clear out the screen and display the message
 					Label youWon = new Label("   You Won\n Press on Esc");
 					youWon.setStyle("-fx-font-weight: bold");
 					youWon.setFont(Font.font("Verdana", 22));
@@ -230,10 +226,10 @@ public class Blackjack extends Application {
 			}
 		});
 		// create a background fill
-		BackgroundFill background_fill = new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY);
+		BackgroundFill background_fill = new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY); // chnage the background color
 
 		// create Background
-		Background background = new Background(background_fill);
+		Background background = new Background(background_fill); // add the color to method 
 
 		// set background
 		pane.setBackground(background);

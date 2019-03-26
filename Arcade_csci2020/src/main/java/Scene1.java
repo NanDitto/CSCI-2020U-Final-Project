@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
+import java.net.URL;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Button;
 import javafx.animation.ScaleTransition;
@@ -62,6 +63,7 @@ import javafx.stage.FileChooser;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
+import javafx.scene.media.AudioClip;
 
 public class Scene1 extends Application {
 	public Stage CurrentWindow;
@@ -76,6 +78,7 @@ public class Scene1 extends Application {
 	public String temp1 ="";
 	public String temp2 = "";
 	public static boolean type = false;
+	private AudioClip audioClip;;
 
 	public String getUser(){
 		return temp1;
@@ -85,10 +88,12 @@ public class Scene1 extends Application {
 
 	public void start(Stage primaryStage) {
 		CurrentWindow = primaryStage;
-		Media media = new Media("file:" + cwd + ret + "src" + ret + "main" + ret+ "resources" + ret+ "music.mp3");
-       		MediaPlayer player = new MediaPlayer(media); // used for playig music at the background
-       		player.play();
-       		ImageView home = new ImageView("q.gif"); // main background image
+
+		final URL resource = getClass().getResource("/music.mp3"); // used for playig music at the background
+		audioClip = new AudioClip(resource.toExternalForm());
+		audioClip.play();
+
+		ImageView home = new ImageView("q.gif"); // main background image
 		pane.getChildren().add(home);
 		login.setId("button");
 		register.setId("button");
@@ -118,7 +123,7 @@ public class Scene1 extends Application {
 		
 	}
 	public static void main(String[] args) {
-		if(args[0].equals("Host")){
+		if(args[0].equals("Host")){ // hosting the server for chatting
 			new Thread( () -> {
 				try{
 					ChatServer server = new ChatServer();
@@ -128,11 +133,11 @@ public class Scene1 extends Application {
 			ret = File.separator; // to get file seperator according to the os
     		launch(args);
 		}
-		if(args[0].equals("Join")){
+		if(args[0].equals("Join")){ // joining the server that has already been setup
 			ret = File.separator; // to get file seperator according to the os
     		launch(args);
 		}
-		if(args[0].equals("Offline")){
+		if(args[0].equals("Offline")){ // playing by urself
 			type = true;
 			ret = File.separator; // to get file seperator according to the os
     		launch(args);
@@ -196,12 +201,12 @@ public class Scene1 extends Application {
 						    pane.getChildren().add(image);
 						    fadeTran(1,0,image,5);
 						    opt = true;
-						    if (type != true){
+						    if (type != true){ 
 						    	try{
 									ChatClient p1 = new ChatClient(temp1,"localhost");
 								}catch (Exception e){}
 						    }
-						    new Thread( () -> {
+						    new Thread( () -> { // making a new thread  for the next scren 
 						    	MainMenu hi = new MainMenu();
 						    	try{
 						    		Thread.sleep(3300);

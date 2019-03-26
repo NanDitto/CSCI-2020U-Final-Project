@@ -19,13 +19,11 @@ import java.util.Scanner;
 */
 public class Scores extends Application {
 
-	//set width and height of stage
 	private int Width = 900;
 	private int Height = 590;
-	
-	String cwd = System.getProperty("user.dir"); //gets current directory
-	String ret = ""; //
-	String currentFile = ""; //stores file name
+	String cwd = System.getProperty("user.dir");
+	String ret = "";
+	String currentFile = "";
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -45,12 +43,13 @@ public class Scores extends Application {
 
 		// ret = File.separator;
 		File file = new File(currentFile);
-		try (Scanner scan = new Scanner(file)) {
+		try (Scanner scan = new Scanner(file)) { // used to read the file
 			while (scan.hasNextLine()) {
 				String line = scan.nextLine();
 				String[] details = line.split(",");
-				for (int i = 0; i < details.length; i++) {
-					if (i == 0) {
+				for (int i = 0; i < details.length; i++) { // getting just the username and level uncloked 
+
+					if (i == 0) { 
 						user.add(details[0]);
 					}
 					if (i == (details.length - 1)) {
@@ -61,7 +60,7 @@ public class Scores extends Application {
 		}
 
 		Text[] text = new Text[user.size()];
-
+		// making new textfield by prioritizng 
 		for (int i = 0; i < user.size(); i++) {
 			if (i == 0) {
 				text[i] = new Text(user.get(i) + "   " + levels.get(i));
@@ -72,7 +71,7 @@ public class Scores extends Application {
 
 		for (int i = 0; i < user.size(); i++) {
 			text[i].setFill(Color.WHITE);
-			Font myFont = Font.loadFont(getClass().getResourceAsStream("/HyperspaceBold.otf"), 20);
+			Font myFont = Font.loadFont(getClass().getResourceAsStream("/HyperspaceBold.otf"), 20); // font style and size
 			text[i].setFont(myFont);
 			box.getChildren().addAll(text[i]);
 		}
@@ -89,7 +88,6 @@ public class Scores extends Application {
 
 		pane.getChildren().addAll(box);
 
-		
 		pane.setStyle("-fx-background-color: black");
 		primaryStage.setTitle("Scores");
 		Scene scene = new Scene(pane, Width, Height);

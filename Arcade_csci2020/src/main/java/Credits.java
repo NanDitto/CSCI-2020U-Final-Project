@@ -24,7 +24,7 @@ public class Credits extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Pane pane = new Pane();
+        Pane pane = new Pane(); // main pane
         VBox box = new VBox(60);
 
         Title title = new Title("Credits");
@@ -36,10 +36,11 @@ public class Credits extends Application {
         Text[] text = {new Text("Hanan Amer"), new Text("Nandor Gallo"), new Text("Joseph Fanous"),
                 new Text("Garry Masaun")};
 
+        //changing the font size and font style for the program
         for(int i=0; i<4; i++){
             text[i].setFill(Color.WHITE);
-            Font myFont = Font.loadFont(getClass().getResourceAsStream("/HyperspaceBold.otf"), 30);
-            text[i].setFont(myFont);
+            Font myFont = Font.loadFont(getClass().getResourceAsStream("/HyperspaceBold.otf"), 30); 
+            text[i].setFont(myFont); // 
             box.getChildren().addAll(text[i]);
         }
         Button button = new Button("Back");

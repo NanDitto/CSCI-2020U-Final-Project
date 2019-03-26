@@ -28,7 +28,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 
 //Citation: Baimagambetov, Almas (Published 2017)
-//[Source code] : https://github.com/AlmasB/FXTutorials/blob/master/src/com/almasb/civ6menu/Civ6MenuApp.java
+//[Source code] : small snippets from https://github.com/AlmasB/FXTutorials/blob/master/src/com/almasb/civ6menu/Civ6MenuApp.java
 
 
 public class MainMenu extends Application {

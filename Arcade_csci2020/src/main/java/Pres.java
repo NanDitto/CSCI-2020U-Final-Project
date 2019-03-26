@@ -61,38 +61,20 @@ public class Pres extends Application {
 
 	private StackPane stack = new StackPane(); // stack for pile up
 	private ArrayList<String> number = new ArrayList<String>();
-
-	private ArrayList<ImageView> user = new ArrayList<ImageView>(); // playerone
-																	// arraylist
-																	// for cards
-	private ArrayList<ImageView> usertwo = new ArrayList<ImageView>(); // playertwo
-																		// arraylist
-																		// for
-																		// cards
+	private ArrayList<ImageView> user = new ArrayList<ImageView>(); // playerone arraylist for cards
+	private ArrayList<ImageView> usertwo = new ArrayList<ImageView>(); // playertwo arraylist for cards
 	private Button butto[] = new Button[12]; // button f
-
-	private Button playertwobutto[] = new Button[12]; // buttons for player 2
-
-	private ArrayList<String> userran = new ArrayList<String>(); // playerone
-																	// arraylist
-																	// for
-																	// random
-																	// num
-	private ArrayList<String> usertworan = new ArrayList<String>(); // playerone
-																	// arraylist
-																	// for
-																	// random
-																	// num
-
+	private Button playertwobutto[] = new Button[12]; //buttons for player 2
+	private ArrayList<String> userran = new ArrayList<String>(); // playerone arrylist for random num 
+	private ArrayList<String> usertworan = new ArrayList<String>(); // playerone arraylist for random nunm
 	private Button passButton[] = new Button[2]; // passbuttons for both players
-
 	private Random rand = new Random(); // random number generator
 	private int count = 0, countt = 0;
 
 	public String temp;
 	public String file;
 
-	public void settemp(String temp, String file) {
+	public void settemp(String temp, String file) { // a getter method used to store usename and fikename
 		this.temp = temp;
 		this.file = file;
 	}
@@ -163,12 +145,7 @@ public class Pres extends Application {
 
 		for (int i = 0; i < butto.length; i++) {
 			if (i <= 1) {
-				passButton[i].setOnAction(this::handleButtonAction); // setting
-																		// button
-																		// handlers
-																		// for
-																		// player
-																		// 1
+				passButton[i].setOnAction(this::handleButtonAction); // setting bytton handlers for player1
 			}
 			butto[i].setOnAction(this::handleButtonAction);
 		}
@@ -178,12 +155,7 @@ public class Pres extends Application {
 		resetDeck.setOnAction(this::handleButtonAction);
 
 		for (int i = 0; i < playertwobutto.length; i++) {
-			playertwobutto[i].setOnAction(this::handleButtonAction); // setting
-																		// button
-																		// handlers
-																		// for
-																		// player
-																		// 2
+			playertwobutto[i].setOnAction(this::handleButtonAction); // setting buttons handlers for player 2
 		}
 		for (int i = 0; i < usertwo.size(); i++) {
 			usertwo.get(i).setVisible(false);
@@ -191,11 +163,11 @@ public class Pres extends Application {
 
 		Scene scene = new Scene(pane, 650, 800);
 		pane.setId("scene");
-		scene.getStylesheets().add("PresStyle.css"); // used for desiging the
-														// layout
+		scene.getStylesheets().add("PresStyle.css"); // used for desiging the layout
 		primaryStage.setTitle("President"); // Set the stage title
 		primaryStage.setScene(scene); // Place the scene in the stage
 		primaryStage.show(); // Display the stage
+		// if escape is pressed, end the game and check for win status
 		scene.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
 			case ESCAPE:
@@ -223,20 +195,16 @@ public class Pres extends Application {
 	public void readAdd() {
 		CSV savea = new CSV();
 		try {
-			savea.read(temp, file, "5");
+			savea.read(temp, file, "5"); // adding the level that was completed 
 			savea.save(file);
 		} catch (IOException e) {
 		}
 
 	}
 
-	public void user(String card, ArrayList<ImageView> lists) { // used to
-																// generate
-																// random cards
-																// for player 1
+	public void user(String card, ArrayList<ImageView> lists) { // used to generate random cards for player1
 		String end = card + ".png";
-		String finalo = source + end; // adding the entension with the
-										// destination
+		String finalo = source + end; // adding the entension with the destination
 		lists.add(new ImageView(finalo));
 		lists.get(count).setFitHeight(100);
 		lists.get(count).setFitWidth(80);
@@ -245,14 +213,9 @@ public class Pres extends Application {
 		count = count + 1;
 	}
 
-	public void usertwos(String card, ArrayList<ImageView> lists) { // used to
-																	// genrator
-																	// random
-																	// cards for
-																	// player 2
+	public void usertwos(String card, ArrayList<ImageView> lists) { // used to generate random cards for player 2
 		String end = card + ".png";
-		String finalo = source + end; // adding the entension with the
-										// destination
+		String finalo = source + end; // adding the entension with the destination
 		lists.add(new ImageView(finalo));
 		lists.get(countt).setFitHeight(100);
 		lists.get(countt).setFitWidth(80);
@@ -261,8 +224,7 @@ public class Pres extends Application {
 		countt = countt + 1;
 	}
 
-	public void button(Button[] butt, int len, HBox name) { // adding button to
-															// pane
+	public void button(Button[] butt, int len, HBox name) { // adding button to pane
 		for (int i = 0; i < len; i++) {
 			butt[i] = new Button(Integer.toString(i + 1));
 			butt[i].setId("Button");
@@ -271,9 +233,7 @@ public class Pres extends Application {
 		}
 	}
 
-	public void handleButtonAction(ActionEvent event) { // used to handle
-														// buttons accoriding to
-														// their functionality
+	public void handleButtonAction(ActionEvent event) { // used to handle buttons accoriding to their functionality
 		if (event.getSource() == resetDeck) {
 			ImageView blankCard = new ImageView(source + "blank.png");
 			stack.getChildren().add(blankCard);
@@ -341,8 +301,7 @@ public class Pres extends Application {
 
 	}
 
-	private void fadeAndDisable(Button x) { // when a button is pressed, it will
-											// fade and disable
+	private void fadeAndDisable(Button x) { // when a button is pressed, it will fade and disable
 		for (int i = 0; i < playertwobutto.length; i++) {
 			if (x.equals(playertwobutto[i])) {
 				usertwocounter = usertwocounter + 1;
@@ -357,18 +316,13 @@ public class Pres extends Application {
 		trans.setCycleCount(1);
 		trans.play();
 		x.setDisable(true);
-		if ((usertwocounter == 12) || (usercounter == 12)) { // checking if the
-																// either the 12
-																// buttons are
-																// pressed or
-																// not
+		if ((usertwocounter == 12) || (usercounter == 12)) { // checking if the either the 12 buttons are pressed or not
 			WIN = true;
 			System.exit(0);
 		}
 	}
 
-	private void fadeAndDisableCards(ImageView x) { // hiding the cards for
-													// other user
+	private void fadeAndDisableCards(ImageView x) { // hiding the cards for other user
 		FadeTransition trans = new FadeTransition(Duration.seconds(1), x);
 		trans.setFromValue(0.0);
 		trans.setToValue(.00);

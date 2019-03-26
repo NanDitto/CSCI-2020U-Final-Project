@@ -162,7 +162,7 @@ public class Scene3 extends Application {
 
         Text cs = new Text(STARTX + GAP*2, 865, "Coming Soon..");
         cs.setFont(Font.font("Times New Roman", FontWeight.BOLD, 25));
-
+        // filling the text color to white 
 		l1.setFill(Color.WHITE);
 		l2.setFill(Color.WHITE);
 		l3.setFill(Color.WHITE);
@@ -434,7 +434,7 @@ public class Scene3 extends Application {
 			addLocks(i);
 			FadeEffect(2, locks[i], 0, 1);
 		}
-        // conditions for unlock
+        // conditions for unlocking levels 
 		if (levelsUnlocked < 7) {
 			Level8.setDisable(true);
 		}

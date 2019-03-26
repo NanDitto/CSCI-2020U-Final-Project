@@ -18,15 +18,14 @@ public class Title extends Pane {
 
 		//set title properties
 		text = new Text(Name);
-		Font font = Font.loadFont(getClass().getResourceAsStream("/atarifull.ttf"), 36); 
-		text.setFont(font);
+		Font font = Font.loadFont(getClass().getResourceAsStream("/atarifull.ttf"), 36); // font style and size
+		text.setFont(font); 
 		text.setFill(Color.WHITE);
 		text.setEffect(new DropShadow(25, Color.BLACK));
 
 		getChildren().addAll(text);
 	}
 
-	//gets the width of the title text
 	public double getTitleWidth() {
 		return text.getLayoutBounds().getWidth();
 	}
