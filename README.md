@@ -1,7 +1,7 @@
 # Arcade Game
 
 ### About
-  Single player game, where user completes a level to unlock the next. Game implements a chatbox where two users can send messages to each other.
+  Single player game, where users complete levels to unlock the next. Game implements a chatbox where two users can send messages to each other.
 
 ### Prerequisites
 
